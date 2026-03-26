@@ -1,6 +1,5 @@
 <template>
   <div v-if="isHome" class="layout-bottom">
-    <div class="title">All rights reserved.</div>
     <a
       v-for="(item, idx) in linkList"
       :key="idx"
