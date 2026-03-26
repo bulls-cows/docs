@@ -1,7 +1,30 @@
 {
+  "name": "docs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
   "scripts": {
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bulls-cows/docs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bulls-cows/docs/issues"
+  },
+  "homepage": "https://github.com/bulls-cows/docs#readme",
+  "devDependencies": {
+    "sass-embedded": "1.98.0",
+    "vitepress": "2.0.0-alpha.17",
+    "vue": "3.5.31"
   }
 }
