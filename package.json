@@ -7,9 +7,9 @@
     "doc": "docs"
   },
   "scripts": {
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:dev": "vitepress dev config",
+    "docs:build": "vitepress build config",
+    "docs:preview": "vitepress preview config"
   },
   "repository": {
     "type": "git",

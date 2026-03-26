@@ -2,6 +2,8 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  srcDir: "..\\docs",
+
   title: "牛气腾腾的文档",
   description: "与热爱不期而遇",
   themeConfig: {
