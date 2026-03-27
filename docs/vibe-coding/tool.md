@@ -1,5 +1,4 @@
 ---
-title: 编程工具篇
 order: 1
 ---
 
@@ -10,7 +9,8 @@ order: 1
 ## CodeBuddy
 
 - [CodeBuddy 文档](https://www.codebuddy.cn/docs/ide/Introduction)
-- 默认兼容 AGENTS.md 文档。
+- 工具形式：`VS Code` 衍生编辑器。
+- 默认兼容 `AGENTS.md` 文档。
 - 支持 `/技能名` 召唤技能，但是没有提示。
 - 支持规则。
 - 支持生成 git 提交信息。
