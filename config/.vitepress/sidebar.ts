@@ -109,13 +109,13 @@ function readDocMeta(filePath: string): DocMeta {
   };
 }
 
-function sortByOrder<T extends { order: number; text: string }>(items: T[]): T[] {
+function sortByOrder<T extends { order: number; text?: string }>(items: T[]): T[] {
   return items.sort((left, right) => {
     if (left.order !== right.order) {
       return left.order - right.order;
     }
 
-    return left.text.localeCompare(right.text, "zh-CN");
+    return (left.text || '').localeCompare((right.text || ''), "zh-CN");
   });
 }
 

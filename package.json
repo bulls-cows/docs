@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/bulls-cows/docs#readme",
   "devDependencies": {
+    "@types/node": "22.19.15",
     "markdownlint-cli": "0.48.0",
     "sass-embedded": "1.98.0",
     "typescript": "6.0.2",
