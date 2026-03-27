@@ -40,6 +40,10 @@ order: 1
 }
 ```
 
+## Trae CN
+
+可以配置**官方指定的第三方供应商**的 api key。
+
 ## OpenCode
 
 在 `用户主目录/.config/opencode/opencode.jsonc` 中参考下面这样就可以配置自定义模型了：

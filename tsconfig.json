@@ -16,6 +16,7 @@
     "config/.vitepress/**/*.ts",
     "config/.vitepress/**/*.mts",
     "config/.vitepress/**/*.vue",
+    "build/**/*.ts",
     "env.d.ts"
   ],
   "exclude": ["dist", "node_modules"]
