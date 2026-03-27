@@ -4,7 +4,7 @@ order: 1
 
 # 编程工具篇
 
-包括编辑器、插件、cli 等 AI 编程工具。
+包括编辑器、插件、cli 等 AI 编程工具的介绍和第三方 api key 的接入说明。
 
 ## CodeBuddy
 
@@ -37,5 +37,161 @@ order: 1
             "supportsImages": true
         }
     ]
+}
+```
+
+## OpenCode
+
+在 `用户主目录/.config/opencode/opencode.jsonc` 中参考下面这样就可以配置自定义模型了：
+
+```jsonc
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "volcengine-plan/ark-code-latest",
+  "provider": {
+    "volcengine-plan": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Volcano Engine",
+      "options": {
+        "baseURL": "https://ark.cn-beijing.volces.com/api/coding/v3",
+        "apiKey": "填你的 api key"
+      },
+      "models": {
+        "ark-code-latest": {
+          "name": "ark-code-latest",
+          "limit": {
+            "context": 256000,
+            "output": 4096
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "doubao-seed-code": {
+          "name": "doubao-seed-code",
+          "limit": {
+            "context": 256000,
+            "output": 4096
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "glm-4.7": {
+          "name": "glm-4.7",
+          "limit": {
+            "context": 200000,
+            "output": 4096
+          },
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "deepseek-v3.2": {
+          "name": "deepseek-v3.2",
+          "limit": {
+            "context": 128000,
+            "output": 4096
+          }
+        },
+        "doubao-seed-2.0-code": {
+          "name": "doubao-seed-2.0-code",
+          "limit": {
+            "context": 256000,
+            "output": 4096
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "doubao-seed-2.0-pro": {
+          "name": "doubao-seed-2.0-pro",
+          "limit": {
+            "context": 256000,
+            "output": 4096
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "doubao-seed-2.0-lite": {
+          "name": "doubao-seed-2.0-lite",
+          "limit": {
+            "context": 256000,
+            "output": 4096
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "minimax-m2.5": {
+          "name": "minimax-m2.5",
+          "limit": {
+            "context": 200000,
+            "output": 4096
+          },
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "kimi-k2.5": {
+          "name": "kimi-k2.5",
+          "limit": {
+            "context": 256000,
+            "output": 4096
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        }
+      }
+    }
+  }
 }
 ```
