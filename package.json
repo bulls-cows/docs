@@ -9,7 +9,10 @@
   "scripts": {
     "docs:dev": "vitepress dev config",
     "docs:build": "vitepress build config",
-    "docs:preview": "vitepress preview config"
+    "docs:preview": "vitepress preview config",
+    "lint": "node --run check:type && node --run lint:markdown",
+    "lint:markdown": "markdownlint \"**/*.md\" --fix --ignore node_modules",
+    "check:type": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -23,7 +26,9 @@
   },
   "homepage": "https://github.com/bulls-cows/docs#readme",
   "devDependencies": {
+    "markdownlint-cli": "0.48.0",
     "sass-embedded": "1.98.0",
+    "typescript": "6.0.2",
     "vitepress": "2.0.0-alpha.17",
     "vue": "3.5.31"
   },
