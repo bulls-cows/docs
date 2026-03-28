@@ -1,7 +1,7 @@
 <template>
   <div class="home-features-before">
-    <div class="section-main-title">作品</div>
-    <div class="section-sub-title">PRODUCT</div>
+    <div class="section-main-title">文档</div>
+    <div class="section-sub-title">DOCUMENTS</div>
   </div>
 </template>
 
