@@ -19,25 +19,25 @@ hero:
       link: /about
 
 features:
-  - title: AI辅助工作指南
+  - title: AI 辅助工作指南
     link: /vibe-working/
-    details: 探索 AI 辅助工作新范式，掌握用自然语言驱动工作流程优化的核心方法与实践技巧。
+    details: 让 AI 成为你的智能助手，从文档处理到科研工作，全面提升日常工作效率。
     linkText: 开始阅读
     icon:
       src: "/vibe-working-logo.svg"
-  - title: AI辅助编程指南
+  - title: AI 辅助编程指南
     link: /vibe-coding/
-    details: 探索 AI 辅助编程新范式，掌握用自然语言驱动代码生成的核心方法与实践技巧。
+    details: 用自然语言描述需求，让 AI 帮你写代码。从需求到实现，编程从未如此简单。
     linkText: 开始阅读
     icon:
       src: "/vibe-coding-logo.svg"
-  - title: TypeScript 全栈开发指南
+  - title: Web 全栈开发指南
     link: /fullstack/
     details: 汇集牛牛团队 TypeScript 全栈开发的最佳实践，涵盖前后端开发、架构设计等核心内容。
     linkText: 开始阅读
     icon:
       src: "/fullstack-logo.svg"
-  - title: 系统重构
+  - title: 重构你的系统
     link: /system-refactor/
     details: 重塑认知体系,提升搜索、科研、技能运用能力。帮助你在瓶颈期找到突破口,实现自我进化。
     linkText: 开始阅读
