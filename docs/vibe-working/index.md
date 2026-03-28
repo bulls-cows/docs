@@ -4,7 +4,7 @@ bookOrder: 0
 shortTitle: AI辅助工作
 ---
 
-# 什么是 AI 辅助工作（Vibe Working）
+# AI 辅助工作
 
 > "AI 不会取代你，但使用 AI 的人会。" —— IBM 商业研究院
 

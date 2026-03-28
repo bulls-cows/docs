@@ -4,7 +4,7 @@ bookOrder: 1
 shortTitle: AI辅助编程
 ---
 
-# 什么是 Vibe Coding（氛围编程）
+# AI辅助编程
 
 > "最新的编程语言是英语。" —— Andrej Karpathy
 
