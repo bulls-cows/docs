@@ -5,7 +5,6 @@ order: 1
 # 目录
 
 - 第一篇 基础入门
-  - [什么是 Vibe Coding](./index.md)
   - [编程思维转变](./mindset.md)
   - [编程工具篇](./tool.md)
 - 第二篇 实践技巧

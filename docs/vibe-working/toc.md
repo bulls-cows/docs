@@ -5,7 +5,6 @@ order: 1
 # 目录
 
 - 第一篇 工具基础
-  - [AI 如何改变工作方式](./index.md)
   - [常用 AI 工具介绍](./tools.md)
 - 第二篇 核心应用
   - [AI 辅助写作](./writing.md)
