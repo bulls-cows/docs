@@ -67,6 +67,39 @@ order: 1
 
 ## OpenCode
 
+- [OpenCode 官网](https://opencode.ai)
+- [OpenCode 文档](https://opencode.ai/docs/zh-cn)
+- 工具形式：CLI 终端工具 + IDE 扩展 + 桌面应用（Beta）
+- 定位：开源 AI 编程代理，强调隐私保护
+
+### 核心功能
+
+- **LSP 支持**：自动为 LLM 加载合适的 Language Server Protocol，提升代码补全和分析能力
+- **多会话并行**：可在同一项目中启动多个代理会话，独立处理不同任务
+- **会话分享**：支持生成会话链接，便于分享、参考或调试
+- **多模型支持**：支持 75+ LLM 提供商（包括本地模型），通过 Models.dev 连接
+- **隐私保护**：不存储用户代码或上下文数据，适合对隐私敏感的环境
+
+### 安装方式
+
+**一键安装（Linux/macOS）：**
+```bash
+curl -fsSL https://opencode.ai/install | bash
+```
+
+**包管理器安装：**
+```bash
+# npm
+npm install -g opencode
+
+# Homebrew
+brew install opencode
+```
+
+**桌面应用：**支持 macOS、Windows、Linux，可从官网下载 Beta 版
+
+### 配置自定义模型
+
 在 `用户主目录/.config/opencode/opencode.jsonc` 中参考下面这样就可以配置自定义模型了：
 
 ```jsonc
