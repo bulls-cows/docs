@@ -159,7 +159,7 @@ function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
   const sortedFiles = sortByOrder(fileItems).map(({ text, link }) => ({ text, link }));
   const sortedSections = sortByOrder(childSections).map(({ order: _order, ...section }) => section);
   const items = [
-    ...(indexMeta ? [{ text: "概览", link: indexMeta.link }] : []),
+    ...(indexMeta ? [{ text: "前言", link: indexMeta.link }] : []),
     ...sortedFiles,
     ...sortedSections,
   ];
