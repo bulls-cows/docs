@@ -46,7 +46,7 @@ order: 1
 - 工具形式：独立 IDE（基于 VS Code 内核）
 - 定位："The Real AI Engineer" — 真正的 AI 开发工程师
 
-### 核心功能
+### 核心功能 {#trae-feature}
 
 - **SOLO 模式**：AI 主导的全流程开发，理解需求 → 分解任务 → 自动执行
 - **智能协作**：AI 与用户高效配合，支持上下文理解和工具调度
@@ -83,11 +83,13 @@ order: 1
 ### 安装方式
 
 **一键安装（Linux/macOS）：**
+
 ```bash
 curl -fsSL https://opencode.ai/install | bash
 ```
 
 **包管理器安装：**
+
 ```bash
 # npm
 npm install -g opencode

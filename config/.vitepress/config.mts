@@ -22,7 +22,7 @@ export default defineConfig({
     publicDir: "..\\public",
   },
   base: `${base}/`,
-  title: "牛气腾腾",
+  title: "牛牛文档",
   description: "与热爱不期而遇",
   lang: "zh-CN",
   head: [["link", { rel: "icon", href: `${base}/earth.svg` }]],

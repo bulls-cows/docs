@@ -15,7 +15,7 @@
     "lint:markdown": "markdownlint \"**/*.md\" --fix --ignore node_modules",
     "check:type": "tsc --noEmit",
     "deploy": "node ./build/deploy.ts",
-    "buildAndDeploy": "node --run docs:build && node --run deploy"
+    "buildAndDeploy": "node --run lint && node --run docs:build && node --run deploy"
   },
   "repository": {
     "type": "git",
