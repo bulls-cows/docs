@@ -78,4 +78,6 @@ Vibe Coding 代表了 AI 时代软件开发范式的转变——从"编写代码
 
 ---
 
-*参考资料：Wikipedia - Vibe coding*
+## 参考资料
+
+- [Wikipedia - Vibe coding](https://en.wikipedia.org/wiki/Vibe_coding)
