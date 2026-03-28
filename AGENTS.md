@@ -17,7 +17,7 @@ docs/
 │   ├── index.md          # Vibe Coding介绍
 │   └── tool.md           # 编程工具介绍
 ├── vibe-working/         # AI辅助工作指南
-├── fullstack/            # Web全栈开发指南
+├── fullstack/            # 全栈开发指南
 └── system-refactor/      # 重构你的系统
 ```
 

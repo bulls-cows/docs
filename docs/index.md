@@ -31,7 +31,7 @@ features:
     linkText: 开始阅读
     icon:
       src: "/vibe-coding-logo.svg"
-  - title: Web 全栈开发指南
+  - title: 全栈开发指南
     link: /fullstack/
     details: 汇集牛牛团队 TypeScript 全栈开发的最佳实践，涵盖前后端开发、架构设计等核心内容。
     linkText: 开始阅读
