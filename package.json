@@ -11,11 +11,11 @@
     "docs:dev": "vitepress dev config",
     "docs:build": "vitepress build config",
     "docs:preview": "vitepress preview config",
-    "lint": "node --run check:type && node --run lint:markdown",
+    "lint": "node --run check:type && node --run lint:markdown && node --run docs:build",
     "lint:markdown": "markdownlint \"**/*.md\" --fix --ignore node_modules",
     "check:type": "tsc --noEmit",
     "deploy": "node ./build/deploy.ts",
-    "buildAndDeploy": "node --run lint && node --run docs:build && node --run deploy"
+    "buildAndDeploy": "node --run lint && node --run deploy"
   },
   "repository": {
     "type": "git",
