@@ -21,13 +21,13 @@ hero:
 features:
   - title: AI辅助工作指南
     link: /vibe-working/
-    details: AI辅助工作，又叫氛围工作，即 Vibe Working。
+    details: 探索 AI 辅助工作新范式，掌握用自然语言驱动工作流程优化的核心方法与实践技巧。
     linkText: 开始阅读
     icon:
       src: "/vibe-working-logo.svg"
   - title: AI辅助编程指南
     link: /vibe-coding/
-    details: AI辅助编程，又叫氛围编程，即 Vibe Coding。
+    details: 探索 AI 辅助编程新范式，掌握用自然语言驱动代码生成的核心方法与实践技巧。
     linkText: 开始阅读
     icon:
       src: "/vibe-coding-logo.svg"
