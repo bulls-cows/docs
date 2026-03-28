@@ -55,7 +55,7 @@ order: 0
 
 ### 1. 项目架构设计
 
-```
+```text
 my-fullstack-app/
 ├── apps/
 │   ├── web/          # 前端应用
