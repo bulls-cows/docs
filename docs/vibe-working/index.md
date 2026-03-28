@@ -1,5 +1,6 @@
 ---
 order: 0
+shortTitle: AI辅助工作
 ---
 
 # 什么是 AI 辅助工作（Vibe Working）

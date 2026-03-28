@@ -1,5 +1,5 @@
 import { defineConfig } from "vitepress";
-import { buildSidebar } from "./sidebar";
+import { buildSidebar, buildNav } from "./sidebar";
 
 const base = ''
 
@@ -94,10 +94,7 @@ export default defineConfig({
         },
       },
     },
-    nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
-    ],
+    nav: buildNav(),
 
     sidebar: buildSidebar(),
 

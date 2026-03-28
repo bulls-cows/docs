@@ -1,5 +1,6 @@
 ---
 order: 0
+shortTitle: 系统重构
 ---
 
 # 重构你的系统

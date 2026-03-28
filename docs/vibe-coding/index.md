@@ -1,5 +1,6 @@
 ---
 order: 0
+shortTitle: AI辅助编程
 ---
 
 # 什么是 Vibe Coding（氛围编程）

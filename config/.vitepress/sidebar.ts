@@ -180,6 +180,41 @@ function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
   } as DefaultTheme.SidebarItem & { order: number };
 }
 
+type NavItemWithOrder = DefaultTheme.NavItem & { order: number };
+
+export function buildNav(): DefaultTheme.NavItem[] {
+  const entries = fs.readdirSync(DOCS_ROOT, { withFileTypes: true });
+  const navItems: NavItemWithOrder[] = [];
+
+  for (const entry of entries) {
+    if (!entry.isDirectory()) {
+      continue;
+    }
+
+    const indexPath = path.join(DOCS_ROOT, entry.name, "index.md");
+    if (!fs.existsSync(indexPath)) {
+      continue;
+    }
+
+    const source = fs.readFileSync(indexPath, "utf8");
+    const frontmatter = extractFrontmatter(source);
+    const heading = extractHeading(source);
+
+    const text =
+      typeof frontmatter.shortTitle === "string" && frontmatter.shortTitle
+        ? frontmatter.shortTitle
+        : heading || prettifyName(entry.name);
+
+    navItems.push({
+      text,
+      link: `/${entry.name}/`,
+      order: typeof frontmatter.order === "number" ? frontmatter.order : Number.MAX_SAFE_INTEGER,
+    });
+  }
+
+  return sortByOrder(navItems).map(({ order: _order, ...item }) => item);
+}
+
 export function buildSidebar(): DefaultTheme.Sidebar {
   const entries = fs.readdirSync(DOCS_ROOT, { withFileTypes: true });
   const sidebar: DefaultTheme.Sidebar = {};
