@@ -39,7 +39,7 @@ features:
       src: "/fullstack-logo.svg"
   - title: 系统重构
     link: /system-refactor/
-    details: 牛牛团队平时开发产品的时候主要使用 TypeScript 进行全栈开发，这份指南汇集了我们平时开发过程中积累的一些"最佳"实践。
+    details: 重塑认知体系,提升搜索、科研、技能运用能力。帮助你在瓶颈期找到突破口,实现自我进化。
     linkText: 开始阅读
     icon:
       src: "/system-refactor-logo.svg"
