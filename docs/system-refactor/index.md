@@ -1,5 +1,6 @@
 ---
 order: 0
+bookOrder: 3
 shortTitle: 系统重构
 ---
 

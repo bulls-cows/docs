@@ -208,7 +208,7 @@ export function buildNav(): DefaultTheme.NavItem[] {
     navItems.push({
       text,
       link: `/${entry.name}/`,
-      order: typeof frontmatter.order === "number" ? frontmatter.order : Number.MAX_SAFE_INTEGER,
+      order: typeof frontmatter.bookOrder === "number" ? frontmatter.bookOrder : 0,
     });
   }
 
