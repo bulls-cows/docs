@@ -180,36 +180,23 @@ function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
   } as DefaultTheme.SidebarItem & { order: number };
 }
 
-export function buildSidebar(): DefaultTheme.SidebarItem[] {
+export function buildSidebar(): DefaultTheme.Sidebar {
   const entries = fs.readdirSync(DOCS_ROOT, { withFileTypes: true });
-  const rootFiles: DocMeta[] = [];
-  const rootSections: Array<DefaultTheme.SidebarItem & { order: number }> = [];
+  const sidebar: DefaultTheme.Sidebar = {};
 
   for (const entry of entries) {
-    const absolutePath = path.join(DOCS_ROOT, entry.name);
-
-    if (entry.isDirectory()) {
-      const section = buildSection(absolutePath);
-      if (section) {
-        rootSections.push(section as DefaultTheme.SidebarItem & { order: number });
-      }
+    if (!entry.isDirectory()) {
       continue;
     }
 
-    if (!entry.isFile() || !entry.name.endsWith(".md") || entry.name === "index.md") {
-      continue;
-    }
+    const dirPath = path.join(DOCS_ROOT, entry.name);
+    const section = buildSection(dirPath);
 
-    const meta = readDocMeta(absolutePath);
-    if (!meta.hidden) {
-      rootFiles.push(meta);
+    if (section) {
+      const { order: _order, ...sidebarSection } = section as DefaultTheme.SidebarItem & { order?: number };
+      sidebar[`/${entry.name}/`] = [sidebarSection];
     }
   }
 
-  const sidebarItems: DefaultTheme.SidebarItem[] = [
-    ...sortByOrder(rootFiles).map(({ text, link }) => ({ text, link })),
-    ...sortByOrder(rootSections).map(({ order: _order, ...section }) => section),
-  ];
-
-  return sidebarItems;
+  return sidebar;
 }
