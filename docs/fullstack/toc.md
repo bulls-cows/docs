@@ -7,108 +7,33 @@ order: 1
 - [快速开始](./getting-started.md)
 - [全栈最佳实践](./best-practices.md)
 - 第一篇 前端开发
-  - 第1章 前端技术栈
-    - [1.1 技术选型](./frontend/index.md)
-    - [1.2 开发环境搭建](./frontend/index.md)
-  - 第2章 Vue.js 实战
-    - [2.1 组合式 API](./vue.md)
-    - [2.2 响应式原理](./vue.md)
-    - [2.3 组件设计模式](./vue.md)
-  - 第3章 React 实战
-    - [3.1 Hooks 深入](./react.md)
-    - [3.2 状态管理](./react.md)
-    - [3.3 性能优化](./react.md)
-  - 第4章 TypeScript 最佳实践
-    - [4.1 类型系统](./typescript.md)
-    - [4.2 泛型编程](./typescript.md)
-    - [4.3 工程化配置](./typescript.md)
-  - 第5章 状态管理
-    - [5.1 全局状态设计](./state-management.md)
-    - [5.2 状态持久化](./state-management.md)
-    - [5.3 调试技巧](./state-management.md)
-  - 第6章 样式方案
-    - [6.1 CSS 架构](./styling.md)
-    - [6.2 CSS-in-JS](./styling.md)
-    - [6.3 主题系统](./styling.md)
-  - 第7章 性能优化
-    - [7.1 加载性能](./performance.md)
-    - [7.2 运行时性能](./performance.md)
-    - [7.3 监控与分析](./performance.md)
+  - [前端技术栈](./frontend/index.md)
+  - [Vue.js 实战](./frontend/vue.md)
+  - [React 实战](./frontend/react.md)
+  - [TypeScript 最佳实践](./frontend/typescript.md)
+  - [状态管理](./frontend/state-management.md)
+  - [样式方案](./frontend/styling.md)
+  - [性能优化](./frontend/performance.md)
 - 第二篇 后端开发
-  - 第8章 后端技术栈
-    - [8.1 技术选型](./backend/index.md)
-    - [8.2 架构模式](./backend/index.md)
-  - 第9章 Node.js 实战
-    - [9.1 异步编程](./nodejs.md)
-    - [9.2 中间件设计](./nodejs.md)
-    - [9.3 错误处理](./nodejs.md)
-  - 第10章 数据库设计
-    - [10.1 关系型数据库](./database.md)
-    - [10.2 非关系型数据库](./database.md)
-    - [10.3 数据建模](./database.md)
-  - 第11章 API 设计规范
-    - [11.1 RESTful API](./api-design.md)
-    - [11.2 GraphQL](./api-design.md)
-    - [11.3 接口文档](./api-design.md)
-  - 第12章 认证与授权
-    - [12.1 身份认证](./authentication.md)
-    - [12.2 权限控制](./authentication.md)
-    - [12.3 安全最佳实践](./authentication.md)
-  - 第13章 缓存策略
-    - [13.1 缓存架构](./caching.md)
-    - [13.2 缓存失效](./caching.md)
-    - [13.3 分布式缓存](./caching.md)
-- 第三篇 运维部署
-  - 第14章 DevOps 概览
-    - [14.1 DevOps 理念](./devops/index.md)
-    - [14.2 团队协作](./devops/index.md)
-  - 第15章 Docker 容器化
-    - [15.1 容器基础](./docker.md)
-    - [15.2 镜像构建](./docker.md)
-    - [15.3 编排实践](./docker.md)
-  - 第16章 CI/CD 流水线
-    - [16.1 持续集成](./ci-cd.md)
-    - [16.2 持续部署](./ci-cd.md)
-    - [16.3 自动化测试](./ci-cd.md)
-  - 第17章 监控与日志
-    - [17.1 应用监控](./monitoring.md)
-    - [17.2 日志管理](./monitoring.md)
-    - [17.3 告警机制](./monitoring.md)
-  - 第18章 云服务部署
-    - [18.1 云平台选型](./cloud.md)
-    - [18.2 弹性伸缩](./cloud.md)
-    - [18.3 成本优化](./cloud.md)
+  - [后端技术栈](./backend/index.md)
+  - [Node.js 实战](./backend/nodejs.md)
+  - [数据库设计](./backend/database.md)
+  - [API 设计规范](./backend/api-design.md)
+  - [认证与授权](./backend/authentication.md)
+  - [缓存策略](./backend/caching.md)
+- 第三篇 DevOps
+  - [DevOps 概览](./devops/index.md)
+  - [Docker 容器化](./devops/docker.md)
+  - [CI/CD 流水线](./devops/ci-cd.md)
+  - [监控与日志](./devops/monitoring.md)
+  - [云服务部署](./devops/cloud.md)
 - 第四篇 架构设计
-  - 第19章 架构原则
-    - [19.1 设计原则](./architecture/index.md)
-    - [19.2 架构模式](./architecture/index.md)
-  - 第20章 微服务架构
-    - [20.1 服务拆分](./microservices.md)
-    - [20.2 服务通信](./microservices.md)
-    - [20.3 服务治理](./microservices.md)
-  - 第21章 单体应用
-    - [21.1 模块化设计](./monolith.md)
-    - [21.2 渐进式重构](./monolith.md)
-  - 第22章 无服务器架构
-    - [22.1 函数计算](./serverless.md)
-    - [22.2 事件驱动](./serverless.md)
-    - [22.3 实践案例](./serverless.md)
-- 第五篇 测试策略
-  - 第23章 测试概览
-    - [23.1 测试金字塔](./testing/index.md)
-    - [23.2 测试策略](./testing/index.md)
-  - 第24章 单元测试
-    - [24.1 测试框架](./unit-testing.md)
-    - [24.2 Mock 技术](./unit-testing.md)
-    - [24.3 覆盖率](./unit-testing.md)
-  - 第25章 集成测试
-    - [25.1 接口测试](./integration.md)
-    - [25.2 数据库测试](./integration.md)
-    - [25.3 第三方服务](./integration.md)
-  - 第26章 端到端测试
-    - [26.1 自动化测试](./e2e.md)
-    - [26.2 视觉回归](./e2e.md)
-    - [26.3 性能测试](./e2e.md)
-- 附录
-  - [附录A 快速开始](./getting-started.md)
-  - [附录B 全栈最佳实践](./best-practices.md)
+  - [架构原则](./architecture/index.md)
+  - [微服务架构](./architecture/microservices.md)
+  - [单体应用](./architecture/monolith.md)
+  - [无服务器架构](./architecture/serverless.md)
+- 第五篇 测试
+  - [测试概览](./testing/index.md)
+  - [单元测试](./testing/unit-testing.md)
+  - [集成测试](./testing/integration.md)
+  - [端到端测试](./testing/e2e.md)
