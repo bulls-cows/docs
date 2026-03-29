@@ -10,7 +10,7 @@ import {
   logInfo,
 } from "nsuite";
 import { parseEnvFiles, getDirname } from "nsuite";
-import { DOMAIN } from "./constant";
+import { DOMAIN } from "./constant.ts";
 
 const __dirname = getDirname(import.meta.url);
 export const PATH_ROOT = joinPath(__dirname, "../");
