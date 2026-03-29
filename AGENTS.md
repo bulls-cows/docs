@@ -121,6 +121,7 @@ npm run buildAndDeploy
 
 ## 提交规范
 
+- 提交信息: `<type>(<scope>): <subject>`中的 `<subject>` 需为中文（专业词汇、文件名等特殊场景除外）
 - 文档更新: `docs(板块名): 描述`
 - 配置修改: `config: 描述`
 - 主题定制: `theme: 描述`
