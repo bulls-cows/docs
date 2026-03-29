@@ -2,6 +2,7 @@ import { defineConfig } from "vitepress";
 import markdownItMathjax from 'markdown-it-mathjax3'
 import { buildSidebar, buildNav } from "./sidebar";
 import { DOMAIN } from "../../build/constant";
+import autoprefixer from 'autoprefixer';
 
 const base = ''
 
@@ -20,6 +21,22 @@ export default defineConfig({
     },
     build: {
       emptyOutDir: true,
+    },
+    css: {
+      postcss: {
+        plugins: [
+          autoprefixer({
+            overrideBrowserslist: [
+              'Android >= 4.2',
+              'iOS >= 7',
+              'Safari >= 7',
+              'Chrome >= 21',
+              'Firefox >= 28',
+              'Edge >= 12'
+            ]
+          })
+        ],
+      },
     },
     publicDir: "..\\public",
   },

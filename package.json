@@ -30,8 +30,10 @@
   "homepage": "https://github.com/bulls-cows/docs#readme",
   "devDependencies": {
     "@types/node": "22.19.15",
+    "autoprefixer": "10.4.27",
     "markdownlint-cli": "0.48.0",
     "nsuite": "0.1.0",
+    "postcss-cli": "11.0.1",
     "sass-embedded": "1.98.0",
     "typescript": "6.0.2",
     "vitepress": "2.0.0-alpha.17",
