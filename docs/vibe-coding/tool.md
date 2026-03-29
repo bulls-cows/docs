@@ -38,7 +38,7 @@ order: 10
         }
     ]
 }
-```
+```text
 
 ## Trae CN
 
@@ -86,7 +86,7 @@ order: 10
 
 ```bash
 curl -fsSL https://opencode.ai/install | bash
-```
+```text
 
 **包管理器安装：**
 
@@ -96,7 +96,7 @@ npm install -g opencode
 
 # Homebrew
 brew install opencode
-```
+```text
 
 **桌面应用：**支持 macOS、Windows、Linux，可从官网下载 Beta 版
 
@@ -254,4 +254,4 @@ brew install opencode
     }
   }
 }
-```
+```text
