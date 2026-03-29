@@ -34,6 +34,7 @@ export default defineConfig({
     languageAlias: {
       mysql: "sql",
       svg: "html",
+      promql: "yaml",
     },
     config: (md) => {
       // use more markdown-it plugins!
