@@ -1,4 +1,5 @@
 import { defineConfig } from "vitepress";
+import markdownItMathjax from 'markdown-it-mathjax3'
 import { buildSidebar, buildNav } from "./sidebar";
 
 const base = ''
@@ -34,6 +35,10 @@ export default defineConfig({
       mysql: "sql",
       svg: "html",
     },
+    config: (md) => {
+      // use more markdown-it plugins!
+      md.use(markdownItMathjax)
+    }
   },
   sitemap: {
     hostname: `https://docs.verysites.com`,
