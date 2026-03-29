@@ -10,6 +10,7 @@ import {
   logInfo,
 } from "nsuite";
 import { parseEnvFiles, getDirname } from "nsuite";
+import { DOMAIN } from "./constant";
 
 const __dirname = getDirname(import.meta.url);
 export const PATH_ROOT = joinPath(__dirname, "../");
@@ -26,7 +27,7 @@ const SSH_USERNAME = process.env.SSH_USERNAME || "";
 const SSH_PASSWORD = process.env.SSH_PASSWORD || "";
 
 // 远程目录路径
-const cwd = `/www/sites/docs.verysites.com/public/`;
+const cwd = `/www/sites/${DOMAIN}/public/`;
 
 logInfo(`Deploying docs`);
 
@@ -108,6 +109,7 @@ const deployToServer = async () => {
 const main = async () => {
   await deployToServer();
   console.log(`Deployment completed for docs`);
+  console.log(`Homepage: https://${DOMAIN}`);
   process.exit(0);
 };
 

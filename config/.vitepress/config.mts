@@ -1,6 +1,7 @@
 import { defineConfig } from "vitepress";
 import markdownItMathjax from 'markdown-it-mathjax3'
 import { buildSidebar, buildNav } from "./sidebar";
+import { DOMAIN } from "../../build/constant";
 
 const base = ''
 
@@ -42,7 +43,7 @@ export default defineConfig({
     }
   },
   sitemap: {
-    hostname: `https://docs.verysites.com`,
+    hostname: `https://${DOMAIN}`,
     lastmodDateOnly: true,
     transformItems: (items) => {
       items.forEach((item) => {
