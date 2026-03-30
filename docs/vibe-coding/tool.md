@@ -11,7 +11,7 @@ order: 10
 - [CodeBuddy 文档](https://www.codebuddy.cn/docs/ide/Introduction)
 - 工具形式：`VS Code` 衍生编辑器。
 - 默认兼容 `AGENTS.md` 文档。
-- 支持 `/技能名` 召唤技能，但是没有提示。
+- 支持 `/技能名` 召唤技能。
 - 支持规则。
 - 支持生成 git 提交信息。
 - 支持选中代码添加到对话框。
@@ -27,8 +27,74 @@ order: 10
     "models": [
         {
             "id": "GLM-5",
-            "name": "GLM-5",
-            "vendor": "京东云coding plan",
+            "name": "京东云",
+            "vendor": "京东云",
+            "apiKey": "填你的 api key",
+            "maxInputTokens": 200000,
+            "maxOutputTokens": 8192,
+            "url": "https://modelservice.jdcloud.com/coding/openai/v1",
+            "supportsToolCall": true,
+            "supportsImages": true
+        },
+        {
+            "id": "GLM-4.7",
+            "name": "京东云",
+            "vendor": "京东云",
+            "apiKey": "填你的 api key",
+            "maxInputTokens": 200000,
+            "maxOutputTokens": 8192,
+            "url": "https://modelservice.jdcloud.com/coding/openai/v1",
+            "supportsToolCall": true,
+            "supportsImages": true
+        },
+        {
+            "id": "DeepSeek-V3.2",
+            "name": "京东云",
+            "vendor": "京东云",
+            "apiKey": "填你的 api key",
+            "maxInputTokens": 200000,
+            "maxOutputTokens": 8192,
+            "url": "https://modelservice.jdcloud.com/coding/openai/v1",
+            "supportsToolCall": true,
+            "supportsImages": true
+        },
+        {
+            "id": "MiniMax-M2.5",
+            "name": "京东云",
+            "vendor": "京东云",
+            "apiKey": "填你的 api key",
+            "maxInputTokens": 200000,
+            "maxOutputTokens": 8192,
+            "url": "https://modelservice.jdcloud.com/coding/openai/v1",
+            "supportsToolCall": true,
+            "supportsImages": true
+        },
+        {
+            "id": "Kimi-K2.5",
+            "name": "京东云",
+            "vendor": "京东云",
+            "apiKey": "填你的 api key",
+            "maxInputTokens": 200000,
+            "maxOutputTokens": 8192,
+            "url": "https://modelservice.jdcloud.com/coding/openai/v1",
+            "supportsToolCall": true,
+            "supportsImages": true
+        },
+        {
+            "id": "Kimi-K2-Turbo",
+            "name": "京东云",
+            "vendor": "京东云",
+            "apiKey": "填你的 api key",
+            "maxInputTokens": 200000,
+            "maxOutputTokens": 8192,
+            "url": "https://modelservice.jdcloud.com/coding/openai/v1",
+            "supportsToolCall": true,
+            "supportsImages": true
+        },
+        {
+            "id": "Qwen3-Coder",
+            "name": "京东云",
+            "vendor": "京东云",
             "apiKey": "填你的 api key",
             "maxInputTokens": 200000,
             "maxOutputTokens": 8192,
@@ -38,7 +104,7 @@ order: 10
         }
     ]
 }
-```text
+```
 
 ## Trae CN
 
@@ -86,7 +152,7 @@ order: 10
 
 ```bash
 curl -fsSL https://opencode.ai/install | bash
-```text
+```
 
 **包管理器安装：**
 
@@ -96,7 +162,7 @@ npm install -g opencode
 
 # Homebrew
 brew install opencode
-```text
+```
 
 **桌面应用：**支持 macOS、Windows、Linux，可从官网下载 Beta 版
 
@@ -254,4 +320,4 @@ brew install opencode
     }
   }
 }
-```text
+```
