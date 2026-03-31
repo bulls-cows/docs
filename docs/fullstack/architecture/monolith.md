@@ -162,7 +162,7 @@ JOIN products ON orders.product_id = products.id;
 
 ### 分层架构
 
-```
+```text
 经典分层架构：
 ┌─────────────────────────────────────────────────────┐
 │                  表现层 (Presentation)               │
@@ -181,7 +181,7 @@ JOIN products ON orders.product_id = products.id;
 
 **代码组织**：
 
-```
+```text
 src/
 ├── modules/                    # 按业务模块组织
 │   ├── user/
@@ -275,7 +275,7 @@ class OrderController {
 
 ### 内部模块化
 
-```
+```text
 模块内部结构：
 ┌─────────────────────────────────────────────────────┐
 │                    OrderModule                       │

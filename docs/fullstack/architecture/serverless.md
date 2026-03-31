@@ -331,7 +331,7 @@ async function getOrdersByUser(userId: string): Promise<Order[]> {
 
 **DynamoDB 数据模型设计**：
 
-```
+```text
 DynamoDB 单表设计：
 ┌─────────────────────────────────────────────────────────────┐
 │ Table: Orders                                               │
@@ -466,7 +466,7 @@ export const processSQS = async (event: SQSEvent) => {
 
 ### 什么是冷启动
 
-```
+```text
 Lambda 执行生命周期：
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
@@ -586,7 +586,7 @@ functions:
     provisionedConcurrency: 5  # 保持 5 个实例预热
 ```
 
-```
+```text
 预置并发效果：
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
@@ -756,7 +756,7 @@ export const handler = async (event: any) => {
 
 **不适合 Serverless 的场景**：
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
 │  1. 长时间运行任务                                           │
