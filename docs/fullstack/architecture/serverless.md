@@ -12,7 +12,7 @@ order: 40
 
 Serverless 并非"没有服务器"，而是"无需管理服务器"：
 
-```text
+```
 传统架构 vs Serverless 架构：
 ┌─────────────────────────────────────────────────────────────┐
 │ 传统架构                                                     │
@@ -26,7 +26,7 @@ Serverless 并非"没有服务器"，而是"无需管理服务器"：
 │ │  云厂商负责：运行时 + 中间件 + OS + 服务器 + 网络         │ │
 │ └─────────────────────────────────────────────────────────┘ │
 └─────────────────────────────────────────────────────────────┘
-```text
+```
 
 ### Serverless 核心特征
 
@@ -40,7 +40,7 @@ Serverless 并非"没有服务器"，而是"无需管理服务器"：
 
 ### Serverless 组成部分
 
-```text
+```
 Serverless 生态：
 ┌─────────────────────────────────────────────────────────────┐
 │                     Serverless 应用                          │
@@ -66,7 +66,7 @@ Serverless 生态：
 │                            │ └── EventBridge          │    │
 │                            └──────────────────────────┘    │
 └─────────────────────────────────────────────────────────────┘
-```text
+```
 
 ## FaaS 平台实践
 
@@ -119,7 +119,7 @@ async function processOrder(orderData: any) {
   // 处理订单逻辑
   return { orderId: '12345', status: 'completed' };
 }
-```text
+```
 
 **函数配置**：
 
@@ -151,11 +151,11 @@ functions:
       - http:
           path: orders/{id}
           method: get
-```text
+```
 
 ### 触发器类型
 
-```text
+```
 常见触发器类型：
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
@@ -185,7 +185,7 @@ functions:
 │  └── SES (邮件事件)                                         │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
-```text
+```
 
 **多触发器函数示例**：
 
@@ -210,13 +210,13 @@ export const handler = async (event: any) => {
     return handleHttpRequest(event);
   }
 };
-```text
+```
 
 ### 函数设计模式
 
 **1. 函数粒度**
 
-```text
+```
 函数粒度选择：
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
@@ -231,7 +231,7 @@ export const handler = async (event: any) => {
 │  缺点：耦合度高、难以独立扩展                                │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
-```text
+```
 
 **2. 函数编排**
 
@@ -264,9 +264,9 @@ export const handler = async (event: any) => {
     }
   }
 }
-```text
+```
 
-```text
+```
 Step Functions 流程图：
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
@@ -282,7 +282,7 @@ Step Functions 流程图：
 │                                          └─────────────┘   │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
-```text
+```
 
 ## BaaS 服务集成
 
@@ -327,11 +327,11 @@ async function getOrdersByUser(userId: string): Promise<Order[]> {
   }));
   return result.Items as Order[];
 }
-```text
+```
 
 **DynamoDB 数据模型设计**：
 
-```text
+```
 DynamoDB 单表设计：
 ┌─────────────────────────────────────────────────────────────┐
 │ Table: Orders                                               │
@@ -348,7 +348,7 @@ DynamoDB 单表设计：
 访问模式：
 - 按 orderId 查询：PK = ORDER#123
 - 查询用户所有订单：PK = USER#U001, SK begins_with ORDER#
-```text
+```
 
 ### 存储服务
 
@@ -389,7 +389,7 @@ export const processUpload = async (event: S3Event) => {
     // ... 处理逻辑
   }
 };
-```text
+```
 
 ### 认证服务
 
@@ -433,7 +433,7 @@ async function signIn(email: string, password: string) {
     refreshToken: result.AuthenticationResult.RefreshToken
   };
 }
-```text
+```
 
 ### 消息服务
 
@@ -460,13 +460,13 @@ export const processSQS = async (event: SQSEvent) => {
     await processMessage(message);
   }
 };
-```text
+```
 
 ## 冷启动优化
 
 ### 什么是冷启动
 
-```text
+```
 Lambda 执行生命周期：
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
@@ -483,7 +483,7 @@ Lambda 执行生命周期：
 │  └──────────┘                                               │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
-```text
+```
 
 ### 冷启动影响因素
 
@@ -514,14 +514,14 @@ func handler() (string, error) {
 func main() {
   lambda.Start(handler)
 }
-```text
+```
 
 ```typescript
 // Node.js：冷启动较快，推荐使用
 export const handler = async (event) => {
   return { message: 'Hello from Node.js!' };
 };
-```text
+```
 
 **2. 减少依赖**
 
@@ -531,7 +531,7 @@ import _ from 'lodash';  // 整个 lodash 约 70KB
 
 // 好的做法：只引入需要的函数
 import debounce from 'lodash/debounce';  // 只引入需要的部分
-```text
+```
 
 **3. 使用 Layer 共享依赖**
 
@@ -548,7 +548,7 @@ functions:
     handler: handler.main
     layers:
       - { Ref: CommonDepsLambdaLayer }
-```text
+```
 
 **4. 延迟初始化**
 
@@ -574,7 +574,7 @@ export const handler = async (event) => {
   const database = getDb();  // 首次调用时才初始化
   // 使用 database
 };
-```text
+```
 
 **5. Provisioned Concurrency**
 
@@ -584,9 +584,9 @@ functions:
   criticalFunction:
     handler: handler.main
     provisionedConcurrency: 5  # 保持 5 个实例预热
-```text
+```
 
-```text
+```
 预置并发效果：
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
@@ -602,7 +602,7 @@ functions:
 │  └─────────────────────────────────────────────────────┘   │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
-```text
+```
 
 **6. 保持函数温暖**
 
@@ -617,7 +617,7 @@ export const warmup = async (event: any) => {
   // 正常业务逻辑
   return processBusinessLogic(event);
 };
-```text
+```
 
 ```yaml
 # serverless.yml 配置预热
@@ -629,7 +629,7 @@ functions:
           rate: rate(5 minutes)
           input:
             source: serverless-plugin-warmup
-```text
+```
 
 ## 成本与限制
 
@@ -637,7 +637,7 @@ functions:
 
 **Lambda 定价模型**：
 
-```text
+```
 成本 = 请求费用 + 计算费用
 
 请求费用：
@@ -659,11 +659,11 @@ functions:
 │ 计算费用：1000万 × 0.1s × $0.0000002083 × 4 = $0.83        │
 │ 总费用：$1.80 + $0.83 = $2.63/月                            │
 └─────────────────────────────────────────────────────────────┘
-```text
+```
 
 **成本对比**：
 
-```text
+```
 EC2 vs Lambda 成本对比（月度）：
 ┌─────────────────────────────────────────────────────────────┐
 │ 场景：API 服务，平均 100 QPS，峰值 1000 QPS                  │
@@ -681,7 +681,7 @@ EC2 vs Lambda 成本对比（月度）：
 │ 结论：低流量场景 Lambda 更划算                               │
 │       高流量持续负载场景 EC2 可能更经济                       │
 └─────────────────────────────────────────────────────────────┘
-```text
+```
 
 ### 服务限制
 
@@ -717,13 +717,13 @@ export const handler = async (event: any) => {
     }));
   }
 };
-```text
+```
 
 ### 适用场景分析
 
 **适合 Serverless 的场景**：
 
-```text
+```
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
 │  1. 流量波动大                                               │
@@ -752,11 +752,11 @@ export const handler = async (event: any) => {
 │     └── 低运维需求                                          │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
-```text
+```
 
 **不适合 Serverless 的场景**：
 
-```text
+```
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
 │  1. 长时间运行任务                                           │
@@ -785,7 +785,7 @@ export const handler = async (event: any) => {
 │     └── 建议：使用 Fargate/ECS                              │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
-```text
+```
 
 ## 最佳实践
 
@@ -816,7 +816,7 @@ export const orderHandler = async (event: any) => {
   }
   // 函数变得臃肿，难以维护
 };
-```text
+```
 
 ### 错误处理
 
@@ -857,7 +857,7 @@ export const handler = async (event: any) => {
     };
   }
 };
-```text
+```
 
 ### 本地开发与测试
 
@@ -883,7 +883,7 @@ describe('Order Handler', () => {
     expect(JSON.parse(result.body).orderId).toBeDefined();
   });
 });
-```text
+```
 
 ### 监控与告警
 
@@ -905,7 +905,7 @@ Resources:
       Dimensions:
         - Name: FunctionName
           Value: myFunction
-```text
+```
 
 ## 小结
 

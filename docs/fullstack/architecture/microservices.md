@@ -36,7 +36,7 @@ order: 20
     │ 用户DB  │ │ 订单DB  │ │ 商品DB  │ │ 支付DB  │
     │ MySQL   │ │ MySQL   │ │ MongoDB │ │ MySQL   │
     └─────────┘ └─────────┘ └─────────┘ └─────────┘
-```text
+```
 
 ### 微服务 vs 单体架构
 
@@ -61,7 +61,7 @@ order: 20
 └───────────┘ └───────────┘ └───────────┘
 优点：独立扩展、技术自由、故障隔离
 缺点：运维复杂、分布式问题、数据一致性
-```text
+```
 
 ### 微服务的优势
 
@@ -74,7 +74,7 @@ order: 20
 kubectl set image deployment/user-service user-service=user-service:v2.0
 
 # 其他服务不受影响，继续运行
-```text
+```
 
 **2. 技术多样性**
 
@@ -85,7 +85,7 @@ kubectl set image deployment/user-service user-service=user-service:v2.0
 数据分析：Python + Pandas（数据处理）
 核心交易：Java + Spring Boot（稳定性）
 实时推送：Go + WebSocket（高性能）
-```text
+```
 
 **3. 弹性扩展**
 
@@ -100,7 +100,7 @@ kubectl set image deployment/user-service user-service=user-service:v2.0
 ├─────────────┤
 │   商品服务   │ × 3 实例（中负载）
 └─────────────┘
-```text
+```
 
 **4. 故障隔离**
 
@@ -115,7 +115,7 @@ kubectl set image deployment/user-service user-service=user-service:v2.0
 服务A ──→ 服务B ──→ 服务C ──→ 服务D
   ✓         ✗    ───→  ✓         ✓
            (熔断降级)
-```text
+```
 
 ## 服务拆分策略
 
@@ -123,7 +123,7 @@ kubectl set image deployment/user-service user-service=user-service:v2.0
 
 基于领域驱动设计 (DDD) 的限界上下文：
 
-```text
+```
 电商系统业务边界：
 ┌─────────────────────────────────────────────────┐
 │                   电商系统                       │
@@ -135,7 +135,7 @@ kubectl set image deployment/user-service user-service=user-service:v2.0
 │  │ 权限  │  │  │ 库存  │  │  │     物流      │  │
 │  └───────┘  │  └───────┘  │  └───────────────┘  │
 └─────────────┴─────────────┴─────────────────────┘
-```text
+```
 
 ### 服务拆分原则
 
@@ -159,13 +159,13 @@ class BusinessService {
   manageUser() {}
   handlePayment() {}
 }
-```text
+```
 
 **2. 高内聚**
 
 服务内部功能紧密相关：
 
-```text
+```
 订单服务内部结构：
 ┌─────────────────────────────────┐
 │          OrderService           │
@@ -179,7 +179,7 @@ class BusinessService {
 │  OrderRepository (数据访问)      │
 │  OrderValidator (校验逻辑)       │
 └─────────────────────────────────┘
-```text
+```
 
 **3. 松耦合**
 
@@ -203,13 +203,13 @@ class OrderService {
     const user = await this.userClient.getUser(userId); // HTTP/RPC 调用
   }
 }
-```text
+```
 
 ### 服务粒度控制
 
 服务粒度的权衡：
 
-```text
+```
 粒度过细：
 ┌───┐ ┌───┐ ┌───┐ ┌───┐ ┌───┐
 │登录│ │注册│ │修改│ │查询│ │删除│
@@ -227,7 +227,7 @@ class OrderService {
 │ 用户服务 │ │ 订单服务 │ │ 商品服务 │
 └─────────┘ └─────────┘ └─────────┘
 平衡：业务边界清晰、独立部署、适度规模
-```text
+```
 
 **粒度判断标准**：
 
@@ -261,7 +261,7 @@ class OrderClient {
     return response.json();
   }
 }
-```text
+```
 
 **gRPC**
 
@@ -286,7 +286,7 @@ message Order {
   repeated OrderItem items = 3;
   double total = 4;
 }
-```text
+```
 
 ```typescript
 // gRPC 客户端调用
@@ -301,13 +301,13 @@ client.getOrder({ order_id: '123' }, (err, order) => {
   if (err) console.error(err);
   else console.log(order);
 });
-```text
+```
 
 ### 异步通信
 
 **消息队列模式**
 
-```text
+```
 发布-订阅模式：
 ┌─────────────┐
 │  订单服务    │
@@ -327,7 +327,7 @@ client.getOrder({ order_id: '123' }, (err, order) => {
 │ 库存服务   │ │ 通知服务   │ │ 积分服务   │
 │ (订阅者)  │ │ (订阅者)   │ │ (订阅者)   │
 └───────────┘ └───────────┘ └───────────┘
-```text
+```
 
 ```typescript
 // 事件发布
@@ -354,11 +354,11 @@ class InventorySubscriber {
     });
   }
 }
-```text
+```
 
 **事件溯源**
 
-```text
+```
 传统方式：存储当前状态
 ┌─────────────────────────────┐
 │ Order Table                 │
@@ -376,11 +376,11 @@ class InventorySubscriber {
 │ OrderShipped  | {...}       | t4        │
 └─────────────────────────────────────────┘
 通过重放事件重建任意时刻的状态
-```text
+```
 
 ### 服务发现
 
-```text
+```
 服务发现流程：
 ┌─────────────┐     1. 注册      ┌─────────────┐
 │ 订单服务    │ ──────────────→  │ 服务注册中心 │
@@ -398,7 +398,7 @@ class InventorySubscriber {
 │ 订单服务    │
 │ :8002       │
 └─────────────┘
-```text
+```
 
 ```typescript
 // 客户端服务发现
@@ -422,13 +422,13 @@ class UserClient {
     return response.json();
   }
 }
-```text
+```
 
 ## 分布式事务
 
 ### 分布式事务挑战
 
-```text
+```
 本地事务（ACID）：
 ┌─────────────────────────────────────┐
 │           单数据库事务               │
@@ -445,13 +445,13 @@ class UserClient {
 │  (DB1)    │     │  (DB2)    │     │  (DB3)    │
 └───────────┘     └───────────┘     └───────────┘
 挑战：网络分区、部分失败、超时重试
-```text
+```
 
 ### 解决方案
 
 **1. 两阶段提交 (2PC)**
 
-```text
+```
 两阶段提交流程：
 ┌─────────────────────────────────────────────────┐
 │                   协调者                          │
@@ -470,7 +470,7 @@ class UserClient {
   协调者 → 参与者：COMMIT
 否则：
   协调者 → 参与者：ROLLBACK
-```text
+```
 
 **缺点**：同步阻塞、单点故障、数据不一致风险
 
@@ -478,11 +478,11 @@ class UserClient {
 
 在 2PC 基础上增加预提交阶段，减少阻塞：
 
-```text
+```
 阶段1：CanCommit（询问是否可以提交）
 阶段2：PreCommit（预提交）
 阶段3：DoCommit（正式提交）
-```text
+```
 
 **3. TCC (Try-Confirm-Cancel)**
 
@@ -531,11 +531,11 @@ class OrderTccService {
     await this.paymentClient.unfreezeAmount(orderId);
   }
 }
-```text
+```
 
 **4. Saga 模式**
 
-```text
+```
 Saga 编排模式：
 ┌──────────────────────────────────────────────────────┐
 │                    Saga 协调器                        │
@@ -551,7 +551,7 @@ Saga 编排模式：
     ┌─────────┐             ┌─────────┐             ┌─────────┐
     │ 取消订单 │ ←────────── │ 恢复库存 │ ←────────── │ 恢复余额 │
     └─────────┘   补偿      └─────────┘   补偿      └─────────┘
-```text
+```
 
 ```typescript
 // Saga 编排器
@@ -579,11 +579,11 @@ class CreateOrderSaga {
     }
   }
 }
-```text
+```
 
 **5. 本地消息表**
 
-```text
+```
 本地消息表模式：
 ┌─────────────────────────────────────────────────────┐
 │                    订单服务                          │
@@ -599,13 +599,13 @@ class CreateOrderSaga {
                     │    库存服务      │
                     │ 处理消息并确认   │
                     └─────────────────┘
-```text
+```
 
 ### 最终一致性
 
 微服务架构通常采用最终一致性模型：
 
-```text
+```
 一致性级别对比：
 ┌─────────────────┬─────────────────────────────────┐
 │ 强一致性         │ 所有节点同时看到相同数据          │
@@ -619,7 +619,7 @@ class CreateOrderSaga {
 - 异步事件通知
 - 定时任务补偿
 - 手动对账修复
-```text
+```
 
 ## 实战考量
 
@@ -627,7 +627,7 @@ class CreateOrderSaga {
 
 **日志聚合**
 
-```text
+```
 ┌───────────┐   ┌───────────┐   ┌───────────┐
 │ 服务 A    │   │ 服务 B    │   │ 服务 C    │
 │ 日志      │   │ 日志      │   │ 日志      │
@@ -643,7 +643,7 @@ class CreateOrderSaga {
               ┌───────────────┐
               │  统一查询界面  │
               └───────────────┘
-```text
+```
 
 **分布式追踪**
 
@@ -675,9 +675,9 @@ async function createOrder(orderData: OrderData) {
     span.end();
   }
 }
-```text
+```
 
-```text
+```
 追踪链示例：
 ┌─────────────────────────────────────────────────────────────┐
 │ Trace ID: abc123                                            │
@@ -687,7 +687,7 @@ async function createOrder(orderData: OrderData) {
 │ [Inventory]       10ms ──────── 25ms                        │
 │ [Payment]         30ms ────────────── 40ms                  │
 └─────────────────────────────────────────────────────────────┘
-```text
+```
 
 ### 容错设计
 
@@ -730,9 +730,9 @@ class CircuitBreaker {
     }
   }
 }
-```text
+```
 
-```text
+```
 熔断器状态机：
 ┌─────────────────────────────────────────────────┐
 │                                                 │
@@ -749,7 +749,7 @@ class CircuitBreaker {
 │  │ (熔断)  │ 超时后    │ (熔断)  │              │
 │  └─────────┘          └─────────┘              │
 └─────────────────────────────────────────────────┘
-```text
+```
 
 **重试策略**
 
@@ -772,7 +772,7 @@ async function retryWithBackoff<T>(
   }
   throw new Error('Max retries exceeded');
 }
-```text
+```
 
 **降级策略**
 
@@ -795,13 +795,13 @@ class OrderService {
     return this.cache.get('hot_products') || [];
   }
 }
-```text
+```
 
 ### 配置管理
 
 **集中式配置**
 
-```text
+```
 配置中心架构：
 ┌─────────────────────────────────────────────────┐
 │                 配置中心                         │
@@ -814,7 +814,7 @@ class OrderService {
 │ 服务 A        │ │ 服务 B        │ │ 服务 C        │
 │ 配置热更新     │ │ 配置热更新     │ │ 配置热更新     │
 └───────────────┘ └───────────────┘ └───────────────┘
-```text
+```
 
 ```typescript
 // 配置使用示例
@@ -830,11 +830,11 @@ class OrderService {
     // 使用配置...
   }
 }
-```text
+```
 
 ### API 网关
 
-```text
+```
 API 网关职责：
 ┌─────────────────────────────────────────────────────┐
 │                    API Gateway                       │
@@ -852,7 +852,7 @@ API 网关职责：
 ┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐
 │用户服务│ │订单服务│ │商品服务│ │支付服务│
 └───────┘ └───────┘ └───────┘ └───────┘
-```text
+```
 
 ## 小结
 

@@ -25,7 +25,7 @@ order: 10
 │  数据架构    →  数据模型、存储方案、数据治理              │
 │  部署架构    →  部署拓扑、容灾方案、运维体系              │
 └─────────────────────────────────────────────────────────┘
-```text
+```
 
 架构的核心价值在于：**用合理的成本，构建满足当前需求且易于演进的系统**。
 
@@ -65,7 +65,7 @@ class EmailService {
 class ReportService {
   generateReport() { /* 报表逻辑 */ }
 }
-```text
+```
 
 **依赖倒置原则应用示例**：
 
@@ -91,7 +91,7 @@ class OrderService {
     this.repository.save(order);
   }
 }
-```text
+```
 
 ### DRY 原则
 
@@ -124,7 +124,7 @@ class Validator {
     return this.EMAIL_REGEX.test(email);
   }
 }
-```text
+```
 
 ### KISS 原则
 
@@ -175,7 +175,7 @@ class User {
 }
 
 const user = new User('John', 'john@example.com');
-```text
+```
 
 ### 其他重要原则
 
@@ -208,7 +208,7 @@ const user = new User('John', 'john@example.com');
 │ Module A │────→│ Interface│←────│ Module B │
 └──────────┘     └──────────┘     └──────────┘
                  (抽象层解耦)
-```text
+```
 
 ## 架构决策方法
 
@@ -238,7 +238,7 @@ const user = new User('John', 'john@example.com');
 - 需要专门的 DBA 进行运维
 - 水平扩展相对复杂
 - 需要处理连接池管理
-```text
+```
 
 ### 决策框架
 
@@ -267,7 +267,7 @@ const user = new User('John', 'john@example.com');
 │ 可扩展性     │   高   │   低   │   高   │
 │ 团队能力匹配 │   高   │   中   │   低   │
 └─────────────┴────────┴────────┴────────┘
-```text
+```
 
 **4. 做出决策**
 
@@ -294,7 +294,7 @@ const user = new User('John', 'john@example.com');
     │              │              │              │
     ↓              ↓              ↓              ↓
  快速迭代       清晰边界       独立部署       独立扩展
-```text
+```
 
 ### 绞杀者模式
 
@@ -332,7 +332,7 @@ const user = new User('John', 'john@example.com');
         │   新系统       │
         │  (全部功能)    │
         └───────────────┘
-```text
+```
 
 ### 演进原则
 
