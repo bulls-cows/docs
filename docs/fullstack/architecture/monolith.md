@@ -12,7 +12,7 @@ order: 30
 
 单体架构最大的优势在于简单：
 
-```
+```text
 单体应用结构：
 ┌─────────────────────────────────────────────────────┐
 │                    单体应用                          │
@@ -90,13 +90,13 @@ async function createOrder(orderData: OrderData) {
   await this.db.transaction(async (trx) => {
     // 1. 创建订单
     const order = await trx('orders').insert(orderData);
-    
+
     // 2. 扣减库存
     await trx('inventory').decrement('stock', orderData.quantity);
-    
+
     // 3. 扣减余额
     await trx('accounts').decrement('balance', orderData.total);
-    
+
     // 全部成功或全部回滚，ACID 保证
   });
 }
@@ -110,7 +110,7 @@ async function createOrder(orderData: OrderData) {
 
 ### 运维成本低
 
-```
+```text
 单体应用运维：
 ┌─────────────────────────────────────┐
 │  监控：一个应用                      │
@@ -220,7 +220,7 @@ export interface IUserService {
 class OrderService {
   // 通过接口依赖，而非具体实现
   constructor(private readonly userService: IUserService) {}
-  
+
   async createOrder(userId: string, items: OrderItem[]) {
     // 通过接口调用用户服务
     const user = await this.userService.getUser(userId);
@@ -265,7 +265,7 @@ Container.set('OrderService', new OrderService(
 // 在控制器中使用
 class OrderController {
   private orderService = Container.get<OrderService>('OrderService');
-  
+
   async create(req: Request, res: Response) {
     const order = await this.orderService.createOrder(req.body);
     res.json(order);
@@ -299,7 +299,7 @@ class OrderController {
 
 ### 为什么单体优先
 
-```
+```text
 项目发展阶段：
 ┌─────────────────────────────────────────────────────────────┐
 │  阶段1：探索期        阶段2：验证期       阶段3：成熟期      │
@@ -326,7 +326,7 @@ class OrderController {
 
 **拆分信号**：
 
-```
+```text
 拆分信号检查清单：
 
 业务层面：
@@ -359,7 +359,7 @@ class OrderController {
 
 **1. 前置准备**
 
-```
+```text
 演进前必须具备的能力：
 ┌─────────────────────────────────────────────────────┐
 │ 基础设施                                             │
@@ -382,10 +382,10 @@ class OrderController {
 
 **2. 渐进式拆分**
 
-```
+```text
 拆分顺序建议：
 ┌─────────────────────────────────────────────────────────────┐
-│                                                             │
+│                                                                                                                         │
 │  第一步：拆分边缘服务                                        │
 │  ├── 通知服务（邮件、短信）                                  │
 │  ├── 文件服务（上传、处理）                                  │
@@ -409,7 +409,7 @@ class OrderController {
 
 **3. 拆分步骤**
 
-```
+```text
 单个服务拆分流程：
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
@@ -467,7 +467,7 @@ const db = {
 
 **数据迁移策略**：
 
-```
+```text
 数据迁移步骤：
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
@@ -519,14 +519,14 @@ class OrderFacade {
 class OrderService {
   async createOrder(orderData: OrderData) {
     const order = await this.orderRepository.create(orderData);
-    
+
     // 发布事件，而非直接调用其他模块
     this.eventBus.publish('order.created', {
       orderId: order.id,
       userId: order.userId,
       total: order.total
     });
-    
+
     return order;
   }
 }
@@ -549,7 +549,7 @@ class NotificationService {
 
 ### 明确模块边界
 
-```
+```text
 模块边界检查：
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
@@ -570,7 +570,7 @@ class NotificationService {
 
 ### 代码组织规范
 
-```
+```text
 推荐的项目结构：
 project/
 ├── src/
@@ -608,7 +608,7 @@ import { Logger } from 'winston';
 
 class OrderService {
   constructor(private logger: Logger) {}
-  
+
   async createOrder(orderData: OrderData) {
     this.logger.info('Creating order', {
       module: 'order',
@@ -616,15 +616,15 @@ class OrderService {
       userId: orderData.userId,
       itemCount: orderData.items.length
     });
-    
+
     try {
       const order = await this.orderRepository.create(orderData);
-      
+
       this.logger.info('Order created successfully', {
         module: 'order',
         orderId: order.id
       });
-      
+
       return order;
     } catch (error) {
       this.logger.error('Failed to create order', {
@@ -647,18 +647,18 @@ class ProductService {
     private cache: CacheService,
     private productRepository: ProductRepository
   ) {}
-  
+
   async getProduct(productId: string): Promise<Product> {
     // 缓存优先
     const cached = await this.cache.get(`product:${productId}`);
     if (cached) return cached;
-    
+
     // 数据库查询
     const product = await this.productRepository.findById(productId);
-    
+
     // 写入缓存
     await this.cache.set(`product:${productId}`, product, 3600);
-    
+
     return product;
   }
 }
@@ -670,7 +670,7 @@ class OrderService {
     const orders = await this.orderRepository.findByIds(orderIds);
     const userIds = [...new Set(orders.map(o => o.userId))];
     const users = await this.userService.getUsers(userIds);
-    
+
     // 组装数据
     return orders.map(order => ({
       ...order,
