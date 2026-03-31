@@ -65,7 +65,7 @@ npm init -y
 
 在 AI 对话框中输入：
 
-```
+```text
 初始化一个 Vue 3 + TypeScript + Vite 项目。使用 npm 作为包管理器，不使用 JSX。
 ```
 
@@ -78,11 +78,12 @@ AI 会自动执行 `npm create vite@latest` 并安装依赖。
 npm create vite@latest . -- --template vue-ts
 npm install
 ```
+
 :::
 
 等依赖安装完成，项目结构应该是这样的：
 
-```
+```text
 my-first-ai-project/
 ├── src/
 │   ├── App.vue
@@ -99,7 +100,7 @@ my-first-ai-project/
 
 告诉 AI：
 
-```
+```text
 在 src/components/ 目录下创建 TodoApp.vue 组件，实现一个待办事项应用：
 
 功能要求：
@@ -121,6 +122,7 @@ AI 会生成一个完整的 Vue 3 组件。仔细看看生成的代码——**�
 
 ::: tip 审查要点
 快速扫一眼 AI 生成的代码，检查：
+
 - 是否使用了 `Composition API` + `<script setup>`
 - 是否有 TypeScript 类型定义
 - 输入验证是否完善（空任务不允许添加）
@@ -131,7 +133,7 @@ AI 会生成一个完整的 Vue 3 组件。仔细看看生成的代码——**�
 
 告诉 AI：
 
-```
+```text
 把 TodoApp 组件挂载到 App.vue 中，替换掉默认内容。清空 style.css 中的默认样式。
 ```
 
@@ -148,9 +150,10 @@ npm run dev
 ::: tip 如果页面报错
 把浏览器控制台或终端的错误信息直接粘贴给 AI，让它帮你修复：
 
-```
+```text
 运行 npm run dev 后页面报错：[粘贴错误信息]
 ```
+
 :::
 
 **到这里，你已经完成了第一个 AI 辅助编程项目。全程没有手写一行代码。**
@@ -161,7 +164,7 @@ npm run dev
 
 现在任务刷新就没了，我们来加上本地存储。告诉 AI：
 
-```
+```text
 给 TodoApp 组件添加 localStorage 持久化：
 - 每次任务列表变化时自动保存到 localStorage
 - 页面加载时从 localStorage 恢复数据
@@ -174,7 +177,7 @@ AI 会加上 `watch` 和 `onMounted` 的逻辑。刷新页面试试，数据应�
 
 让应用变得更好用。逐个告诉 AI：
 
-```
+```text
 给 TodoApp 添加以下优化：
 1. 空状态提示：当没有任务时显示"暂无待办事项，添加一个吧"
 2. 批量操作：添加"清除已完成"按钮
@@ -189,13 +192,14 @@ AI 会加上 `watch` 和 `onMounted` 的逻辑。刷新页面试试，数据应�
 npm install sortablejs
 npm install -D @types/sortablejs
 ```
+
 :::
 
 ## Step 7：代码审查（2 分钟）
 
 项目完成了，但在提交之前，做一个快速审查。告诉 AI：
 
-```
+```text
 审查 TodoApp.vue 组件，检查以下问题：
 1. 是否有内存泄漏（如未清理的事件监听）
 2. localStorage 存储是否有异常处理（如隐私模式）
@@ -218,13 +222,13 @@ npm run build
 
 告诉 AI：
 
-```
+```text
 生成一个简单的 vercel.json 配置文件，支持 SPA 路由。
 ```
 
 或者告诉 AI：
 
-```
+```text
 生成 GitHub Actions 工作流配置，实现推送代码后自动构建并部署到 GitHub Pages。
 ```
 
