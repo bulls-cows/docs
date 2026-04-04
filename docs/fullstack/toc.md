@@ -37,3 +37,34 @@ order: 1
   - [单元测试](./testing/unit-testing.md)
   - [集成测试](./testing/integration.md)
   - [端到端测试](./testing/e2e.md)
+- 第六篇 企业级实战
+  - [实战概述](./case-study/index.md)
+  - 用户管理系统
+    - [系统概述](./case-study/user-system/index.md)
+    - [用户表设计](./case-study/user-system/user-table.md)
+    - [角色与权限](./case-study/user-system/role-permission.md)
+    - [认证与授权](./case-study/user-system/authentication.md)
+  - 内容管理系统
+    - [系统概述](./case-study/content-system/index.md)
+    - [文章系统](./case-study/content-system/article.md)
+    - [分类与标签](./case-study/content-system/category-tag.md)
+    - [富文本编辑](./case-study/content-system/rich-text.md)
+  - 支付系统
+    - [系统概述](./case-study/payment-system/index.md)
+    - [余额系统](./case-study/payment-system/balance.md)
+    - [充值流程](./case-study/payment-system/recharge.md)
+    - [提现流程](./case-study/payment-system/withdrawal.md)
+  - 文件管理
+    - [系统概述](./case-study/file-system/index.md)
+    - [文件上传](./case-study/file-system/upload.md)
+    - [权限控制](./case-study/file-system/permission.md)
+  - 扩展功能
+    - [扩展功能概述](./case-study/extensions/index.md)
+    - [预约系统](./case-study/extensions/booking.md)
+    - [导航系统](./case-study/extensions/navigation.md)
+    - [相册系统](./case-study/extensions/album.md)
+    - [日志监控](./case-study/extensions/monitoring.md)
+- 附录
+  - [开发环境搭建](./appendix/development.md)
+  - [部署上线](./appendix/deployment.md)
+  - [开发规范速查](./appendix/code-standards.md)
