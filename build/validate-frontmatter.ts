@@ -25,7 +25,7 @@ function extractFrontmatter(source: string): Frontmatter | null {
   }
 }
 
-function validateFile(filePath: string): void {
+function validateFile(filePath: string): Frontmatter {
   const source = fs.readFileSync(filePath, "utf8");
   const frontmatter = extractFrontmatter(source);
 
@@ -41,11 +41,14 @@ function validateFile(filePath: string): void {
     console.error(`  Missing field: 'order'`);
     throw new Error("Validation failed");
   }
+
+  return frontmatter;
 }
 
 function validateDirectory(dirPath: string): number {
   const entries = fs.readdirSync(dirPath, { withFileTypes: true });
   let fileCount = 0;
+  const orderMap = new Map<number, string[]>();
 
   for (const entry of entries) {
     const absolutePath = path.join(dirPath, entry.name);
@@ -63,8 +66,26 @@ function validateDirectory(dirPath: string): number {
       continue;
     }
 
-    validateFile(absolutePath);
+    const frontmatter = validateFile(absolutePath);
+    if (frontmatter.order !== undefined) {
+      const files = orderMap.get(frontmatter.order) || [];
+      files.push(entry.name);
+      orderMap.set(frontmatter.order, files);
+    }
     fileCount++;
+  }
+
+  for (const [order, files] of orderMap) {
+    if (files.length > 1) {
+      const relativeDir = path.relative(DOCS_ROOT, dirPath);
+      console.error(`✗ Duplicate 'order' value found in directory: ${relativeDir || "."}`);
+      console.error(`  Order value: ${order}`);
+      console.error(`  Conflicting files:`);
+      for (const file of files) {
+        console.error(`    - ${file}`);
+      }
+      throw new Error("Validation failed");
+    }
   }
 
   return fileCount;
