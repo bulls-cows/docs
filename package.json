@@ -14,6 +14,7 @@
     "lint": "node --run check:type && node --run lint:markdown && node --run docs:build",
     "lint:markdown": "markdownlint \"**/*.md\" --fix --ignore node_modules",
     "check:type": "tsc --noEmit",
+    "validate:frontmatter": "node build/validate-frontmatter.ts",
     "deploy": "node ./build/deploy.ts",
     "buildAndDeploy": "node --run lint && node --run deploy"
   },
@@ -29,6 +30,7 @@
   },
   "homepage": "https://github.com/bulls-cows/docs#readme",
   "devDependencies": {
+    "@types/js-yaml": "4.0.9",
     "@types/node": "22.19.15",
     "autoprefixer": "10.4.27",
     "markdownlint-cli": "0.48.0",
@@ -40,6 +42,7 @@
     "vue": "3.5.31"
   },
   "dependencies": {
+    "js-yaml": "4.1.1",
     "markdown-it-mathjax3": "4.3.2"
   }
 }
