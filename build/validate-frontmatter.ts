@@ -11,6 +11,11 @@ interface Frontmatter {
   [key: string]: unknown;
 }
 
+/**
+ * 从 Markdown 源码中提取 YAML frontmatter
+ * @param source - Markdown 文件内容
+ * @returns 解析后的 frontmatter 对象，若无 frontmatter 或解析失败则返回 null
+ */
 function extractFrontmatter(source: string): Frontmatter | null {
   const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (!match) {
@@ -25,6 +30,12 @@ function extractFrontmatter(source: string): Frontmatter | null {
   }
 }
 
+/**
+ * 验证单个 Markdown 文件的 frontmatter
+ * @param filePath - 文件绝对路径
+ * @returns 解析后的 frontmatter 对象
+ * @throws 若 frontmatter 不存在或缺少 order 字段则抛出错误
+ */
 function validateFile(filePath: string): Frontmatter {
   const source = fs.readFileSync(filePath, "utf8");
   const frontmatter = extractFrontmatter(source);
@@ -45,9 +56,22 @@ function validateFile(filePath: string): Frontmatter {
   return frontmatter;
 }
 
+/**
+ * 递归验证目录下所有 Markdown 文件的 frontmatter
+ *
+ * 验证规则：
+ * 1. 每个文件必须包含 frontmatter
+ * 2. frontmatter 必须包含 order 字段
+ * 3. 同一目录下的文件 order 值不能重复
+ *
+ * @param dirPath - 目录绝对路径
+ * @returns 已验证的文件数量
+ * @throws 若验证失败则抛出错误
+ */
 function validateDirectory(dirPath: string): number {
   const entries = fs.readdirSync(dirPath, { withFileTypes: true });
   let fileCount = 0;
+  // 收集同级目录下所有文件的 order 值，用于检测重复
   const orderMap = new Map<number, string[]>();
 
   for (const entry of entries) {
@@ -75,6 +99,7 @@ function validateDirectory(dirPath: string): number {
     fileCount++;
   }
 
+  // 检查同级目录下 order 值是否重复
   for (const [order, files] of orderMap) {
     if (files.length > 1) {
       const relativeDir = path.relative(DOCS_ROOT, dirPath);
@@ -91,6 +116,10 @@ function validateDirectory(dirPath: string): number {
   return fileCount;
 }
 
+/**
+ * 程序入口函数
+ * 执行 frontmatter 验证并输出结果
+ */
 const main = () => {
   try {
     const fileCount = validateDirectory(DOCS_ROOT);
