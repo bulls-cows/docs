@@ -11,6 +11,12 @@ type DocMeta = {
 
 const DOCS_ROOT = path.resolve(__dirname, "../../docs");
 
+/**
+ * 解析 frontmatter 字段值为具体类型
+ * 支持字符串、数字、布尔值类型
+ * @param rawValue - 原始字段值字符串
+ * @returns 解析后的值
+ */
 function parseFrontmatterValue(rawValue: string): string | number | boolean {
   const value = rawValue.trim();
 
@@ -37,6 +43,11 @@ function parseFrontmatterValue(rawValue: string): string | number | boolean {
   return value;
 }
 
+/**
+ * 从 Markdown 源码中提取 frontmatter
+ * @param source - Markdown 文件内容
+ * @returns 解析后的 frontmatter 键值对对象
+ */
 function extractFrontmatter(source: string): Record<string, string | number | boolean> {
   const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (!match) {
@@ -63,6 +74,11 @@ function extractFrontmatter(source: string): Record<string, string | number | bo
   return result;
 }
 
+/**
+ * 从 Markdown 源码中提取一级标题
+ * @param source - Markdown 文件内容
+ * @returns 一级标题文本，若无则返回 undefined
+ */
 function extractHeading(source: string): string | undefined {
   const lines = source.split(/\r?\n/);
   for (const line of lines) {
@@ -73,12 +89,23 @@ function extractHeading(source: string): string | undefined {
   }
 }
 
+/**
+ * 将文件名转换为可读标题
+ * 将连字符和下划线替换为空格，并首字母大写
+ * @param name - 原始文件名
+ * @returns 格式化后的标题
+ */
 function prettifyName(name: string): string {
   return name
     .replace(/[-_]/g, " ")
     .replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
+/**
+ * 将文件相对路径转换为 VitePress 链接
+ * @param relativePath - 相对于 docs 目录的路径
+ * @returns VitePress 格式的链接路径
+ */
 function toLink(relativePath: string): string {
   const normalized = relativePath.replace(/\\/g, "/");
 
@@ -93,6 +120,11 @@ function toLink(relativePath: string): string {
   return `/${normalized.slice(0, -".md".length)}`;
 }
 
+/**
+ * 读取单个 Markdown 文档的元数据
+ * @param filePath - 文件绝对路径
+ * @returns 文档元数据对象
+ */
 function readDocMeta(filePath: string): DocMeta {
   const source = fs.readFileSync(filePath, "utf8");
   const frontmatter = extractFrontmatter(source);
@@ -109,6 +141,11 @@ function readDocMeta(filePath: string): DocMeta {
   };
 }
 
+/**
+ * 按 order 字段排序，order 相同时按文本排序
+ * @param items - 待排序的项数组
+ * @returns 排序后的数组
+ */
 function sortByOrder<T extends { order: number; text?: string }>(items: T[]): T[] {
   return items.sort((left, right) => {
     if (left.order !== right.order) {
@@ -119,6 +156,18 @@ function sortByOrder<T extends { order: number; text?: string }>(items: T[]): T[
   });
 }
 
+/**
+ * 递归构建侧边栏区块
+ *
+ * 处理逻辑：
+ * 1. 遍历目录下的文件和子目录
+ * 2. 读取每个文件的元数据
+ * 3. 递归处理子目录
+ * 4. 按 order 排序后返回侧边栏配置
+ *
+ * @param dirPath - 目录绝对路径
+ * @returns 侧边栏区块配置，若目录为空则返回 null
+ */
 function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
   const entries = fs.readdirSync(dirPath, { withFileTypes: true });
   const fileItems: DocMeta[] = [];
@@ -128,6 +177,7 @@ function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
   for (const entry of entries) {
     const absolutePath = path.join(dirPath, entry.name);
 
+    // 递归处理子目录
     if (entry.isDirectory()) {
       const section = buildSection(absolutePath);
       if (section) {
@@ -148,6 +198,7 @@ function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
       continue;
     }
 
+    // 单独处理 index.md，作为区块标题
     if (entry.name === "index.md") {
       indexMeta = meta;
       continue;
@@ -156,6 +207,7 @@ function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
     fileItems.push(meta);
   }
 
+  // 合并并排序：前言 -> 文件 -> 子目录
   const sortedFiles = sortByOrder(fileItems).map(({ text, link }) => ({ text, link }));
   const sortedSections = sortByOrder(childSections).map(({ order: _order, ...section }) => section);
   const items = [
@@ -182,6 +234,11 @@ function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
 
 type NavItemWithOrder = DefaultTheme.NavItem & { order: number };
 
+/**
+ * 构建顶部导航栏
+ * 遍历 docs 目录下的所有子目录，提取 index.md 中的元数据
+ * @returns 导航栏配置数组
+ */
 export function buildNav(): DefaultTheme.NavItem[] {
   const entries = fs.readdirSync(DOCS_ROOT, { withFileTypes: true });
   const navItems: NavItemWithOrder[] = [];
@@ -215,6 +272,11 @@ export function buildNav(): DefaultTheme.NavItem[] {
   return sortByOrder(navItems).map(({ order: _order, ...item }) => item);
 }
 
+/**
+ * 构建完整侧边栏配置
+ * 为每个一级目录生成独立的侧边栏
+ * @returns VitePress 侧边栏配置对象
+ */
 export function buildSidebar(): DefaultTheme.Sidebar {
   const entries = fs.readdirSync(DOCS_ROOT, { withFileTypes: true });
   const sidebar: DefaultTheme.Sidebar = {};
