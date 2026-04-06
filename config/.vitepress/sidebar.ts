@@ -96,9 +96,7 @@ function extractHeading(source: string): string | undefined {
  * @returns 格式化后的标题
  */
 function prettifyName(name: string): string {
-  return name
-    .replace(/[-_]/g, " ")
-    .replace(/\b\w/g, (char) => char.toUpperCase());
+  return name.replace(/[-_]/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
 /**
@@ -130,7 +128,8 @@ function readDocMeta(filePath: string): DocMeta {
   const frontmatter = extractFrontmatter(source);
   const relativePath = path.relative(DOCS_ROOT, filePath);
   const filename = path.basename(relativePath, ".md");
-  const titleFromFrontmatter = typeof frontmatter.title === "string" ? frontmatter.title : undefined;
+  const titleFromFrontmatter =
+    typeof frontmatter.title === "string" ? frontmatter.title : undefined;
   const heading = extractHeading(source);
 
   return {
@@ -152,7 +151,7 @@ function sortByOrder<T extends { order: number; text?: string }>(items: T[]): T[
       return left.order - right.order;
     }
 
-    return (left.text || '').localeCompare((right.text || ''), "zh-CN");
+    return (left.text || "").localeCompare(right.text || "", "zh-CN");
   });
 }
 
@@ -189,7 +188,9 @@ function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
       if (section) {
         childSections.push({
           ...section,
-          order: (section as DefaultTheme.SidebarItem & { order?: number }).order ?? Number.MAX_SAFE_INTEGER,
+          order:
+            (section as DefaultTheme.SidebarItem & { order?: number }).order ??
+            Number.MAX_SAFE_INTEGER,
         });
       }
       continue;
@@ -286,7 +287,7 @@ type NavItemWithOrder = DefaultTheme.NavItem & { order: number };
 export function buildNav(): DefaultTheme.NavItem[] {
   const entries = fs.readdirSync(DOCS_ROOT, { withFileTypes: true });
   const navItems: NavItemWithOrder[] = [
-    { text: '官网', link: 'https://www.verysites.com/', order: 0 }
+    { text: "官网", link: "https://www.verysites.com/", order: 0 },
   ];
 
   for (const entry of entries) {
@@ -336,7 +337,9 @@ export function buildSidebar(): DefaultTheme.Sidebar {
     const section = buildSection(dirPath);
 
     if (section) {
-      const { order: _order, ...sidebarSection } = section as DefaultTheme.SidebarItem & { order?: number };
+      const { order: _order, ...sidebarSection } = section as DefaultTheme.SidebarItem & {
+        order?: number;
+      };
       sidebar[`/${entry.name}/`] = [sidebarSection];
     }
   }

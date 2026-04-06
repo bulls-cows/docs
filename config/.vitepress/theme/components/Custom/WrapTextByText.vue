@@ -1,7 +1,5 @@
 <template>
-  <span v-for="(t, idx) in textList" :key="idx" class="single-text">{{
-    t
-  }}</span>
+  <span v-for="(t, idx) in textList" :key="idx" class="single-text">{{ t }}</span>
 </template>
 
 <script lang="ts" setup>

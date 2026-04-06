@@ -1,1 +1,1 @@
-export const DOMAIN = "docs.verysites.com"
+export const DOMAIN = "docs.verysites.com";

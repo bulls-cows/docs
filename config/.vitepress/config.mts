@@ -1,10 +1,10 @@
 import { defineConfig } from "vitepress";
-import markdownItMathjax from 'markdown-it-mathjax3'
+import markdownItMathjax from "markdown-it-mathjax3";
 import { buildSidebar, buildNav } from "./sidebar";
 import { DOMAIN } from "../../build/constant";
-import autoprefixer from 'autoprefixer';
+import autoprefixer from "autoprefixer";
 
-const base = ''
+const base = "";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -27,14 +27,14 @@ export default defineConfig({
         plugins: [
           autoprefixer({
             overrideBrowserslist: [
-              'Android >= 4.2',
-              'iOS >= 7',
-              'Safari >= 7',
-              'Chrome >= 21',
-              'Firefox >= 28',
-              'Edge >= 12'
-            ]
-          })
+              "Android >= 4.2",
+              "iOS >= 7",
+              "Safari >= 7",
+              "Chrome >= 21",
+              "Firefox >= 28",
+              "Edge >= 12",
+            ],
+          }),
         ],
       },
     },
@@ -56,8 +56,8 @@ export default defineConfig({
     },
     config: (md) => {
       // use more markdown-it plugins!
-      md.use(markdownItMathjax)
-    }
+      md.use(markdownItMathjax);
+    },
   },
   sitemap: {
     hostname: `https://${DOMAIN}`,
@@ -122,9 +122,7 @@ export default defineConfig({
 
     sidebar: buildSidebar(),
 
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/bulls-cows/docs' }
-    ],
+    socialLinks: [{ icon: "github", link: "https://github.com/bulls-cows/docs" }],
 
     footer: {
       message: "天上的神明与星辰，人间的艺术和真纯，我们所敬畏和热爱的，莫过于此。",

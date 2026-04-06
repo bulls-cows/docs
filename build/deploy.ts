@@ -15,10 +15,7 @@ import { DOMAIN } from "./constant.ts";
 const __dirname = getDirname(import.meta.url);
 export const PATH_ROOT = joinPath(__dirname, "../");
 
-parseEnvFiles([
-  joinPath(PATH_ROOT, ".env.local"),
-  joinPath(PATH_ROOT, "../aimian/.env"),
-]);
+parseEnvFiles([joinPath(PATH_ROOT, ".env.local"), joinPath(PATH_ROOT, "../aimian/.env")]);
 
 // 环境变量
 const SSH_HOST = process.env.SSH_HOST || "";
@@ -34,7 +31,7 @@ logInfo(`Deploying docs`);
 // 错误处理包装函数
 const handleAsyncError = async <T>(
   fn: () => Promise<T>,
-  errorMessage: string,
+  errorMessage: string
 ): Promise<T | undefined> => {
   try {
     return await fn();
@@ -57,13 +54,13 @@ const deployToServer = async () => {
         username: SSH_USERNAME,
         password: SSH_PASSWORD,
       }),
-    "Failed to connect to server",
+    "Failed to connect to server"
   );
 
   const execCommand = async (command: string): Promise<void> => {
     await handleAsyncError(
       () => sshExecCommand({ ssh, cwd, command }),
-      `Failed to execute command: ${command}`,
+      `Failed to execute command: ${command}`
     );
   };
 
@@ -79,7 +76,7 @@ const deployToServer = async () => {
         pathFolder: pathDist,
         pathOutputFile: pathDistZip,
       }),
-    "Failed to create zip file",
+    "Failed to create zip file"
   );
 
   // 上传 zip 文件到服务器
@@ -92,7 +89,7 @@ const deployToServer = async () => {
         localFile: pathDistZip,
         remoteFile: pathRemoteZip,
       }),
-    "Failed to upload zip file to server",
+    "Failed to upload zip file to server"
   );
 
   // 在服务器上解压并清理

@@ -88,7 +88,9 @@ function removeInvalidField(
   if (Object.keys(frontmatter).length === 0) {
     const newContent = source.slice(match[0]!.length).replace(/^\r?\n/, "");
     fs.writeFileSync(filePath, newContent, "utf8");
-    console.log(`✓ Removed invalid field '${fieldName}' (and empty frontmatter) from: ${relativePath}`);
+    console.log(
+      `✓ Removed invalid field '${fieldName}' (and empty frontmatter) from: ${relativePath}`
+    );
     return;
   }
 
@@ -210,9 +212,7 @@ function validateFile(
  * @param dirPath - 目录绝对路径
  * @returns 按目录路径分组的 order 值映射，外层 Map 的 key 是目录路径，内层 Map 的 key 是 order 值，value 是文件名数组
  */
-function collectOrderValues(
-  dirPath: string
-): Map<string, Map<number, string[]>> {
+function collectOrderValues(dirPath: string): Map<string, Map<number, string[]>> {
   const result = new Map<string, Map<number, string[]>>();
 
   function traverse(currentDir: string): void {
@@ -283,10 +283,7 @@ function checkDuplicateOrders(orderValues: Map<string, Map<number, string[]>>): 
  * @param isFirstLevelSubdir - 是否在 docs 根目录的直接子目录层级
  * @returns 已验证的文件数量
  */
-function validateAndCleanDirectory(
-  dirPath: string,
-  isFirstLevelSubdir: boolean = false
-): number {
+function validateAndCleanDirectory(dirPath: string, isFirstLevelSubdir: boolean = false): number {
   const entries = fs.readdirSync(dirPath, { withFileTypes: true });
   let fileCount = 0;
 
@@ -335,10 +332,7 @@ function validateAndCleanDirectory(
  * @returns 已验证的文件数量
  * @throws 若验证失败则抛出错误
  */
-function validateDirectory(
-  dirPath: string,
-  isFirstLevelSubdir: boolean = false
-): number {
+function validateDirectory(dirPath: string, isFirstLevelSubdir: boolean = false): number {
   // 阶段一：验证并清理无效的 order 字段
   const fileCount = validateAndCleanDirectory(dirPath, isFirstLevelSubdir);
 
@@ -359,7 +353,7 @@ const main = () => {
     console.log(`✓ Validated ${fileCount} markdown files`);
     console.log(`✓ All files have required frontmatter fields`);
     process.exit(0);
-  } catch (error) {
+  } catch (_error) {
     console.error(`✗ Validation failed`);
     process.exit(1);
   }

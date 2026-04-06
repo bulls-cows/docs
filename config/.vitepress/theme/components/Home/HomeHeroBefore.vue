@@ -2,8 +2,7 @@
   <div class="home-hero-before"></div>
 </template>
 
-<script lang="ts" setup>
-</script>
+<script lang="ts" setup></script>
 
 <style lang="scss" scoped>
 .home-hero-before {
