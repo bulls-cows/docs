@@ -72,7 +72,27 @@ docs/                          # 项目根目录
 
 ### Frontmatter 约定
 
-每篇文档必须包含以下 frontmatter:
+不同类型的文件有不同的 frontmatter 要求：
+
+| 文件类型 | 必需字段 | 可选字段 | 说明 |
+|---------|---------|---------|------|
+| docs 根目录下的 .md 文件（非 index.md） | 无 | title | 不应有 `order` 字段 |
+| 第一层子目录的 index.md | bookOrder, shortTitle | title | 不应有 `order` 字段，`bookOrder` 必须 > 0 |
+| 第一层子目录的 toc.md | 无 | 无 | 不应有 `order` 字段，可不写 frontmatter |
+| 其他目录的 index.md | 无 | title | 不需要 `order` 字段 |
+| 其他 .md 文件 | order | title | `order` 用于排序 |
+
+#### 字段说明
+
+- `title`: 侧边栏显示标题。未填写时从文档一级标题或文件名自动提取
+- `order`: 排序序号，数字越小越靠前。未填写时默认排在最后
+- `shortTitle`: 导航栏短标题，用于顶部导航（仅第一层子目录 index.md 需要）
+- `bookOrder`: 板块在导航栏的排序（仅第一层子目录 index.md 需要）
+- `sidebar`: 设为 `false` 可隐藏侧边栏显示
+
+#### 示例
+
+**普通文档**：
 
 ```md
 ---
@@ -81,11 +101,20 @@ order: 1
 ---
 ```
 
-- `title`: 侧边栏显示标题
-- `order`: 排序序号，数字越小越靠前
-- `shortTitle`: （可选）导航栏短标题
-- `bookOrder`: （可选）板块在导航栏的排序
-- `sidebar`: 设为 `false` 可隐藏侧边栏显示
+**第一层子目录的 index.md**：
+
+```md
+---
+title: AI辅助编程指南
+shortTitle: Vibe Coding
+bookOrder: 1
+---
+```
+
+#### 注意事项
+
+- 空 frontmatter（无任何字段）会被自动移除
+- 同一目录下 `order` 值不能重复
 
 ### 内容风格
 
