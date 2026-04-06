@@ -255,15 +255,17 @@ function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
   const sectionText = indexMeta?.text || prettifyName(sectionName);
   const sectionOrder = indexMeta?.order ?? Number.MAX_SAFE_INTEGER;
 
-  // 构建章节配置：点击章节标题直接跳转到 index.md
+  // 构建章节配置
   const result: DefaultTheme.SidebarItem & { order: number } = {
     text: sectionText,
-    collapsed: true,
+    // 书籍根目录默认展开，非根目录默认折叠
+    collapsed: !isBookRoot,
     order: sectionOrder,
   };
 
-  // 如果有 index.md，添加 link 属性使章节标题可点击跳转
-  if (indexMeta) {
+  // 非根目录：如果有 index.md，添加 link 属性使章节标题可点击跳转
+  // 书籍根目录：不设置 link，保持为纯目录
+  if (indexMeta && !isBookRoot) {
     result.link = indexMeta.link;
   }
 
