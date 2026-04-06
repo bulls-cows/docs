@@ -12,7 +12,7 @@
     "docs:build": "vitepress build config",
     "docs:preview": "vitepress preview config",
     "lint": "node --run check:type && node --run lint:markdown && node --run docs:build",
-    "lint:markdown": "markdownlint \"**/*.md\" --fix --ignore node_modules",
+    "lint:markdown": "markdownlint \"**/*.md\" --fix --ignore node_modules && node --run validate:frontmatter",
     "check:type": "tsc --noEmit",
     "validate:frontmatter": "node build/validate-frontmatter.ts",
     "deploy": "node ./build/deploy.ts",
