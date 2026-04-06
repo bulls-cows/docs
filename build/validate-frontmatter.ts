@@ -8,6 +8,8 @@ const DOCS_ROOT = path.resolve(__dirname, "../docs");
 
 interface Frontmatter {
   order?: number;
+  bookOrder?: number;
+  shortTitle?: string;
   [key: string]: unknown;
 }
 
@@ -34,33 +36,82 @@ function extractFrontmatter(source: string): Frontmatter | null {
  * 验证单个 Markdown 文件的 frontmatter
  *
  * 验证规则：
- * - index.md 文件不需要 order 字段（固定为目录第一个）
- * - toc.md 不需要 order 字段（固定为书籍目录第二个）
- * - 其他文件必须有 order 字段
+ * - docs 根目录下的直接 .md 文件（非 index.md）：不应该有 order 字段
+ * - 第一层子目录内的 toc.md：不应该有 order 字段（可以没有 frontmatter）
+ * - 第一层子目录内的 index.md：不应该有 order 字段，必须有 bookOrder > 0 和 shortTitle
+ * - 其他 index.md 文件：不需要 order 字段
+ * - 其他文件：必须有 order 字段
  *
  * @param filePath - 文件绝对路径
+ * @param parentDirPath - 父目录绝对路径
+ * @param isFirstLevelSubdir - 是否在 docs 根目录的直接子目录层级
  * @returns 解析后的 frontmatter 对象
- * @throws 若 frontmatter 不存在或缺少 order 字段则抛出错误
+ * @throws 若 frontmatter 验证失败则抛出错误
  */
-function validateFile(filePath: string): Frontmatter {
+function validateFile(
+  filePath: string,
+  parentDirPath: string,
+  isFirstLevelSubdir: boolean
+): Frontmatter {
   const source = fs.readFileSync(filePath, "utf8");
   const frontmatter = extractFrontmatter(source);
   const filename = path.basename(filePath);
   const relativePath = path.relative(DOCS_ROOT, filePath);
+  const isRootLevel = parentDirPath === DOCS_ROOT;
 
+  // 规则 A：docs 根目录下的直接 .md 文件（非 index.md）不应该有 order 字段
+  if (isRootLevel && filename !== "index.md") {
+    if (frontmatter && frontmatter.order !== undefined) {
+      console.error(`✗ File should not have 'order' field in root level: ${relativePath}`);
+      throw new Error("Validation failed");
+    }
+    return frontmatter || {};
+  }
+
+  // 规则 B：第一层子目录内的 toc.md 不应该有 order 字段（可以没有 frontmatter）
+  if (isFirstLevelSubdir && filename === "toc.md") {
+    if (frontmatter && frontmatter.order !== undefined) {
+      console.error(`✗ toc.md should not have 'order' field: ${relativePath}`);
+      throw new Error("Validation failed");
+    }
+    return frontmatter || {};
+  }
+
+  // 规则 C：第一层子目录内的 index.md 不应该有 order 字段，必须有 bookOrder > 0 和 shortTitle
+  if (isFirstLevelSubdir && filename === "index.md") {
+    if (!frontmatter) {
+      console.error(`✗ File missing frontmatter: ${relativePath}`);
+      throw new Error("Validation failed");
+    }
+
+    if (frontmatter.order !== undefined) {
+      console.error(`✗ index.md should not have 'order' field: ${relativePath}`);
+      throw new Error("Validation failed");
+    }
+
+    if (frontmatter.bookOrder === undefined || frontmatter.bookOrder <= 0) {
+      console.error(`✗ index.md missing required field 'bookOrder' (must be > 0): ${relativePath}`);
+      throw new Error("Validation failed");
+    }
+
+    if (frontmatter.shortTitle === undefined) {
+      console.error(`✗ index.md missing required field 'shortTitle': ${relativePath}`);
+      throw new Error("Validation failed");
+    }
+
+    return frontmatter;
+  }
+
+  // 规则 D：其他文件（保持原有逻辑）
+  // index.md 文件：可以没有 frontmatter，或者有 frontmatter 但不需要 order 字段
+  if (filename === "index.md") {
+    return frontmatter || {};
+  }
+
+  // 其他文件：必须有 frontmatter 和 order 字段
   if (!frontmatter) {
     console.error(`✗ File missing frontmatter: ${relativePath}`);
     throw new Error("Validation failed");
-  }
-
-  // index.md 文件不需要 order 字段，固定为目录第一个
-  if (filename === "index.md") {
-    return frontmatter;
-  }
-
-  // toc.md 不需要 order 字段，固定为书籍目录第二个
-  if (filename === "toc.md") {
-    return frontmatter;
   }
 
   if (frontmatter.order === undefined) {
@@ -76,28 +127,36 @@ function validateFile(filePath: string): Frontmatter {
  * 递归验证目录下所有 Markdown 文件的 frontmatter
  *
  * 验证规则：
- * 1. 每个文件必须包含 frontmatter
- * 2. index.md 文件不需要 order 字段
- * 3. 书籍根目录下的 toc.md 不需要 order 字段
- * 4. 其他文件必须有 order 字段
- * 5. 同一目录下的文件 order 值不能重复
+ * 1. docs 根目录下的直接 .md 文件（非 index.md）：不应该有 order 字段
+ * 2. 第一层子目录内的 toc.md：不应该有 order 字段（可以没有 frontmatter）
+ * 3. 第一层子目录内的 index.md：不应该有 order 字段，必须有 bookOrder > 0 和 shortTitle
+ * 4. 其他 index.md 文件：不需要 order 字段
+ * 5. 其他文件：必须有 order 字段
+ * 6. 同一目录下的文件 order 值不能重复
  *
  * @param dirPath - 目录绝对路径
+ * @param isFirstLevelSubdir - 是否在 docs 根目录的直接子目录层级
  * @returns 已验证的文件数量
  * @throws 若验证失败则抛出错误
  */
-function validateDirectory(dirPath: string): number {
+function validateDirectory(
+  dirPath: string,
+  isFirstLevelSubdir: boolean = false
+): number {
   const entries = fs.readdirSync(dirPath, { withFileTypes: true });
 
   let fileCount = 0;
-  // 收集同级目录下所有文件的 order 值，用于检测重复（index.md 和书籍根目录的 toc.md 不参与）
+  // 收集同级目录下所有文件的 order 值，用于检测重复
   const orderMap = new Map<number, string[]>();
 
   for (const entry of entries) {
     const absolutePath = path.join(dirPath, entry.name);
 
     if (entry.isDirectory()) {
-      fileCount += validateDirectory(absolutePath);
+      // 判断子目录是否是 docs 根目录的直接子目录
+      const parentDir = path.dirname(absolutePath);
+      const isSubdirFirstLevel = parentDir === DOCS_ROOT;
+      fileCount += validateDirectory(absolutePath, isSubdirFirstLevel);
       continue;
     }
 
@@ -109,11 +168,10 @@ function validateDirectory(dirPath: string): number {
       continue;
     }
 
-    const frontmatter = validateFile(absolutePath);
+    const frontmatter = validateFile(absolutePath, dirPath, isFirstLevelSubdir);
 
-    // index.md 和 toc.md 不需要 order，也不参与重复检查
-    const shouldCheckOrder = entry.name !== "index.md" && entry.name !== "toc.md";
-    if (shouldCheckOrder && frontmatter.order !== undefined) {
+    // 检查 order 值重复（只检查有 order 字段的文件）
+    if (frontmatter.order !== undefined) {
       const files = orderMap.get(frontmatter.order) || [];
       files.push(entry.name);
       orderMap.set(frontmatter.order, files);
