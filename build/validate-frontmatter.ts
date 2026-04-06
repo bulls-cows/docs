@@ -32,6 +32,11 @@ function extractFrontmatter(source: string): Frontmatter | null {
 
 /**
  * 验证单个 Markdown 文件的 frontmatter
+ *
+ * 验证规则：
+ * - index.md 文件不需要 order 字段（固定为目录第一个）
+ * - 其他文件必须有 order 字段
+ *
  * @param filePath - 文件绝对路径
  * @returns 解析后的 frontmatter 对象
  * @throws 若 frontmatter 不存在或缺少 order 字段则抛出错误
@@ -39,15 +44,20 @@ function extractFrontmatter(source: string): Frontmatter | null {
 function validateFile(filePath: string): Frontmatter {
   const source = fs.readFileSync(filePath, "utf8");
   const frontmatter = extractFrontmatter(source);
+  const filename = path.basename(filePath);
+  const relativePath = path.relative(DOCS_ROOT, filePath);
 
   if (!frontmatter) {
-    const relativePath = path.relative(DOCS_ROOT, filePath);
     console.error(`✗ File missing frontmatter: ${relativePath}`);
     throw new Error("Validation failed");
   }
 
+  // index.md 文件不需要 order 字段，固定为目录第一个
+  if (filename === "index.md") {
+    return frontmatter;
+  }
+
   if (frontmatter.order === undefined) {
-    const relativePath = path.relative(DOCS_ROOT, filePath);
     console.error(`✗ File missing required frontmatter field: ${relativePath}`);
     console.error(`  Missing field: 'order'`);
     throw new Error("Validation failed");
@@ -61,7 +71,7 @@ function validateFile(filePath: string): Frontmatter {
  *
  * 验证规则：
  * 1. 每个文件必须包含 frontmatter
- * 2. frontmatter 必须包含 order 字段
+ * 2. 非 index.md 文件必须有 order 字段
  * 3. 同一目录下的文件 order 值不能重复
  *
  * @param dirPath - 目录绝对路径
@@ -71,7 +81,7 @@ function validateFile(filePath: string): Frontmatter {
 function validateDirectory(dirPath: string): number {
   const entries = fs.readdirSync(dirPath, { withFileTypes: true });
   let fileCount = 0;
-  // 收集同级目录下所有文件的 order 值，用于检测重复
+  // 收集同级目录下所有文件的 order 值，用于检测重复（index.md 不参与）
   const orderMap = new Map<number, string[]>();
 
   for (const entry of entries) {
@@ -91,7 +101,8 @@ function validateDirectory(dirPath: string): number {
     }
 
     const frontmatter = validateFile(absolutePath);
-    if (frontmatter.order !== undefined) {
+    // index.md 不需要 order，也不参与重复检查
+    if (entry.name !== "index.md" && frontmatter.order !== undefined) {
       const files = orderMap.get(frontmatter.order) || [];
       files.push(entry.name);
       orderMap.set(frontmatter.order, files);

@@ -207,16 +207,13 @@ function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
     fileItems.push(meta);
   }
 
-  // 合并并排序：前言 -> 文件 -> 子目录
+  // 合并并排序：文件 -> 子目录
   const sortedFiles = sortByOrder(fileItems).map(({ text, link }) => ({ text, link }));
   const sortedSections = sortByOrder(childSections).map(({ order: _order, ...section }) => section);
-  const items = [
-    ...(indexMeta ? [{ text: "前言", link: indexMeta.link }] : []),
-    ...sortedFiles,
-    ...sortedSections,
-  ];
+  const items = [...sortedFiles, ...sortedSections];
 
-  if (items.length === 0) {
+  // 如果没有 index.md 且没有任何子项，返回 null
+  if (!indexMeta && items.length === 0) {
     return null;
   }
 
@@ -224,12 +221,24 @@ function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
   const sectionText = indexMeta?.text || prettifyName(sectionName);
   const sectionOrder = indexMeta?.order ?? Number.MAX_SAFE_INTEGER;
 
-  return {
+  // 构建章节配置：点击章节标题直接跳转到 index.md
+  const result: DefaultTheme.SidebarItem & { order: number } = {
     text: sectionText,
     collapsed: false,
-    items,
     order: sectionOrder,
-  } as DefaultTheme.SidebarItem & { order: number };
+  };
+
+  // 如果有 index.md，添加 link 属性使章节标题可点击跳转
+  if (indexMeta) {
+    result.link = indexMeta.link;
+  }
+
+  // 如果有其他子项（文件或子目录），添加 items
+  if (items.length > 0) {
+    result.items = items;
+  }
+
+  return result;
 }
 
 type NavItemWithOrder = DefaultTheme.NavItem & { order: number };
