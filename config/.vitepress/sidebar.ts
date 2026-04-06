@@ -160,19 +160,25 @@ function sortByOrder<T extends { order: number; text?: string }>(items: T[]): T[
  * 递归构建侧边栏区块
  *
  * 处理逻辑：
- * 1. 遍历目录下的文件和子目录
- * 2. 读取每个文件的元数据
- * 3. 递归处理子目录
- * 4. 按 order 排序后返回侧边栏配置
+ * 1. 判断是否为书籍根目录（存在 toc.md 文件）
+ * 2. 书籍根目录：index.md 显示为"前言"，toc.md 显示为"目录"，固定排在前两位
+ * 3. 子目录：index.md 作为区块标题，toc.md 被过滤
+ * 4. 递归处理子目录
+ * 5. 按 order 排序后返回侧边栏配置
  *
  * @param dirPath - 目录绝对路径
  * @returns 侧边栏区块配置，若目录为空则返回 null
  */
 function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
   const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+
+  // 判断是否为书籍根目录：存在 toc.md 文件
+  const isBookRoot = entries.some((entry) => entry.isFile() && entry.name === "toc.md");
+
   const fileItems: DocMeta[] = [];
   const childSections: Array<DefaultTheme.SidebarItem & { order: number }> = [];
   let indexMeta: DocMeta | null = null;
+  let tocMeta: DocMeta | null = null;
 
   for (const entry of entries) {
     const absolutePath = path.join(dirPath, entry.name);
@@ -198,10 +204,27 @@ function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
       continue;
     }
 
-    // 单独处理 index.md，作为区块标题
-    if (entry.name === "index.md") {
-      indexMeta = meta;
-      continue;
+    // 书籍根目录特殊处理
+    if (isBookRoot) {
+      // index.md 显示为"前言"
+      if (entry.name === "index.md") {
+        indexMeta = { ...meta, text: "前言" };
+        continue;
+      }
+      // toc.md 显示为"目录"
+      if (entry.name === "toc.md") {
+        tocMeta = { ...meta, text: "目录" };
+        continue;
+      }
+    } else {
+      // 子目录：index.md 作为区块标题，toc.md 被过滤
+      if (entry.name === "index.md") {
+        indexMeta = meta;
+        continue;
+      }
+      if (entry.name === "toc.md") {
+        continue;
+      }
     }
 
     fileItems.push(meta);
@@ -210,7 +233,18 @@ function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
   // 合并并排序：文件 -> 子目录
   const sortedFiles = sortByOrder(fileItems).map(({ text, link }) => ({ text, link }));
   const sortedSections = sortByOrder(childSections).map(({ order: _order, ...section }) => section);
-  const items = [...sortedFiles, ...sortedSections];
+
+  // 书籍根目录：前言和目录固定在前两位
+  const items: DefaultTheme.SidebarItem[] = [];
+  if (isBookRoot) {
+    if (indexMeta) {
+      items.push({ text: indexMeta.text, link: indexMeta.link });
+    }
+    if (tocMeta) {
+      items.push({ text: tocMeta.text, link: tocMeta.link });
+    }
+  }
+  items.push(...sortedFiles, ...sortedSections);
 
   // 如果没有 index.md 且没有任何子项，返回 null
   if (!indexMeta && items.length === 0) {

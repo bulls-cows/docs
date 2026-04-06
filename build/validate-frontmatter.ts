@@ -35,13 +35,15 @@ function extractFrontmatter(source: string): Frontmatter | null {
  *
  * 验证规则：
  * - index.md 文件不需要 order 字段（固定为目录第一个）
+ * - 书籍根目录下的 toc.md 不需要 order 字段（固定为第二个）
  * - 其他文件必须有 order 字段
  *
  * @param filePath - 文件绝对路径
+ * @param isBookRoot - 是否为书籍根目录
  * @returns 解析后的 frontmatter 对象
  * @throws 若 frontmatter 不存在或缺少 order 字段则抛出错误
  */
-function validateFile(filePath: string): Frontmatter {
+function validateFile(filePath: string, isBookRoot: boolean): Frontmatter {
   const source = fs.readFileSync(filePath, "utf8");
   const frontmatter = extractFrontmatter(source);
   const filename = path.basename(filePath);
@@ -54,6 +56,11 @@ function validateFile(filePath: string): Frontmatter {
 
   // index.md 文件不需要 order 字段，固定为目录第一个
   if (filename === "index.md") {
+    return frontmatter;
+  }
+
+  // 书籍根目录下的 toc.md 不需要 order 字段，固定为第二个
+  if (filename === "toc.md" && isBookRoot) {
     return frontmatter;
   }
 
@@ -71,8 +78,10 @@ function validateFile(filePath: string): Frontmatter {
  *
  * 验证规则：
  * 1. 每个文件必须包含 frontmatter
- * 2. 非 index.md 文件必须有 order 字段
- * 3. 同一目录下的文件 order 值不能重复
+ * 2. index.md 文件不需要 order 字段
+ * 3. 书籍根目录下的 toc.md 不需要 order 字段
+ * 4. 其他文件必须有 order 字段
+ * 5. 同一目录下的文件 order 值不能重复
  *
  * @param dirPath - 目录绝对路径
  * @returns 已验证的文件数量
@@ -80,8 +89,12 @@ function validateFile(filePath: string): Frontmatter {
  */
 function validateDirectory(dirPath: string): number {
   const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+
+  // 判断是否为书籍根目录：存在 toc.md 文件
+  const isBookRoot = entries.some((entry) => entry.isFile() && entry.name === "toc.md");
+
   let fileCount = 0;
-  // 收集同级目录下所有文件的 order 值，用于检测重复（index.md 不参与）
+  // 收集同级目录下所有文件的 order 值，用于检测重复（index.md 和书籍根目录的 toc.md 不参与）
   const orderMap = new Map<number, string[]>();
 
   for (const entry of entries) {
@@ -100,9 +113,11 @@ function validateDirectory(dirPath: string): number {
       continue;
     }
 
-    const frontmatter = validateFile(absolutePath);
-    // index.md 不需要 order，也不参与重复检查
-    if (entry.name !== "index.md" && frontmatter.order !== undefined) {
+    const frontmatter = validateFile(absolutePath, isBookRoot);
+
+    // index.md 和书籍根目录的 toc.md 不需要 order，也不参与重复检查
+    const shouldCheckOrder = entry.name !== "index.md" && !(entry.name === "toc.md" && isBookRoot);
+    if (shouldCheckOrder && frontmatter.order !== undefined) {
       const files = orderMap.get(frontmatter.order) || [];
       files.push(entry.name);
       orderMap.set(frontmatter.order, files);
