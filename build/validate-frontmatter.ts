@@ -181,6 +181,10 @@ function validateFile(
   // 规则 D：其他文件（保持原有逻辑）
   // index.md 文件：可以没有 frontmatter，或者有 frontmatter 但不需要 order 字段
   if (filename === "index.md") {
+    if (frontmatter && frontmatter.order !== undefined) {
+      removeInvalidField(filePath, "order", frontmatter, match!);
+      delete frontmatter.order;
+    }
     return frontmatter || {};
   }
 
@@ -200,39 +204,99 @@ function validateFile(
 }
 
 /**
- * 递归验证目录下所有 Markdown 文件的 frontmatter
+ * 收集目录下所有 Markdown 文件的 order 值
+ * 用于在清理无效 order 字段后进行判重检查
  *
- * 验证规则：
- * 1. docs 根目录下的直接 .md 文件（非 index.md）：不应该有 order 字段
- * 2. 第一层子目录内的 toc.md：不应该有 order 字段（可以没有 frontmatter）
- * 3. 第一层子目录内的 index.md：不应该有 order 字段，必须有 bookOrder > 0 和 shortTitle
- * 4. 其他 index.md 文件：不需要 order 字段
- * 5. 其他文件：必须有 order 字段
- * 6. 同一目录下的文件 order 值不能重复
+ * @param dirPath - 目录绝对路径
+ * @returns 按目录路径分组的 order 值映射，外层 Map 的 key 是目录路径，内层 Map 的 key 是 order 值，value 是文件名数组
+ */
+function collectOrderValues(
+  dirPath: string
+): Map<string, Map<number, string[]>> {
+  const result = new Map<string, Map<number, string[]>>();
+
+  function traverse(currentDir: string): void {
+    const entries = fs.readdirSync(currentDir, { withFileTypes: true });
+    const orderMap = new Map<number, string[]>();
+
+    for (const entry of entries) {
+      const absolutePath = path.join(currentDir, entry.name);
+
+      if (entry.isDirectory()) {
+        traverse(absolutePath);
+        continue;
+      }
+
+      if (!entry.isFile() || !entry.name.endsWith(".md") || entry.name.startsWith(".")) {
+        continue;
+      }
+
+      // 从文件读取 frontmatter
+      const source = fs.readFileSync(absolutePath, "utf8");
+      const { frontmatter } = extractFrontmatter(source);
+
+      // 收集 order 值
+      if (frontmatter && frontmatter.order !== undefined) {
+        const files = orderMap.get(frontmatter.order) || [];
+        files.push(entry.name);
+        orderMap.set(frontmatter.order, files);
+      }
+    }
+
+    // 只保存有 order 值的目录
+    if (orderMap.size > 0) {
+      result.set(currentDir, orderMap);
+    }
+  }
+
+  traverse(dirPath);
+  return result;
+}
+
+/**
+ * 检查 order 值是否重复
+ *
+ * @param orderValues - 按目录分组的 order 值映射
+ * @throws 若发现重复的 order 值则抛出错误
+ */
+function checkDuplicateOrders(orderValues: Map<string, Map<number, string[]>>): void {
+  for (const [dirPath, orderMap] of orderValues) {
+    for (const [order, files] of orderMap) {
+      if (files.length > 1) {
+        const relativeDir = path.relative(DOCS_ROOT, dirPath);
+        console.error(`✗ Duplicate 'order' value found in directory: ${relativeDir || "."}`);
+        console.error(`  Order value: ${order}`);
+        console.error(`  Conflicting files:`);
+        for (const file of files) {
+          console.error(`    - ${file}`);
+        }
+        throw new Error("Validation failed");
+      }
+    }
+  }
+}
+
+/**
+ * 阶段一：验证文件并清理无效的 order 字段
  *
  * @param dirPath - 目录绝对路径
  * @param isFirstLevelSubdir - 是否在 docs 根目录的直接子目录层级
  * @returns 已验证的文件数量
- * @throws 若验证失败则抛出错误
  */
-function validateDirectory(
+function validateAndCleanDirectory(
   dirPath: string,
   isFirstLevelSubdir: boolean = false
 ): number {
   const entries = fs.readdirSync(dirPath, { withFileTypes: true });
-
   let fileCount = 0;
-  // 收集同级目录下所有文件的 order 值，用于检测重复
-  const orderMap = new Map<number, string[]>();
 
   for (const entry of entries) {
     const absolutePath = path.join(dirPath, entry.name);
 
     if (entry.isDirectory()) {
-      // 判断子目录是否是 docs 根目录的直接子目录
       const parentDir = path.dirname(absolutePath);
       const isSubdirFirstLevel = parentDir === DOCS_ROOT;
-      fileCount += validateDirectory(absolutePath, isSubdirFirstLevel);
+      fileCount += validateAndCleanDirectory(absolutePath, isSubdirFirstLevel);
       continue;
     }
 
@@ -244,30 +308,43 @@ function validateDirectory(
       continue;
     }
 
-    const frontmatter = validateFile(absolutePath, dirPath, isFirstLevelSubdir);
-
-    // 检查 order 值重复（只检查有 order 字段的文件）
-    if (frontmatter.order !== undefined) {
-      const files = orderMap.get(frontmatter.order) || [];
-      files.push(entry.name);
-      orderMap.set(frontmatter.order, files);
-    }
+    validateFile(absolutePath, dirPath, isFirstLevelSubdir);
     fileCount++;
   }
 
-  // 检查同级目录下 order 值是否重复
-  for (const [order, files] of orderMap) {
-    if (files.length > 1) {
-      const relativeDir = path.relative(DOCS_ROOT, dirPath);
-      console.error(`✗ Duplicate 'order' value found in directory: ${relativeDir || "."}`);
-      console.error(`  Order value: ${order}`);
-      console.error(`  Conflicting files:`);
-      for (const file of files) {
-        console.error(`    - ${file}`);
-      }
-      throw new Error("Validation failed");
-    }
-  }
+  return fileCount;
+}
+
+/**
+ * 递归验证目录下所有 Markdown 文件的 frontmatter
+ *
+ * 验证规则：
+ * 1. docs 根目录下的直接 .md 文件（非 index.md）：不应该有 order 字段
+ * 2. 第一层子目录内的 toc.md：不应该有 order 字段（可以没有 frontmatter）
+ * 3. 第一层子目录内的 index.md：不应该有 order 字段，必须有 bookOrder > 0 和 shortTitle
+ * 4. 其他 index.md 文件：不需要 order 字段
+ * 5. 其他文件：必须有 order 字段
+ * 6. 同一目录下的文件 order 值不能重复
+ *
+ * 执行流程：
+ * - 阶段一：遍历所有文件，验证并清理无效的 order 字段
+ * - 阶段二：重新读取文件，收集 order 值并进行判重检查
+ *
+ * @param dirPath - 目录绝对路径
+ * @param isFirstLevelSubdir - 是否在 docs 根目录的直接子目录层级
+ * @returns 已验证的文件数量
+ * @throws 若验证失败则抛出错误
+ */
+function validateDirectory(
+  dirPath: string,
+  isFirstLevelSubdir: boolean = false
+): number {
+  // 阶段一：验证并清理无效的 order 字段
+  const fileCount = validateAndCleanDirectory(dirPath, isFirstLevelSubdir);
+
+  // 阶段二：收集 order 值并判重
+  const orderValues = collectOrderValues(dirPath);
+  checkDuplicateOrders(orderValues);
 
   return fileCount;
 }

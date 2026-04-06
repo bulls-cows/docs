@@ -1,6 +1,5 @@
 ---
-order: 0
-bookOrder: 1
+bookOrder: 2
 shortTitle: AI辅助编程
 ---
 

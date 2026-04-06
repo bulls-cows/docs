@@ -1,6 +1,5 @@
 ---
-order: 0
-bookOrder: 0
+bookOrder: 1
 shortTitle: AI辅助工作
 ---
 
