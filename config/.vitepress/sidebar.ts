@@ -206,9 +206,8 @@ function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
 
     // 书籍根目录特殊处理
     if (isBookRoot) {
-      // index.md 显示为"前言"
       if (entry.name === "index.md") {
-        indexMeta = { ...meta, text: "前言" };
+        indexMeta = meta;
         continue;
       }
       // toc.md 显示为"目录"
@@ -238,7 +237,7 @@ function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
   const items: DefaultTheme.SidebarItem[] = [];
   if (isBookRoot) {
     if (indexMeta) {
-      items.push({ text: indexMeta.text, link: indexMeta.link });
+      items.push({ text: "前言", link: indexMeta.link });
     }
     if (tocMeta) {
       items.push({ text: tocMeta.text, link: tocMeta.link });
