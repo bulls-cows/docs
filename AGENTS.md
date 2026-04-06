@@ -42,27 +42,12 @@ docs/                          # 项目根目录
 │   ├── vibe-coding/           # AI辅助编程指南
 │   ├── vibe-working/          # AI辅助工作指南
 │   ├── fullstack/             # 全栈开发指南
-│   │   ├── frontend/          # 前端开发（Vue、React、TypeScript）
-│   │   ├── backend/           # 后端开发（Node.js、数据库、API）
-│   │   ├── architecture/      # 架构设计
-│   │   ├── devops/            # DevOps 实践
-│   │   └── testing/           # 测试策略
 │   └── system-refactor/       # 重构你的系统
-│       ├── tools/             # 工具篇
-│       ├── mindset/           # 思维篇
-│       ├── skills/            # 技能篇
-│       ├── habits/            # 习惯篇
-│       ├── search/            # 搜索篇
-│       └── research/          # 科研篇
 ├── config/.vitepress/         # VitePress 配置目录
 │   ├── config.mts             # VitePress 主配置
 │   ├── sidebar.ts             # 侧边栏和导航自动生成逻辑
 │   └── theme/                 # 主题定制
-│       ├── index.ts           # 主题入口
-│       ├── MyLayout.vue       # 自定义布局
-│       └── components/        # 自定义 Vue 组件
 ├── build/                     # 构建部署脚本
-│   └── deploy.ts              # 部署脚本
 ├── public/                    # 静态资源文件
 ├── package.json               # 项目依赖配置
 └── tsconfig.json              # TypeScript 配置
