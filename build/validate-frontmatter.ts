@@ -66,6 +66,41 @@ function removeEmptyFrontmatter(filePath: string, match: RegExpMatchArray): void
 }
 
 /**
+ * 从 frontmatter 中移除无效字段并保存文件
+ * @param filePath - 文件绝对路径
+ * @param fieldName - 要移除的字段名
+ * @param frontmatter - frontmatter 对象
+ * @param match - 正则匹配结果
+ */
+function removeInvalidField(
+  filePath: string,
+  fieldName: string,
+  frontmatter: Frontmatter,
+  match: RegExpMatchArray
+): void {
+  const source = fs.readFileSync(filePath, "utf8");
+  const relativePath = path.relative(DOCS_ROOT, filePath);
+
+  // 删除无效字段
+  delete frontmatter[fieldName];
+
+  // 如果删除后 frontmatter 为空，则移除整个 frontmatter 块
+  if (Object.keys(frontmatter).length === 0) {
+    const newContent = source.slice(match[0]!.length).replace(/^\r?\n/, "");
+    fs.writeFileSync(filePath, newContent, "utf8");
+    console.log(`✓ Removed invalid field '${fieldName}' (and empty frontmatter) from: ${relativePath}`);
+    return;
+  }
+
+  // 重新序列化 frontmatter 并写回文件
+  const newFrontmatter = yaml.dump(frontmatter, { lineWidth: -1 });
+  const newContent = `---\n${newFrontmatter}---${source.slice(match[0]!.length)}`;
+
+  fs.writeFileSync(filePath, newContent, "utf8");
+  console.log(`✓ Removed invalid field '${fieldName}' from: ${relativePath}`);
+}
+
+/**
  * 验证单个 Markdown 文件的 frontmatter
  *
  * 验证规则：
@@ -103,8 +138,8 @@ function validateFile(
   // 规则 A：docs 根目录下的直接 .md 文件（非 index.md）不应该有 order 字段
   if (isRootLevel && filename !== "index.md") {
     if (frontmatter && frontmatter.order !== undefined) {
-      console.error(`✗ File should not have 'order' field in root level: ${relativePath}`);
-      throw new Error("Validation failed");
+      removeInvalidField(filePath, "order", frontmatter, match!);
+      delete frontmatter.order;
     }
     return frontmatter || {};
   }
@@ -112,8 +147,8 @@ function validateFile(
   // 规则 B：第一层子目录内的 toc.md 不应该有 order 字段（可以没有 frontmatter）
   if (isFirstLevelSubdir && filename === "toc.md") {
     if (frontmatter && frontmatter.order !== undefined) {
-      console.error(`✗ toc.md should not have 'order' field: ${relativePath}`);
-      throw new Error("Validation failed");
+      removeInvalidField(filePath, "order", frontmatter, match!);
+      delete frontmatter.order;
     }
     return frontmatter || {};
   }
@@ -126,8 +161,8 @@ function validateFile(
     }
 
     if (frontmatter.order !== undefined) {
-      console.error(`✗ index.md should not have 'order' field: ${relativePath}`);
-      throw new Error("Validation failed");
+      removeInvalidField(filePath, "order", frontmatter, match!);
+      delete frontmatter.order;
     }
 
     if (frontmatter.bookOrder === undefined || frontmatter.bookOrder <= 0) {
