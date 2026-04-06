@@ -13,23 +13,56 @@ interface Frontmatter {
   [key: string]: unknown;
 }
 
+interface FrontmatterExtractResult {
+  frontmatter: Frontmatter | null;
+  match: RegExpMatchArray | null;
+}
+
 /**
  * 从 Markdown 源码中提取 YAML frontmatter
  * @param source - Markdown 文件内容
- * @returns 解析后的 frontmatter 对象，若无 frontmatter 或解析失败则返回 null
+ * @returns 解析结果，包含 frontmatter 对象和原始匹配信息
  */
-function extractFrontmatter(source: string): Frontmatter | null {
+function extractFrontmatter(source: string): FrontmatterExtractResult {
   const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (!match) {
-    return null;
+    return { frontmatter: null, match: null };
   }
 
   try {
     const parsed = yaml.load(match[1]) as Frontmatter;
-    return parsed;
+    return { frontmatter: parsed, match };
   } catch {
-    return null;
+    return { frontmatter: null, match };
   }
+}
+
+/**
+ * 检查 frontmatter 是否为空
+ * @param frontmatter - frontmatter 对象
+ * @returns 是否为空 frontmatter
+ */
+function isEmptyFrontmatter(frontmatter: Frontmatter | null): boolean {
+  if (!frontmatter) {
+    return true;
+  }
+  return Object.keys(frontmatter).length === 0;
+}
+
+/**
+ * 移除文件中的空 frontmatter
+ * @param filePath - 文件绝对路径
+ * @param match - 正则匹配结果
+ */
+function removeEmptyFrontmatter(filePath: string, match: RegExpMatchArray): void {
+  const source = fs.readFileSync(filePath, "utf8");
+  const relativePath = path.relative(DOCS_ROOT, filePath);
+
+  // 移除 frontmatter 块，保留后面的内容
+  const newContent = source.slice(match[0]!.length).replace(/^\r?\n/, "");
+
+  fs.writeFileSync(filePath, newContent, "utf8");
+  console.log(`✓ Removed empty frontmatter from: ${relativePath}`);
 }
 
 /**
@@ -41,6 +74,7 @@ function extractFrontmatter(source: string): Frontmatter | null {
  * - 第一层子目录内的 index.md：不应该有 order 字段，必须有 bookOrder > 0 和 shortTitle
  * - 其他 index.md 文件：不需要 order 字段
  * - 其他文件：必须有 order 字段
+ * - 空 frontmatter（无任何字段）会被自动移除
  *
  * @param filePath - 文件绝对路径
  * @param parentDirPath - 父目录绝对路径
@@ -54,10 +88,17 @@ function validateFile(
   isFirstLevelSubdir: boolean
 ): Frontmatter {
   const source = fs.readFileSync(filePath, "utf8");
-  const frontmatter = extractFrontmatter(source);
+  const { frontmatter, match } = extractFrontmatter(source);
   const filename = path.basename(filePath);
   const relativePath = path.relative(DOCS_ROOT, filePath);
   const isRootLevel = parentDirPath === DOCS_ROOT;
+
+  // 检测并移除空 frontmatter
+  if (match && isEmptyFrontmatter(frontmatter)) {
+    removeEmptyFrontmatter(filePath, match);
+    // 移除后返回空对象
+    return {};
+  }
 
   // 规则 A：docs 根目录下的直接 .md 文件（非 index.md）不应该有 order 字段
   if (isRootLevel && filename !== "index.md") {
