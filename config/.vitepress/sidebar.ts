@@ -285,7 +285,9 @@ type NavItemWithOrder = DefaultTheme.NavItem & { order: number };
  */
 export function buildNav(): DefaultTheme.NavItem[] {
   const entries = fs.readdirSync(DOCS_ROOT, { withFileTypes: true });
-  const navItems: NavItemWithOrder[] = [];
+  const navItems: NavItemWithOrder[] = [
+    { text: '官网', link: 'https://www.verysites.com/', order: 0 }
+  ];
 
   for (const entry of entries) {
     if (!entry.isDirectory()) {
