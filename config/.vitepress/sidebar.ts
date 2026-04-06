@@ -224,7 +224,7 @@ function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
   // 构建章节配置：点击章节标题直接跳转到 index.md
   const result: DefaultTheme.SidebarItem & { order: number } = {
     text: sectionText,
-    collapsed: false,
+    collapsed: true,
     order: sectionOrder,
   };
 
