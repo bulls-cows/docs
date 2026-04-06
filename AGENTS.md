@@ -17,8 +17,7 @@
 
 改动后必须执行:
 
-- `npm run lint` - 执行类型检查和 Markdown 格式检查
-- `npm run docs:build` - 验证构建是否成功
+- `npm run lint` - 执行类型检查和 Markdown 格式检查，验证构建是否成功
 
 代码质量检查工具:
 
