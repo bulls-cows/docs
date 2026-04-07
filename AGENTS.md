@@ -8,6 +8,7 @@
   - `config/.vitepress/` - VitePress 配置和主题定制
   - `build/` - 构建部署脚本
   - `public/` - 静态资源文件
+  - 根目录配置文件（如 `package.json`、`tsconfig.json`）- 项目脚本与工具链配置
 - 禁止修改目录:
   - `node_modules/` - 依赖包
   - `dist/` - 构建输出（由构建命令自动生成）
