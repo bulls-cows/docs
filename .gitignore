@@ -4,3 +4,4 @@ dist/
 .codebuddy/
 .vitepress/specs/
 .workbuddy/
+.claude/
