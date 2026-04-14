@@ -140,12 +140,10 @@ docs/                          # 项目根目录
 ```md
 ---
 title: 文章标题
-order: 1
 ---
 ```
 
 - `title` - 侧边栏显示标题
-- `order` - 排序序号，数字越小越靠前
 - `shortTitle` - （可选）导航栏短标题
 - `sidebar` - 设为 `false` 可隐藏侧边栏显示
 

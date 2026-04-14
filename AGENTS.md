@@ -28,7 +28,6 @@
 ## Delivery Format
 
 - 文档修改需包含清晰的修改说明
-- 新增文档必须包含 `order` 字段用于排序（`title` 可选，未填写时自动从文档标题或文件名提取）
 - 修改配置文件后需验证构建流程
 - 文件引用格式: `文件路径`（如 `config/.vitepress/config.mts`）
 
@@ -61,16 +60,15 @@ docs/                          # 项目根目录
 
 | 文件类型 | 必需字段 | 可选字段 | 说明 |
 |---------|---------|---------|------|
-| docs 根目录下的 .md 文件（非 index.md） | 无 | title | 不应有 `order` 字段 |
-| 第一层子目录的 index.md | bookOrder, shortTitle | title | 不应有 `order` 字段，`bookOrder` 必须 > 0 |
-| 第一层子目录的 toc.md | 无 | 无 | 不应有 `order` 字段，可不写 frontmatter |
-| 其他目录的 index.md | 无 | title | 不需要 `order` 字段 |
-| 其他 .md 文件 | order | title | `order` 用于排序 |
+| docs 根目录下的 .md 文件（非 index.md） | 无 | title | - |
+| 第一层子目录的 index.md | bookOrder, shortTitle | title | `bookOrder` 必须 > 0 |
+| 第一层子目录的 toc.md | 无 | 无 | 可不写 frontmatter |
+| 其他目录的 index.md | 无 | title | - |
+| 其他 .md 文件 | 无 | title | - |
 
 #### 字段说明
 
 - `title`: 侧边栏显示标题。未填写时从文档一级标题或文件名自动提取
-- `order`: 排序序号，数字越小越靠前。未填写时默认排在最后
 - `shortTitle`: 导航栏短标题，用于顶部导航（仅第一层子目录 index.md 需要）
 - `bookOrder`: 板块在导航栏的排序（仅第一层子目录 index.md 需要）
 - `sidebar`: 设为 `false` 可隐藏侧边栏显示
@@ -82,7 +80,6 @@ docs/                          # 项目根目录
 ```md
 ---
 title: 文章标题
-order: 1
 ---
 ```
 
@@ -99,7 +96,6 @@ bookOrder: 1
 #### 注意事项
 
 - 空 frontmatter（无任何字段）会被自动移除
-- 同一目录下 `order` 值不能重复
 
 ### 内容风格
 
