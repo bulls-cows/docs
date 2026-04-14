@@ -5,3 +5,4 @@ dist/
 .vitepress/specs/
 .workbuddy/
 .claude/
+config/.vitepress/.temp/
