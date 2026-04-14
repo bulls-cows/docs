@@ -24,17 +24,17 @@
 
 ## 章节导航
 
-- [文章系统](./article.md) - 文章表设计、CRUD操作、付费阅读
-- [分类与标签](./category-tag.md) - 分类表、标签表、关联关系
-- [富文本编辑](./rich-text.md) - 编辑器选择、图片上传、内容存储
+- [文章系统](./03-article.md) - 文章表设计、CRUD操作、付费阅读
+- [分类与标签](./04-category-tag.md) - 分类表、标签表、关联关系
+- [富文本编辑](./05-rich-text.md) - 编辑器选择、图片上传、内容存储
 
 ## 前置知识
 
 阅读本章节前，建议先了解：
 
-- [数据库设计](../../backend/database.md) - 数据库表设计规范
-- [API设计规范](../../backend/api-design.md) - RESTful API 设计
-- [Vue.js 实战](../../frontend/vue.md) - 前端组件开发
+- [数据库设计](../../backend/03-database.md) - 数据库表设计规范
+- [API设计规范](../../backend/04-api-design.md) - RESTful API 设计
+- [Vue.js 实战](../../frontend/02-vue.md) - 前端组件开发
 
 ## 业务流程
 

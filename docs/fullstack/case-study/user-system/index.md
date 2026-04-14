@@ -25,17 +25,17 @@
 
 ## 章节导航
 
-- [用户表设计](./user-table.md) - 用户表结构、角色表、关联关系
-- [角色与权限](./role-permission.md) - 角色设计、权限控制逻辑
-- [认证与授权](./authentication.md) - 登录流程、Token管理、中间件
+- [用户表设计](./02-user-table.md) - 用户表结构、角色表、关联关系
+- [角色与权限](./03-role-permission.md) - 角色设计、权限控制逻辑
+- [认证与授权](./04-authentication.md) - 登录流程、Token管理、中间件
 
 ## 前置知识
 
 阅读本章节前，建议先了解：
 
-- [数据库设计](../../backend/database.md) - 数据库表设计规范
-- [API设计规范](../../backend/api-design.md) - RESTful API 设计
-- [认证与授权](../../backend/authentication.md) - 认证原理
+- [数据库设计](../../backend/03-database.md) - 数据库表设计规范
+- [API设计规范](../../backend/04-api-design.md) - RESTful API 设计
+- [认证与授权](../../backend/05-authentication.md) - 认证原理
 
 ## 业务流程
 

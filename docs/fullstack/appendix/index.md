@@ -5,17 +5,17 @@
 
 ## 章节导航
 
-- [开发环境搭建](./development.md) - 本地开发环境配置
-- [部署上线](./deployment.md) - 生产环境部署指南
-- [开发规范速查](./code-standards.md) - 代码规范快速参考
+- [开发环境搭建](./01-development.md) - 本地开发环境配置
+- [部署上线](./02-deployment.md) - 生产环境部署指南
+- [开发规范速查](./03-code-standards.md) - 代码规范快速参考
 
 ## 快速开始
 
 如果你是第一次接触本项目，建议按以下顺序阅读：
 
-1. 先阅读 [开发环境搭建](./development.md) 配置本地环境
-2. 然后浏览 [开发规范速查](./code-standards.md) 了解代码规范
-3. 最后参考 [部署上线](./deployment.md) 部署到生产环境
+1. 先阅读 [开发环境搭建](./01-development.md) 配置本地环境
+2. 然后浏览 [开发规范速查](./03-code-standards.md) 了解代码规范
+3. 最后参考 [部署上线](./02-deployment.md) 部署到生产环境
 
 ## 项目结构
 

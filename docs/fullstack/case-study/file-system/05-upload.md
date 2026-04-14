@@ -8,7 +8,7 @@ order: 50
 
 ## 前置知识
 
-- [API设计规范](../../backend/api-design.md) - RESTful API 设计
+- [API设计规范](../../backend/04-api-design.md) - RESTful API 设计
 
 ## 上传接口设计
 

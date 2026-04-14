@@ -171,5 +171,5 @@ taskkill /PID <pid> /F
 
 ## 相关章节
 
-- [部署上线](./deployment.md) - 生产环境部署
-- [开发规范速查](./code-standards.md) - 代码规范
+- [部署上线](./02-deployment.md) - 生产环境部署
+- [开发规范速查](./03-code-standards.md) - 代码规范

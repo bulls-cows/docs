@@ -26,17 +26,17 @@
 
 ## 章节导航
 
-- [余额系统](./balance.md) - 余额账户设计、交易流水
-- [充值流程](./recharge.md) - 充值接口、支付回调
-- [提现流程](./withdrawal.md) - 提现申请、审批流程
+- [余额系统](./06-balance.md) - 余额账户设计、交易流水
+- [充值流程](./05-recharge.md) - 充值接口、支付回调
+- [提现流程](./07-withdrawal.md) - 提现申请、审批流程
 
 ## 前置知识
 
 阅读本章节前，建议先了解：
 
-- [数据库设计](../../backend/database.md) - 数据库表设计规范
-- [API设计规范](../../backend/api-design.md) - RESTful API 设计
-- [认证与授权](../../backend/authentication.md) - 用户认证原理
+- [数据库设计](../../backend/03-database.md) - 数据库表设计规范
+- [API设计规范](../../backend/04-api-design.md) - RESTful API 设计
+- [认证与授权](../../backend/05-authentication.md) - 用户认证原理
 
 ## 业务流程概览
 

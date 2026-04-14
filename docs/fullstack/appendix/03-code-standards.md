@@ -240,6 +240,6 @@ export const cGetUserInfo: ExpressRequestHandler = async (req, res, next) => {
 
 ## 相关章节
 
-- [开发环境搭建](./development.md) - 本地开发配置
-- [部署上线](./deployment.md) - 生产环境部署
-- [API设计规范](../backend/api-design.md) - 详细API设计规范
+- [开发环境搭建](./01-development.md) - 本地开发配置
+- [部署上线](./02-deployment.md) - 生产环境部署
+- [API设计规范](../backend/04-api-design.md) - 详细API设计规范

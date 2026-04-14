@@ -5,10 +5,10 @@
 
 ## 章节导航
 
-- [预约系统](./booking.md) - 在线预约功能设计
-- [导航系统](./navigation.md) - 导航网站管理
-- [相册系统](./album.md) - 相册和图片管理
-- [日志监控](./monitoring.md) - 系统日志和错误监控
+- [预约系统](./08-booking.md) - 在线预约功能设计
+- [导航系统](./07-navigation.md) - 导航网站管理
+- [相册系统](./09-album.md) - 相册和图片管理
+- [日志监控](./10-monitoring.md) - 系统日志和错误监控
 
 ## 功能概览
 
@@ -23,5 +23,5 @@
 
 阅读本章节前，建议先了解：
 
-- [数据库设计](../../backend/database.md) - 数据库表设计规范
-- [API设计规范](../../backend/api-design.md) - RESTful API 设计
+- [数据库设计](../../backend/03-database.md) - 数据库表设计规范
+- [API设计规范](../../backend/04-api-design.md) - RESTful API 设计

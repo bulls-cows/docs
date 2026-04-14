@@ -119,6 +119,20 @@ function toLink(relativePath: string): string {
 }
 
 /**
+ * 从文件名提取两位数前缀作为排序号
+ * 支持格式: "01-filename.md", "02-filename.md"
+ * @param filename - 不含路径的文件名（不含扩展名）
+ * @returns 排序号，默认为 Number.MAX_SAFE_INTEGER
+ */
+function extractOrderFromFilename(filename: string): number {
+  const match = filename.match(/^(\d{2})-/);
+  if (match) {
+    return parseInt(match[1], 10);
+  }
+  return Number.MAX_SAFE_INTEGER;
+}
+
+/**
  * 读取单个 Markdown 文档的元数据
  * @param filePath - 文件绝对路径
  * @returns 文档元数据对象
@@ -135,13 +149,13 @@ function readDocMeta(filePath: string): DocMeta {
   return {
     text: titleFromFrontmatter || heading || prettifyName(filename),
     link: toLink(relativePath),
-    order: typeof frontmatter.order === "number" ? frontmatter.order : Number.MAX_SAFE_INTEGER,
+    order: extractOrderFromFilename(filename),
     hidden: frontmatter.sidebar === false,
   };
 }
 
 /**
- * 按 order 字段排序，order 相同时按文本排序
+ * 按文件名两位数前缀排序，order 相同时按文本排序
  * @param items - 待排序的项数组
  * @returns 排序后的数组
  */

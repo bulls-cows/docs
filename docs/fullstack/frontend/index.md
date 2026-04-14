@@ -391,9 +391,9 @@ jobs:
 
 ## 延伸阅读
 
-- [Vue.js 实战](./vue.md)
-- [React 实战](./react.md)
-- [TypeScript 最佳实践](./typescript.md)
-- [状态管理](./state-management.md)
-- [样式方案](./styling.md)
-- [性能优化](./performance.md)
+- [Vue.js 实战](./02-vue.md)
+- [React 实战](./03-react.md)
+- [TypeScript 最佳实践](./04-typescript.md)
+- [状态管理](./05-state-management.md)
+- [样式方案](./06-styling.md)
+- [性能优化](./07-performance.md)

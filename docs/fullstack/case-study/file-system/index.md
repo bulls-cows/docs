@@ -14,13 +14,13 @@
 
 ## 章节导航
 
-- [文件上传](./upload.md) - 文件上传接口、存储策略
-- [权限控制](./permission.md) - 文件访问权限、临时链接
+- [文件上传](./05-upload.md) - 文件上传接口、存储策略
+- [权限控制](./06-permission.md) - 文件访问权限、临时链接
 
 ## 前置知识
 
-- [API设计规范](../../backend/api-design.md) - RESTful API 设计
-- [认证与授权](../../backend/authentication.md) - 用户认证原理
+- [API设计规范](../../backend/04-api-design.md) - RESTful API 设计
+- [认证与授权](../../backend/05-authentication.md) - 用户认证原理
 
 ## 文件存储策略
 

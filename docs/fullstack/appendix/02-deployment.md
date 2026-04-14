@@ -272,5 +272,5 @@ pm2 logs api --err
 
 ## 相关章节
 
-- [开发环境搭建](./development.md) - 本地开发配置
-- [开发规范速查](./code-standards.md) - 代码规范
+- [开发环境搭建](./01-development.md) - 本地开发配置
+- [开发规范速查](./03-code-standards.md) - 代码规范

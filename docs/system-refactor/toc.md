@@ -1,36 +1,36 @@
 
 # 目录
 
-- [案例分享](./cases.md)
+- [案例分享](./10-cases.md)
 - 第一篇 认知重构
   - [认知升级的重要性](./mindset/index.md)
-  - [成长型思维](./mindset/growth.md)
-  - [高效学习法](./mindset/learning.md)
-  - [决策框架](./mindset/decision-making.md)
+  - [成长型思维](./mindset/02-growth.md)
+  - [高效学习法](./mindset/03-learning.md)
+  - [决策框架](./mindset/04-decision-making.md)
 - 第二篇 搜索能力
   - [信息检索艺术](./search/index.md)
-  - [搜索引擎技巧](./search/search-engines.md)
-  - [学术资源获取](./search/academic.md)
-  - [信息验证](./search/fact-checking.md)
+  - [搜索引擎技巧](./search/02-search-engines.md)
+  - [学术资源获取](./search/03-academic.md)
+  - [信息验证](./search/04-fact-checking.md)
 - 第三篇 研究能力
   - [系统化研究方法](./research/index.md)
-  - [快速阅读技巧](./research/reading.md)
-  - [知识管理](./research/note-taking.md)
-  - [学术写作](./research/writing.md)
+  - [快速阅读技巧](./research/02-reading.md)
+  - [知识管理](./research/03-note-taking.md)
+  - [学术写作](./research/04-writing.md)
 - 第四篇 技能运用
   - [技能迁移理论](./skills/index.md)
-  - [刻意练习](./skills/deliberate-practice.md)
-  - [反馈循环](./skills/feedback-loop.md)
-  - [费曼学习法](./skills/teaching.md)
+  - [刻意练习](./skills/02-deliberate-practice.md)
+  - [反馈循环](./skills/03-feedback-loop.md)
+  - [费曼学习法](./skills/04-teaching.md)
 - 第五篇 工具系统
   - [工具思维](./tools/index.md)
-  - [自动化工作流](./tools/automation.md)
-  - [AI 工具整合](./tools/ai-tools.md)
-  - [效率工具箱](./tools/productivity.md)
+  - [自动化工作流](./tools/02-automation.md)
+  - [AI 工具整合](./tools/03-ai-tools.md)
+  - [效率工具箱](./tools/04-productivity.md)
 - 第六篇 习惯系统
   - [习惯的力量](./habits/index.md)
-  - [晨间惯例](./habits/morning-routine.md)
-  - [时间管理](./habits/time-management.md)
-  - [复盘系统](./habits/review-system.md)
+  - [晨间惯例](./habits/02-morning-routine.md)
+  - [时间管理](./habits/03-time-management.md)
+  - [复盘系统](./habits/04-review-system.md)
 - 附录
-  - [重构案例分享](./cases.md)
+  - [重构案例分享](./10-cases.md)
