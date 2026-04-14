@@ -7,7 +7,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DOCS_ROOT = path.resolve(__dirname, "../docs");
 
 interface Frontmatter {
-  order?: number;
   bookOrder?: number;
   shortTitle?: string;
   [key: string]: unknown;
@@ -66,48 +65,9 @@ function removeEmptyFrontmatter(filePath: string, match: RegExpMatchArray): void
 }
 
 /**
- * 从 frontmatter 中移除无效字段并保存文件
- * @param filePath - 文件绝对路径
- * @param fieldName - 要移除的字段名
- * @param frontmatter - frontmatter 对象
- * @param match - 正则匹配结果
- */
-function removeInvalidField(
-  filePath: string,
-  fieldName: string,
-  frontmatter: Frontmatter,
-  match: RegExpMatchArray
-): void {
-  const source = fs.readFileSync(filePath, "utf8");
-  const relativePath = path.relative(DOCS_ROOT, filePath);
-
-  // 删除无效字段
-  delete frontmatter[fieldName];
-
-  // 如果删除后 frontmatter 为空，则移除整个 frontmatter 块
-  if (Object.keys(frontmatter).length === 0) {
-    const newContent = source.slice(match[0]!.length).replace(/^\r?\n/, "");
-    fs.writeFileSync(filePath, newContent, "utf8");
-    console.log(
-      `✓ Removed invalid field '${fieldName}' (and empty frontmatter) from: ${relativePath}`
-    );
-    return;
-  }
-
-  // 重新序列化 frontmatter 并写回文件
-  const newFrontmatter = yaml.dump(frontmatter, { lineWidth: -1 });
-  const newContent = `---\n${newFrontmatter}---${source.slice(match[0]!.length)}`;
-
-  fs.writeFileSync(filePath, newContent, "utf8");
-  console.log(`✓ Removed invalid field '${fieldName}' from: ${relativePath}`);
-}
-
-/**
  * 验证单个 Markdown 文件的 frontmatter
  *
  * 验证规则：
- * - 所有文件都不应该有 order 字段
- * - 如果 frontmatter 只有 order 字段，则删除整个 frontmatter
  * - 第一层子目录内的 index.md：必须有 bookOrder > 0 和 shortTitle
  * - 空 frontmatter（无任何字段）会被自动移除
  *
@@ -134,13 +94,7 @@ function validateFile(
     return {};
   }
 
-  // 规则 A：所有文件都不应该有 order 字段
-  if (frontmatter && frontmatter.order !== undefined) {
-    removeInvalidField(filePath, "order", frontmatter, match!);
-    delete frontmatter.order;
-  }
-
-  // 规则 B：第一层子目录内的 index.md 必须有 bookOrder > 0 和 shortTitle
+  // 规则：第一层子目录内的 index.md 必须有 bookOrder > 0 和 shortTitle
   if (isFirstLevelSubdir && filename === "index.md") {
     if (!frontmatter) {
       console.error(`✗ File missing frontmatter: ${relativePath}`);
@@ -203,9 +157,8 @@ function validateAndCleanDirectory(dirPath: string, isFirstLevelSubdir: boolean 
  * 递归验证目录下所有 Markdown 文件的 frontmatter
  *
  * 验证规则：
- * 1. 所有文件都不应该有 order 字段
- * 2. 第一层子目录内的 index.md：必须有 bookOrder > 0 和 shortTitle
- * 3. 空 frontmatter（无任何字段）会被自动移除
+ * 1. 第一层子目录内的 index.md：必须有 bookOrder > 0 和 shortTitle
+ * 2. 空 frontmatter（无任何字段）会被自动移除
  *
  * @param dirPath - 目录绝对路径
  * @param isFirstLevelSubdir - 是否在 docs 根目录的直接子目录层级
