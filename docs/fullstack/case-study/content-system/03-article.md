@@ -8,8 +8,8 @@ order: 30
 
 ## 前置知识
 
-- [数据库设计](../../backend/database.md) - 数据库表设计规范
-- [API设计规范](../../backend/api-design.md) - RESTful API 设计
+- [数据库设计](../../backend/03-database.md) - 数据库表设计规范
+- [API设计规范](../../backend/04-api-design.md) - RESTful API 设计
 
 ## 文章表设计
 
@@ -257,5 +257,5 @@ const getArticleContent = (article: Article, user: User | null) => {
 
 ## 相关章节
 
-- [分类与标签](./category-tag.md) - 分类和标签的设计
-- [富文本编辑](./rich-text.md) - 富文本编辑器实现
+- [分类与标签](./04-category-tag.md) - 分类和标签的设计
+- [富文本编辑](./05-rich-text.md) - 富文本编辑器实现

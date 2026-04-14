@@ -323,4 +323,4 @@ const handleError = () => {
 
 ## 相关章节
 
-- [权限控制](./permission.md) - 文件访问权限管理
+- [权限控制](./06-permission.md) - 文件访问权限管理

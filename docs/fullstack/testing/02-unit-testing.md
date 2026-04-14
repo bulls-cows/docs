@@ -990,5 +990,5 @@ describe('Async Operations', () => {
 
 ## 下一步
 
-- [集成测试](./integration.md)：了解模块间协作测试
-- [端到端测试](./e2e.md)：掌握完整流程测试
+- [集成测试](./03-integration.md)：了解模块间协作测试
+- [端到端测试](./04-e2e.md)：掌握完整流程测试

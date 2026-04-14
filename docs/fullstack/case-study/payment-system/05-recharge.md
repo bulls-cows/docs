@@ -8,8 +8,8 @@ order: 50
 
 ## 前置知识
 
-- [余额系统](./balance.md) - 余额账户设计
-- [API设计规范](../../backend/api-design.md) - RESTful API 设计
+- [余额系统](./06-balance.md) - 余额账户设计
+- [API设计规范](../../backend/04-api-design.md) - RESTful API 设计
 
 ## 充值流程图
 
@@ -281,5 +281,5 @@ const handleRecharge = async () => {
 
 ## 相关章节
 
-- [余额系统](./balance.md) - 余额账户设计
-- [提现流程](./withdrawal.md) - 提现申请和审批
+- [余额系统](./06-balance.md) - 余额账户设计
+- [提现流程](./07-withdrawal.md) - 提现申请和审批

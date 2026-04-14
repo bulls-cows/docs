@@ -8,7 +8,7 @@ order: 20
 
 ## 前置知识
 
-- [数据库设计](../../backend/database.md) - 数据库设计规范
+- [数据库设计](../../backend/03-database.md) - 数据库设计规范
 
 ## 用户表（user）
 
@@ -176,5 +176,5 @@ interface UserInfo {
 
 ## 相关章节
 
-- [角色与权限](./role-permission.md) - 角色权限控制实现
-- [认证与授权](./authentication.md) - 登录认证流程
+- [角色与权限](./03-role-permission.md) - 角色权限控制实现
+- [认证与授权](./04-authentication.md) - 登录认证流程

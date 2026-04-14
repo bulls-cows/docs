@@ -8,8 +8,8 @@ order: 60
 
 ## 前置知识
 
-- [余额系统](./balance.md) - 余额账户设计
-- [认证与授权](../../backend/authentication.md) - 用户认证原理
+- [余额系统](./06-balance.md) - 余额账户设计
+- [认证与授权](../../backend/05-authentication.md) - 用户认证原理
 
 ## 提现流程图
 
@@ -404,5 +404,5 @@ const handleWithdraw = async () => {
 
 ## 相关章节
 
-- [余额系统](./balance.md) - 余额账户设计
-- [充值流程](./recharge.md) - 充值接口和支付回调
+- [余额系统](./06-balance.md) - 余额账户设计
+- [充值流程](./05-recharge.md) - 充值接口和支付回调

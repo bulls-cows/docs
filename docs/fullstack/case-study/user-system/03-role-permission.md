@@ -8,8 +8,8 @@ order: 30
 
 ## 前置知识
 
-- [认证与授权](../../backend/authentication.md) - 认证授权原理
-- [API设计规范](../../backend/api-design.md) - 接口设计规范
+- [认证与授权](../../backend/05-authentication.md) - 认证授权原理
+- [API设计规范](../../backend/04-api-design.md) - 接口设计规范
 
 ## 角色体系设计
 
@@ -243,5 +243,5 @@ export const cUpdateUserRole: ExpressRequestHandler = async (req, res, next) => 
 
 ## 相关章节
 
-- [用户表设计](./user-table.md) - 用户表结构设计
-- [认证与授权](./authentication.md) - 登录认证实现
+- [用户表设计](./02-user-table.md) - 用户表结构设计
+- [认证与授权](./04-authentication.md) - 登录认证实现

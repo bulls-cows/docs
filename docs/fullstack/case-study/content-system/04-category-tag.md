@@ -8,7 +8,7 @@ order: 40
 
 ## 前置知识
 
-- [数据库设计](../../backend/database.md) - 数据库表设计规范
+- [数据库设计](../../backend/03-database.md) - 数据库表设计规范
 
 ## 分类表设计
 
@@ -298,5 +298,5 @@ interface ReturnApiGetTags {
 
 ## 相关章节
 
-- [文章系统](./article.md) - 文章表设计和CRUD操作
-- [富文本编辑](./rich-text.md) - 富文本编辑器实现
+- [文章系统](./03-article.md) - 文章表设计和CRUD操作
+- [富文本编辑](./05-rich-text.md) - 富文本编辑器实现

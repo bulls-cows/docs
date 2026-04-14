@@ -126,4 +126,4 @@ router.post('/articles', authMiddleware(), async (req, res) => {
 
 ## 相关章节
 
-- [部署上线](../../appendix/deployment.md) - 生产环境部署
+- [部署上线](../../appendix/02-deployment.md) - 生产环境部署
