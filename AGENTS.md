@@ -61,7 +61,7 @@ docs/                          # 项目根目录
 | 文件类型 | 必需字段 | 可选字段 | 说明 |
 |---------|---------|---------|------|
 | docs 根目录下的 .md 文件（非 index.md） | 无 | title | - |
-| 第一层子目录的 index.md | bookOrder, shortTitle | title | `bookOrder` 必须 > 0 |
+| 第一层子目录的 index.md | shortTitle | title | 文件夹名需以两位数字序号开头（如 01-book-name） |
 | 第一层子目录的 toc.md | 无 | 无 | 可不写 frontmatter |
 | 其他目录的 index.md | 无 | title | - |
 | 其他 .md 文件 | 无 | title | - |
@@ -70,8 +70,12 @@ docs/                          # 项目根目录
 
 - `title`: 侧边栏显示标题。未填写时从文档一级标题或文件名自动提取
 - `shortTitle`: 导航栏短标题，用于顶部导航（仅第一层子目录 index.md 需要）
-- `bookOrder`: 板块在导航栏的排序（仅第一层子目录 index.md 需要）
 - `sidebar`: 设为 `false` 可隐藏侧边栏显示
+
+#### 文件夹命名规范
+
+- **第一层子目录**：文件夹名需以两位数字序号开头，格式为 `NN-name`（如 `01-vibe-working`、`02-vibe-coding`）
+- **序号作用**：决定板块在导航栏的显示顺序，从 01 开始递增
 
 #### 示例
 
@@ -89,9 +93,10 @@ title: 文章标题
 ---
 title: AI辅助编程指南
 shortTitle: Vibe Coding
-bookOrder: 1
 ---
 ```
+
+**对应文件夹名**：`01-vibe-coding`
 
 #### 注意事项
 

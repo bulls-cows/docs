@@ -1,5 +1,4 @@
 ---
-bookOrder: 4
 shortTitle: 系统重构
 ---
 

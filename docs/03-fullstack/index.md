@@ -1,5 +1,4 @@
 ---
-bookOrder: 3
 shortTitle: 全栈开发
 ---
 

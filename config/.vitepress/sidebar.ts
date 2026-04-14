@@ -324,7 +324,7 @@ export function buildNav(): DefaultTheme.NavItem[] {
     navItems.push({
       text,
       link: `/${entry.name}/`,
-      order: typeof frontmatter.bookOrder === "number" ? frontmatter.bookOrder : 0,
+      order: extractOrderFromFilename(entry.name),
     });
   }
 

@@ -7,7 +7,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DOCS_ROOT = path.resolve(__dirname, "../docs");
 
 interface Frontmatter {
-  bookOrder?: number;
   shortTitle?: string;
   [key: string]: unknown;
 }
@@ -68,7 +67,7 @@ function removeEmptyFrontmatter(filePath: string, match: RegExpMatchArray): void
  * 验证单个 Markdown 文件的 frontmatter
  *
  * 验证规则：
- * - 第一层子目录内的 index.md：必须有 bookOrder > 0 和 shortTitle
+ * - 第一层子目录内的 index.md：必须有 shortTitle
  * - 空 frontmatter（无任何字段）会被自动移除
  *
  * @param filePath - 文件绝对路径
@@ -94,15 +93,10 @@ function validateFile(
     return {};
   }
 
-  // 规则：第一层子目录内的 index.md 必须有 bookOrder > 0 和 shortTitle
+  // 规则：第一层子目录内的 index.md 必须有 shortTitle
   if (isFirstLevelSubdir && filename === "index.md") {
     if (!frontmatter) {
       console.error(`✗ File missing frontmatter: ${relativePath}`);
-      throw new Error("Validation failed");
-    }
-
-    if (frontmatter.bookOrder === undefined || frontmatter.bookOrder <= 0) {
-      console.error(`✗ index.md missing required field 'bookOrder' (must be > 0): ${relativePath}`);
       throw new Error("Validation failed");
     }
 
@@ -157,7 +151,7 @@ function validateAndCleanDirectory(dirPath: string, isFirstLevelSubdir: boolean 
  * 递归验证目录下所有 Markdown 文件的 frontmatter
  *
  * 验证规则：
- * 1. 第一层子目录内的 index.md：必须有 bookOrder > 0 和 shortTitle
+ * 1. 第一层子目录内的 index.md：必须有 shortTitle
  * 2. 空 frontmatter（无任何字段）会被自动移除
  *
  * @param dirPath - 目录绝对路径
