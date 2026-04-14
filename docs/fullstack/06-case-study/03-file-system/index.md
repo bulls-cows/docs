@@ -19,8 +19,8 @@
 
 ## 前置知识
 
-- [API设计规范](../../backend/04-api-design.md) - RESTful API 设计
-- [认证与授权](../../backend/05-authentication.md) - 用户认证原理
+- [API设计规范](../../02-backend/04-api-design.md) - RESTful API 设计
+- [认证与授权](../../02-backend/05-authentication.md) - 用户认证原理
 
 ## 文件存储策略
 

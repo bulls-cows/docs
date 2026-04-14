@@ -119,13 +119,13 @@ function toLink(relativePath: string): string {
 }
 
 /**
- * 从文件名提取两位数前缀作为排序号
- * 支持格式: "01-filename.md", "02-filename.md"
- * @param filename - 不含路径的文件名（不含扩展名）
+ * 从文件名或文件夹名提取两位数前缀作为排序号
+ * 支持格式: "01-filename.md", "02-foldername"
+ * @param name - 不含路径的文件名（不含扩展名）或文件夹名
  * @returns 排序号，默认为 Number.MAX_SAFE_INTEGER
  */
-function extractOrderFromFilename(filename: string): number {
-  const match = filename.match(/^(\d{2})-/);
+function extractOrderFromFilename(name: string): number {
+  const match = name.match(/^(\d{2})-/);
   if (match) {
     return parseInt(match[1], 10);
   }
@@ -202,9 +202,7 @@ function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
       if (section) {
         childSections.push({
           ...section,
-          order:
-            (section as DefaultTheme.SidebarItem & { order?: number }).order ??
-            Number.MAX_SAFE_INTEGER,
+          order: extractOrderFromFilename(entry.name),
         });
       }
       continue;

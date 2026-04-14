@@ -8,7 +8,7 @@ order: 60
 
 ## 前置知识
 
-- [认证与授权](../../backend/05-authentication.md) - 用户认证原理
+- [认证与授权](../../02-backend/05-authentication.md) - 用户认证原理
 
 ## 权限模型
 

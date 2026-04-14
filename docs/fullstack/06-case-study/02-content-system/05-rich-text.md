@@ -8,8 +8,8 @@ order: 50
 
 ## 前置知识
 
-- [Vue.js 实战](../../frontend/02-vue.md) - Vue 组件开发
-- [文件上传](../file-system/05-upload.md) - 文件上传实现
+- [Vue.js 实战](../../03-frontend/02-vue.md) - Vue 组件开发
+- [文件上传../03-file-system/05-upload.md) - 文件上传实现
 
 ## 编辑器选择
 
@@ -320,4 +320,4 @@ const sanitizedContent = computed(() => {
 
 - [文章系统](./03-article.md) - 文章表设计和CRUD操作
 - [分类与标签](./04-category-tag.md) - 分类和标签的设计
-- [文件上传](../file-system/05-upload.md) - 文件上传详细实现
+- [文件上传../03-file-system/05-upload.md) - 文件上传详细实现

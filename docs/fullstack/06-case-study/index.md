@@ -47,10 +47,10 @@
 
 阅读本篇前，建议先掌握以下知识：
 
-- [后端技术栈](../backend/02-nodejs.md) - Node.js、Express 基础
-- [数据库设计](../backend/03-database.md) - 数据库设计规范
-- [API设计规范](../backend/04-api-design.md) - RESTful API 设计
-- [认证与授权](../backend/05-authentication.md) - 用户认证原理
+- [后端技术栈](../02-backend/02-nodejs.md) - Node.js、Express 基础
+- [数据库设计](../02-backend/03-database.md) - 数据库设计规范
+- [API设计规范](../02-backend/04-api-design.md) - RESTful API 设计
+- [认证与授权](../02-backend/05-authentication.md) - 用户认证原理
 
 ## 约定说明
 

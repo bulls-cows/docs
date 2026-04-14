@@ -1026,6 +1026,6 @@ export default defineConfig({
 完成环境搭建和第一个项目后，建议继续学习：
 
 - **[全栈最佳实践](/fullstack/02-best-practices)** - 学习代码组织、类型共享、安全实践
-- **[前端开发](/fullstack/frontend/)** - 深入 React/Vue 框架
-- **[后端开发](/fullstack/backend/)** - 掌握 Node.js、数据库、API 设计
-- **[架构设计](/fullstack/architecture/)** - 理解系统架构模式
+- **[前端开发](/fullstack/03-frontend/)** - 深入 React/Vue 框架
+- **[后端开发](/fullstack/02-backend/)** - 掌握 Node.js、数据库、API 设计
+- **[架构设计](/fullstack/01-architecture/)** - 理解系统架构模式

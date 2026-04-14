@@ -34,9 +34,9 @@
 
 阅读本章节前，建议先了解：
 
-- [数据库设计](../../backend/03-database.md) - 数据库表设计规范
-- [API设计规范](../../backend/04-api-design.md) - RESTful API 设计
-- [认证与授权](../../backend/05-authentication.md) - 用户认证原理
+- [数据库设计](../../02-backend/03-database.md) - 数据库表设计规范
+- [API设计规范](../../02-backend/04-api-design.md) - RESTful API 设计
+- [认证与授权](../../02-backend/05-authentication.md) - 用户认证原理
 
 ## 业务流程概览
 

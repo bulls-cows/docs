@@ -9,7 +9,7 @@ order: 60
 ## 前置知识
 
 - [余额系统](./06-balance.md) - 余额账户设计
-- [认证与授权](../../backend/05-authentication.md) - 用户认证原理
+- [认证与授权](../../02-backend/05-authentication.md) - 用户认证原理
 
 ## 提现流程图
 
