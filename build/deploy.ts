@@ -64,6 +64,9 @@ const deployToServer = async () => {
     );
   };
 
+  // 清空远程目录
+  await execCommand(`rm -rf ${cwd}`);
+
   // dist 目录路径（VitePress 构建产物在 ./dist）
   const pathDist = joinPath(PATH_ROOT, "dist");
   const zipFileName = `dist.zip`;
