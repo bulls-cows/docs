@@ -125,17 +125,18 @@ npm run buildAndDeploy
 ```text
 docs/                          # 项目根目录
 ├── docs/                      # 文档源目录
-│   ├── index.md               # 首页（4 大板块入口）
+│   ├── index.md               # 首页
 │   ├── about.md               # 关于页面
-│   ├── vibe-coding/           # AI 辅助编程指南
-│   ├── vibe-working/          # AI 辅助工作指南
-│   ├── fullstack/             # 全栈开发指南
-│   ├── system-refactor/       # 重构你的系统
-│   └── health-handbook/       # 健康科普手册
-├── config/.vitepress/         # VitePress 配置目录
-│   ├── config.mts             # VitePress 主配置
-│   ├── sidebar.ts             # 侧边栏和导航自动生成逻辑
-│   └── theme/                 # 主题定制
+│   ├── 01-vibe-working/       # AI 辅助工作指南
+│   ├── 02-vibe-coding/        # AI 辅助编程指南
+│   ├── 03-fullstack/          # 全栈开发指南
+│   ├── 04-system-refactor/    # 重构你的系统
+│   └── 05-health-handbook/    # 健康科普手册
+├── config/                    # 配置目录
+│   └── .vitepress/            # VitePress 配置
+│       ├── config.mts         # VitePress 主配置
+│       ├── sidebar.ts         # 侧边栏和导航自动生成逻辑
+│       └── theme/             # 主题定制
 ├── build/                     # 构建部署脚本
 ├── public/                    # 静态资源文件
 ├── package.json               # 项目依赖配置
