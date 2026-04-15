@@ -1,17 +1,17 @@
-# 牛牛文档
+# 小药文档
 
-> 与热爱不期而遇
+> 让AI赋能药学，让药学拥抱智能
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://github.com/bulls-cows/docs/blob/main/LICENSE)
 [![VitePress](https://img.shields.io/badge/VitePress-2.0.0--alpha.17-brightgreen.svg)](https://vitepress.dev/)
 [![Vue](https://img.shields.io/badge/Vue-3.5.31-4FC08D.svg)](https://vuejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0.2-3178C6.svg)](https://www.typescriptlang.org/)
 
-**牛牛文档** 是一个技术知识库与产品文档平台，由牛牛团队（滕先生和黄女士）创建和维护。我们拥有 15 年生物与信息技术交叉领域的从业经验，致力于将专业知识转化为易于理解的内容，帮助更多人提升技能、解决问题。
+**小药文档** 是一个技术知识库与产品文档平台，由小药团队创建和维护。我们拥有 15 年生物与信息技术交叉领域的从业经验，致力于将专业知识转化为易于理解的内容，帮助更多人提升技能、解决问题。
 
 ## ✨ 核心内容
 
-我们提供四本原创技术书籍，涵盖 AI 应用、编程开发、认知提升等主题：
+我们提供五本原创技术书籍，涵盖 AI 应用、编程开发、认知提升、健康科普等主题：
 
 ### 🤖 [AI 辅助工作指南](https://github.com/bulls-cows/docs/tree/main/docs/vibe-working)
 
@@ -52,6 +52,16 @@
 - **技能篇** - 刻意练习、技能习得
 - **搜索篇** - 信息检索、知识管理
 - **科研篇** - 研究方法、学术写作
+
+### 🏥 [健康科普手册](https://github.com/bulls-cows/docs/tree/main/docs/health-handbook)
+
+综合性健康科普读物，涵盖呼吸、消化、心血管等8大系统常见病症的医学知识、发病原理及科学治愈方案。
+
+- **呼吸系统** - 感冒、哮喘、肺炎等常见疾病
+- **消化系统** - 胃炎、溃疡、肝病等消化问题
+- **心血管系统** - 高血压、心脏病等循环疾病
+- **内分泌系统** - 糖尿病、甲状腺等代谢疾病
+- **其他系统** - 神经、泌尿、骨骼肌肉等系统疾病
 
 ## 🎯 特色亮点
 
@@ -120,7 +130,8 @@ docs/                          # 项目根目录
 │   ├── vibe-coding/           # AI 辅助编程指南
 │   ├── vibe-working/          # AI 辅助工作指南
 │   ├── fullstack/             # 全栈开发指南
-│   └── system-refactor/       # 重构你的系统
+│   ├── system-refactor/       # 重构你的系统
+│   └── health-handbook/       # 健康科普手册
 ├── config/.vitepress/         # VitePress 配置目录
 │   ├── config.mts             # VitePress 主配置
 │   ├── sidebar.ts             # 侧边栏和导航自动生成逻辑
