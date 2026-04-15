@@ -48,5 +48,5 @@ features:
     details: 综合性健康科普读物，涵盖呼吸、消化、心血管等8大系统常见病症的医学知识、发病原理及科学治愈方案。
     linkText: 开始阅读
     icon:
-      src: "/logo.svg"
+      src: "/health-handbook-logo.svg"
 ---
