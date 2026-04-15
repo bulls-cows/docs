@@ -36,12 +36,13 @@
 ```text
 docs/                          # 项目根目录
 ├── docs/                      # 文档源目录
-│   ├── index.md               # 首页（4大板块入口）
+│   ├── index.md               # 首页（5大板块入口）
 │   ├── about.md               # 关于页面
-│   ├── vibe-coding/           # AI辅助编程指南
-│   ├── vibe-working/          # AI辅助工作指南
-│   ├── fullstack/             # 全栈开发指南
-│   └── system-refactor/       # 重构你的系统
+│   ├── 01-vibe-working/       # AI辅助工作指南
+│   ├── 02-vibe-coding/        # AI辅助编程指南
+│   ├── 03-fullstack/          # 全栈开发指南
+│   ├── 04-system-refactor/    # 重构你的系统
+│   └── 05-health-handbook/    # 健康科普手册
 ├── config/.vitepress/         # VitePress 配置目录
 │   ├── config.mts             # VitePress 主配置
 │   ├── sidebar.ts             # 侧边栏和导航自动生成逻辑
