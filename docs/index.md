@@ -1,12 +1,12 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
-title: 牛气腾腾的文档
+title: 小药文档
 
 hero:
-  name: "牛气腾腾的文档"
-  text: "与热爱不期而遇"
-  tagline: "这个站点由滕先生和黄女士 2 名成员维护。\n他们拥有 15 年生物 + 信息技术从业经验。"
+  name: "小药文档"
+  text: "让AI赋能药学，让药学拥抱智能"
+  tagline: "专注AI在药学领域的应用与实践，分享药学人工智能工具、技术教程和行业洞察，助力药学人拥抱AI时代，提升工作效率与创新能力。"
   image:
     src: /earth.svg
     alt: 峰间的云
@@ -15,7 +15,7 @@ hero:
       text: 打赏支持我们
       link: "https://www.verysites.com/donation"
     - theme: alt
-      text: 关于牛牛文档
+      text: 关于小药文档
       link: /about
 
 features:
@@ -43,4 +43,10 @@ features:
     linkText: 开始阅读
     icon:
       src: "/system-refactor-logo.svg"
+  - title: 健康科普手册
+    link: /05-health-handbook/
+    details: 综合性健康科普读物，涵盖呼吸、消化、心血管等8大系统常见病症的医学知识、发病原理及科学治愈方案。
+    linkText: 开始阅读
+    icon:
+      src: "/logo.svg"
 ---

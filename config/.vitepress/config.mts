@@ -41,8 +41,8 @@ export default defineConfig({
     publicDir: "..\\public",
   },
   base: `${base}/`,
-  title: "牛牛文档",
-  description: "与热爱不期而遇",
+  title: "小药文档",
+  description: "让AI赋能药学，让药学拥抱智能",
   lang: "zh-CN",
   head: [["link", { rel: "icon", href: `${base}/earth.svg` }]],
   markdown: {
@@ -125,7 +125,8 @@ export default defineConfig({
     socialLinks: [{ icon: "github", link: "https://github.com/bulls-cows/docs" }],
 
     footer: {
-      message: "天上的神明与星辰，人间的艺术和真纯，我们所敬畏和热爱的，莫过于此。",
+      message:
+        "专注AI在药学领域的应用与实践，分享药学人工智能工具、技术教程和行业洞察，助力药学人拥抱AI时代，提升工作效率与创新能力。",
       copyright: `Copyright © 2009-${new Date().getFullYear()} Yakima Teng. All rights reserved.`,
     },
 
