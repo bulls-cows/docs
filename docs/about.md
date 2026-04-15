@@ -33,9 +33,6 @@
 
 ## 联系我们
 
-如果你有任何问题、建议或合作意向，可以通过以下方式联系我们：
-
-- **官网**：[www.verysites.com](https://www.verysites.com)
-- **打赏支持**：[打赏页面](https://www.verysites.com/donation)
+如果你有任何问题、建议或合作意向，可以[点击这里](https://www.verysites.com/contact)选择适合你的联系方式来联系我们：
 
 感谢你对小药文档的关注与支持！
