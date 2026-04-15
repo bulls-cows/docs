@@ -1,16 +1,11 @@
 <template>
   <div v-if="isHome" class="layout-bottom">
-    <a
-      v-for="(item, idx) in linkList"
-      :key="idx"
-      class="link"
-      :href="item.url"
-      :title="item.tip"
-      target="_blank"
-      rel="noreferrer noopener"
-    >
-      {{ item.label }}
-    </a>
+    <template v-for="(item, idx) in linkList" :key="idx">
+      <a class="link" :href="item.url" :title="item.tip" target="_blank" rel="noreferrer noopener">
+        {{ item.label }}
+      </a>
+      <span v-if="idx < linkList.length - 1" class="separator">|</span>
+    </template>
   </div>
 </template>
 
@@ -30,9 +25,19 @@ interface ILink {
 }
 const linkList: ILink[] = [
   {
-    label: "sitemap",
-    tip: "牛气腾腾的网站地图",
+    label: "网站地图",
+    tip: "网站地图",
     url: "https://docs.verysites.com/sitemap.xml",
+  },
+  {
+    label: "官网首页",
+    tip: "官网首页",
+    url: "https://www.verysites.com/",
+  },
+  {
+    label: "关于我们",
+    tip: "关于我们",
+    url: "https://www.verysites.com/about",
   },
 ];
 </script>
@@ -57,6 +62,10 @@ const linkList: ILink[] = [
     &:hover {
       text-decoration: underline;
     }
+  }
+  .separator {
+    color: var(--vp-c-text-2);
+    margin: 0 4px;
   }
 }
 </style>
