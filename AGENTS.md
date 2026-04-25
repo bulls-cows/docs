@@ -18,17 +18,11 @@
 
 改动后必须执行:
 
-- `npm run lint` - 执行类型检查和 Markdown 格式检查，验证构建是否成功
-
-代码质量检查工具:
-
-- TypeScript - 配置文件类型检查 (`tsc --noEmit`)
-- markdownlint-cli - Markdown 格式检查和自动修复
+- `npm run lint` - 执行完整检查（格式化、类型检查、lint、构建）
 
 ## Delivery Format
 
 - 文档修改需包含清晰的修改说明
-- 修改配置文件后需验证构建流程
 - 文件引用格式: `文件路径`（如 `config/.vitepress/config.mts`）
 
 ## Project Structure
@@ -268,20 +262,8 @@ title: 诊断方法
 # 本地开发预览
 npm run docs:dev
 
-# 构建静态文件
-npm run docs:build
-
-# 预览构建结果
-npm run docs:preview
-
-# 执行 lint 检查（类型检查 + Markdown 检查）
+# 执行完整检查（格式化、类型检查、lint、构建）
 npm run lint
-
-# Markdown 格式检查并自动修复
-npm run lint:markdown
-
-# TypeScript 类型检查
-npm run check:type
 
 # 检查并构建部署
 npm run buildAndDeploy
@@ -299,5 +281,4 @@ npm run buildAndDeploy
 
 - 侧边栏由目录结构自动生成（通过 `config/.vitepress/sidebar.ts`）
 - `docs/index.md` 作为首页，不进入侧边栏
-- 修改配置后需执行 `npm run docs:build` 验证
 - 新增板块需在目录下创建 `index.md` 文件才会出现在导航栏
