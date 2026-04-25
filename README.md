@@ -84,6 +84,10 @@
 
 本项目采用 [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0) 许可证。
 
+### 免责声明
+
+本项目按"原样"提供，不提供任何形式的明示或暗示保证，包括但不限于对适销性、特定用途适用性和非侵权性的保证。在任何情况下，版权持有人或贡献者均不对因合同、侵权或其他方面引起的任何索赔、损害或其他责任负责。
+
 ## 📮 联系我们
 
 - **官网** - [www.verysites.com](https://www.verysites.com)
@@ -99,16 +103,6 @@
 - [VitePress](https://vitepress.dev/) - 强大的文档生成工具
 - [Vue.js](https://vuejs.org/) - 渐进式 JavaScript 框架
 - [TypeScript](https://www.typescriptlang.org/) - JavaScript 的超集
-
----
-
-## 📜 开源协议
-
-本项目采用 [Apache License 2.0](LICENSE.txt) 开源协议进行许可。
-
-### 免责声明
-
-本项目按"原样"提供，不提供任何形式的明示或暗示保证，包括但不限于对适销性、特定用途适用性和非侵权性的保证。在任何情况下，版权持有人或贡献者均不对因合同、侵权或其他方面引起的任何索赔、损害或其他责任负责。
 
 ---
 
