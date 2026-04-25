@@ -242,10 +242,6 @@ function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
     fileItems.push(meta);
   }
 
-  // 合并并排序：文件 -> 子目录
-  const sortedFiles = sortByOrder(fileItems).map(({ text, link }) => ({ text, link }));
-  const sortedSections = sortByOrder(childSections).map(({ order: _order, ...section }) => section);
-
   // 书籍根目录：前言和目录固定在前两位
   const items: DefaultTheme.SidebarItem[] = [];
   if (isBookRoot) {
@@ -255,8 +251,24 @@ function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
     if (tocMeta) {
       items.push({ text: tocMeta.text, link: tocMeta.link });
     }
+    // 书籍根目录：将其他独立文件和子目录合并，统一按 order 排序，不区分类型
+    const allItems = [...fileItems, ...childSections];
+    const sortedAllItems = sortByOrder(allItems).map((item) => {
+      if ("order" in item) {
+        const { order: _order, ...rest } = item;
+        return rest;
+      }
+      return item;
+    });
+    items.push(...sortedAllItems);
+  } else {
+    // 非根目录：保持原有逻辑，先文件，后子目录
+    const sortedFiles = sortByOrder(fileItems).map(({ text, link }) => ({ text, link }));
+    const sortedSections = sortByOrder(childSections).map(
+      ({ order: _order, ...section }) => section
+    );
+    items.push(...sortedFiles, ...sortedSections);
   }
-  items.push(...sortedFiles, ...sortedSections);
 
   // 如果没有 index.md 且没有任何子项，返回 null
   if (!indexMeta && items.length === 0) {
