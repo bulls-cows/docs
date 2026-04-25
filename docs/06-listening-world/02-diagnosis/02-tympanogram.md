@@ -307,7 +307,7 @@
 
 以下是一份正常的鼓室图检查报告，双耳均为A型鼓室图：
 
-![鼓室图检查报告](./_attachments/tympanogram.jpg)
+![鼓室图检查报告](../_attachments/tympanogram.jpg)
 
 **报告解读**：
 
