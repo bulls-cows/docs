@@ -49,4 +49,10 @@ features:
     linkText: 开始阅读
     icon:
       src: "/health-handbook-logo.svg"
+  - title: 倾听世界
+    link: /06-listening-world/
+    details: 听力健康科普读物，系统介绍耳聋的分类、诊断方法与治疗方案，帮助你保护听力健康，倾听美好世界。
+    linkText: 开始阅读
+    icon:
+      src: "/listening-world-logo.svg"
 ---

@@ -1,5 +1,5 @@
 ---
-shortTitle: 简介
+shortTitle: 健康科普
 ---
 
 # 健康科普手册
