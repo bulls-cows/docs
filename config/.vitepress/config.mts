@@ -1,5 +1,6 @@
 import { defineConfig } from "vitepress";
 import markdownItMathjax from "markdown-it-mathjax3";
+import markdownItFootnote from "markdown-it-footnote";
 import { buildSidebar, buildNav } from "./sidebar";
 import { DOMAIN } from "../../build/constant";
 import autoprefixer from "autoprefixer";
@@ -57,6 +58,7 @@ export default defineConfig({
     config: (md) => {
       // use more markdown-it plugins!
       md.use(markdownItMathjax);
+      md.use(markdownItFootnote);
     },
   },
   sitemap: {
