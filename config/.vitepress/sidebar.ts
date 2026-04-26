@@ -198,6 +198,9 @@ function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
 
     // 递归处理子目录
     if (entry.isDirectory()) {
+      if (entry.name.startsWith("_")) {
+        continue;
+      }
       const section = buildSection(absolutePath);
       if (section) {
         childSections.push({
@@ -209,6 +212,10 @@ function buildSection(dirPath: string): DefaultTheme.SidebarItem | null {
     }
 
     if (!entry.isFile() || !entry.name.endsWith(".md")) {
+      continue;
+    }
+
+    if (entry.name.startsWith("_")) {
       continue;
     }
 
@@ -319,6 +326,10 @@ export function buildNav(): DefaultTheme.NavItem[] {
       continue;
     }
 
+    if (entry.name.startsWith("_")) {
+      continue;
+    }
+
     const indexPath = path.join(DOCS_ROOT, entry.name, "index.md");
     if (!fs.existsSync(indexPath)) {
       continue;
@@ -354,6 +365,10 @@ export function buildSidebar(): DefaultTheme.Sidebar {
 
   for (const entry of entries) {
     if (!entry.isDirectory()) {
+      continue;
+    }
+
+    if (entry.name.startsWith("_")) {
       continue;
     }
 
