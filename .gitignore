@@ -1,8 +1,8 @@
 .idea
 node_modules
 dist/
+config/.vitepress/.temp/
 .codebuddy/
-.vitepress/specs/
 .workbuddy/
 .claude/
-config/.vitepress/.temp/
+.trae
