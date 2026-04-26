@@ -6,7 +6,7 @@
 
 ## ✨ 核心内容
 
-我们提供五本原创技术书籍，涵盖 AI 应用、编程开发、认知提升、健康科普等主题：
+我们提供六本原创技术书籍，涵盖 AI 应用、编程开发、认知提升、健康科普等主题：
 
 ### 🤖 AI 辅助工作指南
 
@@ -58,6 +58,14 @@
 - **内分泌系统** - 糖尿病、甲状腺等代谢疾病
 - **其他系统** - 神经、泌尿、骨骼肌肉等系统疾病
 
+### 👂 倾听世界
+
+耳部健康科普读物，涵盖听力损失的原因、诊断方法和治疗方案，帮助读者保护和关爱听力健康。
+
+- **基础篇** - 耳聋的定义、分类、特点及预防措施
+- **诊断篇** - 听力学检查、影像学检查及鼓室图详解
+- **治疗篇** - 传导性聋治疗、助听器、人工耳蜗及康复训练
+
 ## 🎯 特色亮点
 
 - **原创内容** - 基于实战经验总结，非简单搬运
@@ -65,14 +73,6 @@
 - **中文友好** - 中文为主，技术术语保留英文
 - **持续更新** - 紧跟技术发展，定期迭代内容
 - **开源免费** - Apache-2.0 许可，自由阅读和分享
-
-## 📦 技术栈
-
-- **文档引擎** - VitePress - Vue 驱动的静态站点生成器
-- **前端框架** - Vue.js - 渐进式 JavaScript 框架
-- **类型系统** - TypeScript - JavaScript 的超集
-- **数学公式** - MathJax - 数学公式渲染
-- **代码规范** - markdownlint-cli - Markdown 格式检查
 
 ## 🤝 贡献指南
 
@@ -93,14 +93,6 @@
 - **GitHub** - [github.com/bulls-cows/docs](https://github.com/bulls-cows/docs)
 - **问题反馈** - [GitHub Issues](https://github.com/bulls-cows/docs/issues)
 - **打赏支持** - [打赏页面](https://www.verysites.com/donation)
-
-## 🙏 致谢
-
-感谢所有为这个项目做出贡献的人，以及以下开源项目：
-
-- [VitePress](https://vitepress.dev/) - 强大的文档生成工具
-- [Vue.js](https://vuejs.org/) - 渐进式 JavaScript 框架
-- [TypeScript](https://www.typescriptlang.org/) - JavaScript 的超集
 
 ---
 
