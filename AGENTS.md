@@ -175,17 +175,22 @@ docs/                          # 项目根目录
 
 #### 格式要求
 
-- 文档末尾添加 `## 参考资料` 章节
-- 每条参考资料格式：`- [标题](链接)`
+使用脚注引用格式，在正文中标注引用来源：
+
+- 正文引用：在需要引用的内容后添加 `[^N]`（N 为序号）
+- 参考资料章节：使用 `[^N]: [标题](链接)` 格式
 - 链接应指向具体页面，而非首页
+- 引用应与正文内容紧密关联，确保文档内容来源于参考资料
 
 示例：
 
 ```markdown
+老年性聋是最常见的感音神经性耳聋类型，约 1/3 的 65~74 岁老年人有不同程度的听力损失[^1]。
+
 ## 参考资料
 
-- [Ménière's Disease - NIDCD](https://www.nidcd.nih.gov/health/menieres-disease)
-- [Meniere's Disease - MedlinePlus](https://medlineplus.gov/menieresdisease.html)
+[^1]: [Age-Related Hearing Loss - NIDCD](https://www.nidcd.nih.gov/health/age-related-hearing-loss)
+[^2]: [Hearing Loss - Mayo Clinic](https://www.mayoclinic.org/diseases-conditions/hearing-loss)
 ```
 
 #### 注意事项
