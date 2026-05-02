@@ -46,7 +46,7 @@
 ## Project Structure
 
 ```text
-docs/                          # 项目根目录
+/workspace/                   # 项目根目录
 ├── docs/                      # 文档源目录
 │   ├── index.md               # 首页
 │   ├── about.md               # 关于页面
@@ -55,13 +55,14 @@ docs/                          # 项目根目录
 │   ├── 03-fullstack/          # 全栈开发指南
 │   ├── 04-system-refactor/    # 重构你的系统
 │   ├── 05-health-handbook/    # 健康科普手册
-│   └── 06-listening-world/    # 倾听世界
+│   ├── 06-listening-world/    # 倾听世界
+│   └── 06-equipment/          # 设备指南
 ├── config/.vitepress/         # VitePress 配置
 │   ├── config.mts             # 主配置
 │   ├── sidebar.ts             # 侧边栏和导航生成逻辑
 │   └── theme/                 # 主题定制
-├── build/
-├── public/
+├── build/                     # 构建部署脚本
+├── public/                    # 公共资源
 ├── package.json
 └── tsconfig.json
 ```
