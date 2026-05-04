@@ -129,8 +129,8 @@ docs/                          # 项目根目录
 | 文件类型 | 必需字段 | 可选字段 | 说明 |
 |---------|---------|---------|------|
 | docs 根目录下的 .md 文件（非 index.md） | 无 | title | - |
-| 第一层子目录的 index.md | shortTitle | title | 文件夹名需以两位数字序号开头 |
-| 书籍根目录的 index.md | shortTitle | title | 侧边栏显示为"前言" |
+| 第一层子目录的 index.md | shortTitle | title | 用于导航栏短标题，文件夹名需以两位数字序号开头 |
+| 书籍根目录的 index.md | 无 | title | 侧边栏显示为"前言" |
 | 书籍 toc.md | 无 | 无 | 侧边栏显示为"目录" |
 | 篇目录的 index.md | 无 | title | title 为该篇的显示名称 |
 | 章目录的 index.md | 无 | title | title 为该章的显示名称 |
@@ -141,7 +141,7 @@ docs/                          # 项目根目录
 字段说明:
 
 - `title`: 侧边栏显示标题，未填写时从文档一级标题或文件名自动提取
-- `shortTitle`: 导航栏短标题（仅第一层子目录 index.md 需要）
+- `shortTitle`: 导航栏短标题，仅 docs 目录下的第一层子目录（如 docs/06-listening-world/index.md）需要，用于顶部导航栏显示简洁标题
 - `sidebar`: 设为 `false` 可隐藏侧边栏显示
 
 文件夹命名规范:
