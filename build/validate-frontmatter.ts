@@ -48,6 +48,39 @@ function isEmptyFrontmatter(frontmatter: Frontmatter | null): boolean {
 }
 
 /**
+ * 移除文件中多余的 shortTitle 字段
+ * @param filePath - 文件绝对路径
+ * @param match - frontmatter 正则匹配结果
+ */
+function removeShortTitleField(filePath: string, match: RegExpMatchArray): void {
+  const source = fs.readFileSync(filePath, "utf8");
+  const relativePath = path.relative(DOCS_ROOT, filePath);
+
+  const frontmatterContent = match[1]!;
+  const lines = frontmatterContent.split(/\r?\n/);
+  const filteredLines = lines.filter((line) => {
+    const trimmed = line.trim();
+    return !trimmed.startsWith("shortTitle:");
+  });
+
+  const nonEmptyLines = filteredLines.filter((line) => {
+    const trimmed = line.trim();
+    return trimmed !== "" && !trimmed.startsWith("#");
+  });
+
+  if (nonEmptyLines.length === 0) {
+    const newContent = source.slice(match[0]!.length).replace(/^\r?\n/, "");
+    fs.writeFileSync(filePath, newContent, "utf8");
+    console.log(`✓ Removed empty frontmatter (had only shortTitle): ${relativePath}`);
+  } else {
+    const newFrontmatter = filteredLines.join("\n");
+    const newContent = source.replace(match[1]!, newFrontmatter);
+    fs.writeFileSync(filePath, newContent, "utf8");
+    console.log(`✓ Removed unnecessary shortTitle from: ${relativePath}`);
+  }
+}
+
+/**
  * 移除文件中的空 frontmatter
  * @param filePath - 文件绝对路径
  * @param match - 正则匹配结果
@@ -67,6 +100,7 @@ function removeEmptyFrontmatter(filePath: string, match: RegExpMatchArray): void
  * 验证单个 Markdown 文件的 frontmatter
  *
  * 验证规则：
+ * - 非第一层子目录的 index.md：移除多余的 shortTitle 字段
  * - 第一层子目录内的 index.md：必须有 shortTitle
  * - 空 frontmatter（无任何字段）会被自动移除
  *
@@ -86,14 +120,32 @@ function validateFile(
   const filename = path.basename(filePath);
   const relativePath = path.relative(DOCS_ROOT, filePath);
 
-  // 检测并移除空 frontmatter
+  // 步骤 1：非第一层子目录的 index.md 不应该有 shortTitle，自动移除
+  if (
+    !isFirstLevelSubdir &&
+    filename === "index.md" &&
+    frontmatter?.shortTitle !== undefined &&
+    match
+  ) {
+    removeShortTitleField(filePath, match);
+    const newSource = fs.readFileSync(filePath, "utf8");
+    const { frontmatter: newFrontmatter, match: newMatch } = extractFrontmatter(newSource);
+
+    if (newMatch && isEmptyFrontmatter(newFrontmatter)) {
+      removeEmptyFrontmatter(filePath, newMatch);
+      return {};
+    }
+
+    return newFrontmatter || {};
+  }
+
+  // 步骤 2：检测并移除空 frontmatter
   if (match && isEmptyFrontmatter(frontmatter)) {
     removeEmptyFrontmatter(filePath, match);
-    // 移除后返回空对象
     return {};
   }
 
-  // 规则：第一层子目录内的 index.md 必须有 shortTitle
+  // 步骤 3：第一层子目录内的 index.md 必须有 shortTitle
   if (isFirstLevelSubdir && filename === "index.md") {
     if (!frontmatter) {
       console.error(`✗ File missing frontmatter: ${relativePath}`);
@@ -151,8 +203,9 @@ function validateAndCleanDirectory(dirPath: string, isFirstLevelSubdir: boolean 
  * 递归验证目录下所有 Markdown 文件的 frontmatter
  *
  * 验证规则：
- * 1. 第一层子目录内的 index.md：必须有 shortTitle
- * 2. 空 frontmatter（无任何字段）会被自动移除
+ * 1. 非第一层子目录的 index.md：移除多余的 shortTitle 字段
+ * 2. 第一层子目录内的 index.md：必须有 shortTitle
+ * 3. 空 frontmatter（无任何字段）会被自动移除
  *
  * @param dirPath - 目录绝对路径
  * @param isFirstLevelSubdir - 是否在 docs 根目录的直接子目录层级
