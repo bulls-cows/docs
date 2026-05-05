@@ -94,4 +94,4 @@ export const batchUploadPhotos = async (
 ## 相关章节
 
 - [文件上传../03-file-system/05-upload.md) - 文件上传实现
-- [预约系统](./08-booking.md) - 在线预约
+- [预约系统](./02-booking.md) - 在线预约

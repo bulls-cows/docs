@@ -5,8 +5,8 @@
 
 ## 前置知识
 
-- [认证与授权](../../02-backend/05-authentication.md) - 认证授权原理
-- [API设计规范](../../02-backend/04-api-design.md) - 接口设计规范
+- [认证与授权](../../04-backend/05-authentication.md) - 认证授权原理
+- [API设计规范](../../04-backend/04-api-design.md) - 接口设计规范
 
 ## 登录流程
 

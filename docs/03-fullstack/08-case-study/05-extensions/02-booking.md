@@ -83,5 +83,5 @@ export const checkBookingConflict = async (
 
 ## 相关章节
 
-- [导航系统](./07-navigation.md) - 导航网站管理
-- [相册系统](./09-album.md) - 图片管理
+- [导航系统](./03-navigation.md) - 导航网站管理
+- [相册系统](./04-album.md) - 图片管理

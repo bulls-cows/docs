@@ -5,7 +5,7 @@
 
 ## 前置知识
 
-- [数据库设计](../../02-backend/03-database.md) - 数据库表设计规范
+- [数据库设计](../../04-backend/03-database.md) - 数据库表设计规范
 
 ## 数据库设计
 
@@ -225,5 +225,5 @@ export const rechargeBalance = async (
 
 ## 相关章节
 
-- [充值流程](./05-recharge.md) - 充值接口和支付回调
-- [提现流程](./07-withdrawal.md) - 提现申请和审批
+- [充值流程](./03-recharge.md) - 充值接口和支付回调
+- [提现流程](./04-withdrawal.md) - 提现申请和审批

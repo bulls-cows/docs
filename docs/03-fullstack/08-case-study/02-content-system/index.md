@@ -32,8 +32,8 @@
 
 阅读本章节前，建议先了解：
 
-- [数据库设计](../../02-backend/03-database.md) - 数据库表设计规范
-- [API设计规范](../../02-backend/04-api-design.md) - RESTful API 设计
+- [数据库设计](../../04-backend/03-database.md) - 数据库表设计规范
+- [API设计规范](../../04-backend/04-api-design.md) - RESTful API 设计
 - [Vue.js 实战](../../03-frontend/02-vue.md) - 前端组件开发
 
 ## 业务流程

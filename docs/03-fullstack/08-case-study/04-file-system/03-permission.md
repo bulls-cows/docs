@@ -5,7 +5,7 @@
 
 ## 前置知识
 
-- [认证与授权](../../02-backend/05-authentication.md) - 用户认证原理
+- [认证与授权](../../04-backend/05-authentication.md) - 用户认证原理
 
 ## 权限模型
 
@@ -209,4 +209,4 @@ export const cDownloadFile: ExpressRequestHandler = async (req, res, next) => {
 
 ## 相关章节
 
-- [文件上传](./05-upload.md) - 文件上传实现
+- [文件上传](./02-upload.md) - 文件上传实现

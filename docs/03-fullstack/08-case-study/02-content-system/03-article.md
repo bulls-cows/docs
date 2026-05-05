@@ -5,8 +5,8 @@
 
 ## 前置知识
 
-- [数据库设计](../../02-backend/03-database.md) - 数据库表设计规范
-- [API设计规范](../../02-backend/04-api-design.md) - RESTful API 设计
+- [数据库设计](../../04-backend/03-database.md) - 数据库表设计规范
+- [API设计规范](../../04-backend/04-api-design.md) - RESTful API 设计
 
 ## 文章表设计
 

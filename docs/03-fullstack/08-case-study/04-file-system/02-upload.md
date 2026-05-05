@@ -5,7 +5,7 @@
 
 ## 前置知识
 
-- [API设计规范](../../02-backend/04-api-design.md) - RESTful API 设计
+- [API设计规范](../../04-backend/04-api-design.md) - RESTful API 设计
 
 ## 上传接口设计
 
@@ -320,4 +320,4 @@ const handleError = () => {
 
 ## 相关章节
 
-- [权限控制](./06-permission.md) - 文件访问权限管理
+- [权限控制](./03-permission.md) - 文件访问权限管理

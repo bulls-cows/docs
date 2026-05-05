@@ -65,5 +65,5 @@ interface ReturnApiGetNavSites {
 
 ## 相关章节
 
-- [预约系统](./08-booking.md) - 在线预约
-- [相册系统](./09-album.md) - 图片管理
+- [预约系统](./02-booking.md) - 在线预约
+- [相册系统](./04-album.md) - 图片管理
