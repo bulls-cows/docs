@@ -106,4 +106,4 @@ MED-EL 的电极选择非常丰富，医生可根据患者的具体耳蜗情况�
 
 [^1]: [MED-EL 官方网站](https://www.medel.com/)
 [^2]: [国家医保局人工耳蜗医保政策](http://www.nhsa.gov.cn/)
-[^3]: [MED-EL SYNCHRONY + RONDO 2 产品介绍](../_attachments/奥地利美笛乐2025年产品：SYN+R2.pdf)
+[^3]: [MED-EL SYNCHRONY + RONDO 2 产品介绍](../../_attachments/奥地利美笛乐2025年产品：SYN+R2.pdf)
