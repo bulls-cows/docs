@@ -3,12 +3,12 @@
 ## 项目简介
 
 - 本项目是一个基于 VitePress 的中文知识库/电子书站点，内容聚焦 AI 应用、编程实践、全栈开发、系统重构、健康科普与听力健康。
-- 项目根目录包含 `package.json`，文档源位于 `docs/`，站点配置位于 `config/.vitepress/`，构建与部署脚本位于 `build/`。
+- 项目根目录包含 `package.json`，文档源位于 `docs/`，站点配置位于 `config/.vitepress/`，构建与部署脚本位于 `scripts/`。
 
 ## 范围
 
 - 默认语言：TypeScript、Vue、Markdown，内容写作以中文为主，技术术语可保留英文。
-- 允许修改目录：`docs/`、`config/.vitepress/`、`build/`、`public/`。
+- 允许修改目录：`docs/`、`config/.vitepress/`、`scripts/`、`public/`。
 - 允许修改根目录配置文件：`package.json`、`package-lock.json`、`tsconfig.json`、`AGENTS.md`、`README.md` 以及与格式化、lint、构建相关的根目录配置文件。
 - 禁止修改目录：`node_modules/`、`dist/`、`.git/`。
 - 不主动修改 IDE、临时或第三方工具目录：`.idea/`、`.uploads/`、`.claude/`、`.codebuddy/`、`.trae/`，除非用户明确要求。
@@ -70,7 +70,7 @@ docs/                          # 项目根目录
 │   ├── config.mts             # 主配置
 │   ├── sidebar.ts             # 侧边栏和导航生成逻辑
 │   └── theme/                 # 自定义主题、组件、样式
-├── build/                     # 构建、部署、Frontmatter 校验脚本
+├── scripts/                   # 构建、部署、Frontmatter 校验脚本
 ├── public/                    # 静态资源文件
 ├── package.json               # npm 脚本与依赖配置
 └── tsconfig.json              # TypeScript 配置
@@ -213,5 +213,5 @@ npm run buildAndDeploy # 检查并构建部署
 - `README.md`：面向读者的项目介绍和核心内容说明。
 - `config/.vitepress/config.mts`：VitePress 站点主配置。
 - `config/.vitepress/sidebar.ts`：导航和侧边栏自动生成逻辑。
-- `build/validate-frontmatter.ts`：Frontmatter 校验逻辑。
+- `scripts/validate-frontmatter.ts`：Frontmatter 校验逻辑。
 - `package.json`：可用 npm 脚本、依赖和项目元信息。

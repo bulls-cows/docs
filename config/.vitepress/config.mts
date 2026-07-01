@@ -2,7 +2,7 @@ import { defineConfig } from "vitepress";
 import markdownItMathjax from "markdown-it-mathjax3";
 import markdownItFootnote from "markdown-it-footnote";
 import { buildSidebar, buildNav } from "./sidebar";
-import { DOMAIN } from "../../build/constant";
+import { DOMAIN } from "../../scripts/constant";
 import autoprefixer from "autoprefixer";
 
 const base = "";
