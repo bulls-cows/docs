@@ -10,4 +10,5 @@
 - [公共请求封装](./03-http-utilities.md)
 - [Webpack 项目优化实战](./04-webpack-optimization.md)
 - [大型项目条件编译方案](./05-conditional-compile.md)
-- [Vite 插件开发实践](./06-vite-plugins.md)
+- [组件 name 自动注入方案](./06-auto-component-name.md)
+- [编译信息注入方案](./07-build-info-injection.md)

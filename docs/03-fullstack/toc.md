@@ -26,7 +26,8 @@
     - [公共请求封装](./02-frontend/07-engineering/03-http-utilities.md)
     - [Webpack 项目优化实战](./02-frontend/07-engineering/04-webpack-optimization.md)
     - [大型项目条件编译方案](./02-frontend/07-engineering/05-conditional-compile.md)
-    - [Vite 插件开发实践](./02-frontend/07-engineering/06-vite-plugins.md)
+    - [Vite 插件开发实践：组件名自动生成](./02-frontend/07-engineering/06-auto-component-name.md)
+    - [Vite 插件开发实践：编译信息集成](./02-frontend/07-engineering/07-build-info-injection.md)
 - 第二篇 后端开发
   - [后端技术栈](./03-backend/index.md)
   - [Node.js 实战](./03-backend/01-nodejs.md)
