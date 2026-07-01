@@ -15,7 +15,7 @@ import { DOMAIN } from "./constant.ts";
 const __dirname = getDirname(import.meta.url);
 export const PATH_ROOT = joinPath(__dirname, "../");
 
-parseEnvFiles([joinPath(PATH_ROOT, ".env.local"), joinPath(PATH_ROOT, "../aimian/.env")]);
+parseEnvFiles([joinPath(PATH_ROOT, ".env.local"), joinPath(PATH_ROOT, "../tech/.env")]);
 
 // 环境变量
 const SSH_HOST = process.env.SSH_HOST || "";
