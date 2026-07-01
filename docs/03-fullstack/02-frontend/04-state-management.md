@@ -808,6 +808,6 @@ const useStore = create(
 - [Pinia 官方文档](https://pinia.vuejs.org/)
 - [Jotai GitHub](https://github.com/pmndrs/jotai)
 - [TanStack Query 官方文档](https://tanstack.com/query/)
-- [Vue.js 实战](./01-vue.md)
+- [Vue.js 实战](./01-vue/index.md)
 - [React 实战](./02-react.md)
 - [TypeScript 最佳实践](./03-typescript.md)

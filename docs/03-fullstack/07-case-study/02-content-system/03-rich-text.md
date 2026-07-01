@@ -5,7 +5,7 @@
 
 ## 前置知识
 
-- [Vue.js 实战](../../02-frontend/01-vue.md) - Vue 组件开发
+- [Vue.js 实战](../../02-frontend/01-vue/index.md) - Vue 组件开发
 - [文件上传../03-file-system/05-upload.md) - 文件上传实现
 
 ## 编辑器选择

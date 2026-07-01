@@ -34,7 +34,7 @@
 
 - [数据库设计](../../03-backend/02-database.md) - 数据库表设计规范
 - [API设计规范](../../03-backend/03-api-design.md) - RESTful API 设计
-- [Vue.js 实战](../../02-frontend/01-vue.md) - 前端组件开发
+- [Vue.js 实战](../../02-frontend/01-vue/index.md) - 前端组件开发
 
 ## 业务流程
 

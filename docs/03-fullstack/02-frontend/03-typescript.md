@@ -889,6 +889,6 @@ function processUser(data: unknown) {
 
 - [TypeScript 官方文档](https://www.typescriptlang.org/docs/)
 - [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/)
-- [Vue.js 实战](./01-vue.md)
+- [Vue.js 实战](./01-vue/index.md)
 - [React 实战](./02-react.md)
 - [状态管理](./04-state-management.md)

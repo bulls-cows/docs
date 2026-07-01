@@ -769,6 +769,29 @@ class ErrorBoundary extends React.Component {
 - 实时监控和告警
 - 定期分析优化
 
+## 实战案例
+
+### 按钮点击回调的节流处理
+
+> 本节内容待补充。计划涵盖以下主题：
+>
+> - 按钮重复点击的业务场景分析
+> - 节流（Throttle）与防抖（Debounce）的选择依据
+> - 基于指令封装的节流按钮组件
+> - 全局节流策略与局部覆盖
+> - 异步操作中的节流处理（Loading 状态控制）
+
+### 混合 APP 中 H5 页面的缓存处理
+
+> 本节内容待补充。计划涵盖以下主题：
+>
+> - 混合 APP 中 H5 缓存的常见问题
+> - HTTP 缓存策略：强缓存与协商缓存
+> - 离线包方案与增量更新
+> - WebView 缓存管理与清除策略
+> - 版本控制与缓存更新机制
+> - 不同 APP 容器（微信、支付宝、自有 APP）的缓存差异
+
 ## 延伸阅读
 
 - [Web Vitals 官方文档](https://web.dev/vitals/)
@@ -777,3 +800,5 @@ class ErrorBoundary extends React.Component {
 - [React 性能优化](https://react.dev/learn/render-and-commit)
 - [Vue 性能优化](https://vuejs.org/guide/best-practices/performance.html)
 - [前端技术栈](./index.md)
+- [Vue.js 实战](./01-vue/index.md)
+- [前端工程化](./07-engineering/index.md)
