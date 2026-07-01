@@ -214,5 +214,5 @@ onErrorCaptured((err, instance, info) => {
 - [Vue.js 官方文档](https://vuejs.org/)
 - [Vue Router 官方文档](https://router.vuejs.org/)
 - [Pinia 官方文档](https://pinia.vuejs.org/)
-- [TypeScript 最佳实践](./03-typescript.md)
-- [状态管理](./04-state-management.md)
+- [TypeScript 最佳实践](../03-typescript.md)
+- [状态管理](../04-state-management.md)
