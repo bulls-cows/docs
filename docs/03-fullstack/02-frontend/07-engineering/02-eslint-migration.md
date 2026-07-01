@@ -18,6 +18,7 @@
 ### 1.1、尽可能让代码规则可以方便日后的代码搜索定位
 
 比如下面这种代码，一共有3处对val的赋值，当我们想搜代码里所有对val进行复制的地方，我们可能需要写正则来搜：/val\s*=\s*/。
+
 ```generic
 let val  = null;
 if (true) {
@@ -26,7 +27,9 @@ if (true) {
     val='2';
 }
 ```
+
 但是如果我们的代码是下面这样的，你只需要搜"timer ="。这样的例子其实是很多的，在我们排查产线紧急bug时，代码定位的便捷度其实是一个很重要的点。
+
 ```generic
 let timer = null;
 if (true) {
@@ -35,11 +38,13 @@ if (true) {
     timer = '2';
 }
 ```
+
 &nbsp;
 
 ### 1.2、尽可能让代码规则可以帮助减少code review时的差异量
 
 比如下面这样的代码：
+
 ```generic
 const obj = {
     a: 1,
@@ -47,7 +52,9 @@ const obj = {
     c: 3
 }
 ```
+
 我会倾向于使用下面这种代码风格（3后面有个逗号）：
+
 ```generic
 const obj = {
     a: 1,
@@ -55,6 +62,7 @@ const obj = {
     c: 3,
 }
 ```
+
 这是因为当我需要新增一个属性d时：
 
 - 在前面那种写法里我需要修改c所在行并增加一行给d用，在code review时会发现一共有2行的代码差异。
@@ -78,6 +86,7 @@ const obj = {
 那怎么去获得需要列到.eslintignore_old_files文件中的精确清单呢？直接抛代码，大家可以参考：
 
 在项目根目录下新建build/update-eslintignore-old-files.js文件，代码如下：
+
 ```generic
 const path = require('path');
 const fs = require('fs');
@@ -124,9 +133,11 @@ while (hasMore) {
 
 console.log(`最终检出文件${fileList.length}个至.eslintignore_old_files`); // eslint-disable-line
 ```
+
 &nbsp;
 
 在项目根目录下再新建一个build/eslint-formatter.js文件，代码如下：
+
 ```generic
 const path = require('path');
 
@@ -147,12 +158,15 @@ module.exports = function(results) {
     process.exit(0);
 };
 ```
+
 &nbsp;
 
 最后在package.json的scripts字段下新增一行：
+
 ```generic
 "eslint:updateEslintIgnoreOldFiles": "node build/update-eslintignore-old-files.js"
 ```
+
 &nbsp;
 
 这样你只需要执行一次npm run eslint:updateEslintIgnoreOldFiles命令，就可以自动更新.eslintignore_old_files文件里的清单了。
@@ -160,12 +174,14 @@ module.exports = function(results) {
 ## 四、对新代码和没问题的老代码进行强制lint检测
 
 在package.json的scripts字段里添加类似下面这样的代码，就可以强制检测了（检测不通过就没法编译发布）：
+
 ```generic
 "prebuild": "npm run lint && 清空产物目录",
 "build": "构建命令",
 "lint": "eslint --ignore-path .eslintignore_old_files --ext .vue,.js build src",
 "lint:fix": "eslint --ignore-path .eslintignore_old_files --fix --ext .vue,.js build src",
 ```
+
 说明：
 
 1、上面的build命令表示正式构建命令，名字是随意的（按你项目中当前的名字来即可），你也可以换成start等。需要注意的是，这里如果换成其他名字，需要把prebuild里的build也换成其他的名字。比如build换成start的话，prebuild就要换成prestart。这种pre前缀带来的效果是，当你执行npm run build时，npm会去找prebuild命令，如果有就会先执行它。

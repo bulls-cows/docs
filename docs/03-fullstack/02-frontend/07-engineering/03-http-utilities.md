@@ -10,6 +10,7 @@
 我见过一些项目里的某些函数会有七八个入参，那简直了，调用的时候很容易错传——谁吃饱了撑的能记住第5个参数和第7个参数分别表示什么意思呢？这对调用这个方法的开发者和阅读这段代码的开发者来说，都是一种折磨。
 
 作为一个请求方法，最多传3个参数，一般传2个参数就足够了。第一个参数表示必传的接口地址，第二个参数表示可选的请求参数，第三个表示可选的一些配置项（如控制是否显示loading动画、修改请求头）。类似下面这样：
+
 ```generic
 // 这是基础方法，在模块内部使用，不对外暴露
 const request = (method, apiUrl, data, config) => {
@@ -21,9 +22,11 @@ export const doGet = (apiUrl, data, config) => request('GET', apiUrl, data, conf
 // 第一个参数表示必传的接口地址，第二个参数表示可选的请求参数，第三个表示可选的一些配置项
 export const doPost = (apiUrl, data, config) => request('POST', apiUrl, data, config);
 ```
+
 一般我们只需要有一个get请求和一个post请求的封装就行了。如果有其他需要可以类似的封装doJSONP、doPut等。
 
 这里顺带提一下，上面封装出来的doGet和doPost不是让你直接在具体页面里调用的。作为一个工程项目，接口应该集中定义到一个目录/文件里。类似下面这样：
+
 ```generic
 import { doGet } from '../utils/request';
 
@@ -35,6 +38,7 @@ export doGetApi1 = tryDoGet('url_api1');
 
 export doGetApi2 = tryDoGet('url_api2');
 ```
+
 然后在具体的业务代码里引用上面的doGetApi1、doGetApi2即可，使用时一般只需要传接口入参即可。
 
 在上面的讨论里，可能有人会有疑问，说我post请求如果想同时传query search参数怎么办？这个问题问得好，确实是可以这样传参数的，这也是为什么axios里传参时会有data和params两个字段可以用，一般人都是get用params，post用data，其实post时同时往data和params里传参是没问题的，所以这种通用性的ajax库肯定要提供这些字段——万一有人就是要这么传参数呢？但是具体到具体项目，这样的情况是很少的，而且是完全可以避免的，所以我们封装方法时，对外只需要提供一个data参数即可，调用者不需要关心这个data实际是在axios里当data用的还是当params用的。
@@ -42,13 +46,17 @@ export doGetApi2 = tryDoGet('url_api2');
 ### 1.2、设置合理的默认值
 
 比如，如果需要应用里大部分请求都带loading动画，而封装的方法里是通过一个叫showLoading的布尔值变量来控制的。那么showLoading的默认值就应该为true，个别不需要带loading的场景，由调用方显示地传入showLoading: false的配置即可。这样，对大部分调用的地方，只需要像下面这样写：
+
 ```generic
 const res = await apiGetSomething(apiUrl, data);
 ```
+
 只有少数不需要显示loading的地方才需要传第三个参数：
+
 ```generic
 const res = await apiGetSomething(apiUrl, data, { showLoading: false });
 ```
+
 ## 二、请求的相对安全性
 
 在以前用http的时候，我们会需要多做一些安全方面的处理。现在大家都用https，安全性已经好了很多。但是我还是建议做一下这种处理。没有绝对安全，只有相对安全。而且这种处理的成分是非常小的，对业务开发同学来说也是无感的。
@@ -56,6 +64,7 @@ const res = await apiGetSomething(apiUrl, data, { showLoading: false });
 ### 2.1、对请求参数整体做一个转换
 
 这样做可以降低入参的可读性，而且这里可以有一个简单的转换规则，服务端相应地反转换时，如果发现入参不是按规则转换过的，说明可能是被攻击了，这时候可以直接返回个404。
+
 ```generic
 unction request (/* 入参 */) {
     $.ajax({
@@ -75,6 +84,7 @@ unction request (/* 入参 */) {
     })
 }
 ```
+
 上面这样做确实是很好破解，但是有非正常目的的人已经不太好直接用发请求的客户端（如postman）来调试了，需要写脚本去调试我们的接口了。
 
 ### 2.2、密码等敏感字段的加密
@@ -116,6 +126,7 @@ unction request (/* 入参 */) {
 ### 5.1、按钮侧进行节流控制（这个和本文所要讲的接口请求封装没关系）
 
 注意是节流，不是防抖。经常可以看到有朋友会在按钮的点击事件回调里写一段防抖的逻辑。像下面这样（需要在Vue的beforeDestroy或者React的componentWillUnmount等钩子里做下timer定时器的清除逻辑，这里就不写了）：
+
 ```generic
 /**
  * 这里是示意版。
@@ -140,7 +151,9 @@ function onClick() {
     }, 300);
 }
 ```
+
 这样会影响用户体验的，虽然用户的确没法快速触发两次请求了，但是用户第一次点击的时候也要等一段时间才执行，这个等待是完全没必要的。其实只要简单一改，就可以达到不影响用户体验的情况下达到相同的效果：
+
 ```generic
 let timer = null;
 
@@ -158,6 +171,7 @@ function onClick() {
     doSomething();
 }
 ```
+
 ### 5.2、在接口侧进行节流控制
 
 实现方案就是先const map = new Map()。然后在触发请求时，用接口url和入参拼接成一个专属的key，然后在map.set(key, timer)，这里的timer就是一个针对该url和入参的定时器。当下一次有请求触发时，在这个map里找是否存在对应的timer，有的话就直接忽略不触发请求即可，没有的话就正常触发请求并更新这个timer。当timer到时间执行具体内容时记得清楚这个key即可。
