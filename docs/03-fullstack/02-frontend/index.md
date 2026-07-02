@@ -392,7 +392,8 @@ jobs:
 ## 延伸阅读
 
 - [Vue.js 实战](./01-vue/index.md)
-- [前端工程化](./07-engineering/index.md)
+- [前端工程化](./07-engineering.md)
+- [前端实战技巧](./08-practices/index.md)
 - [React 实战](./02-react.md)
 - [TypeScript 最佳实践](./03-typescript.md)
 - [状态管理](./04-state-management.md)
